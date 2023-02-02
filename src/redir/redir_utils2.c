@@ -1,0 +1,123 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_utils2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
+/*   Updated: 2023/02/03 00:05:11 by valentin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/minishell.h"
+
+int	check_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*return_cmd(char *str, int i)
+{
+	char	*dest;
+	int		j;
+
+	j = i;
+	while (str[j] && str[j] != '<' && str[j] != '>')
+		j++;
+	dest = malloc(sizeof(char) * ((j - i) + 1));
+	j = 0;
+	while (str[i] && str[i] != '<' && str[i] != '>')
+		dest[j++] = str[i++];
+	if (dest[j - 1] == ' ')
+	{
+		j--;
+		while (dest[j] == ' ')
+			j--;
+		dest[j + 1] = '\0';
+	}
+	else
+		dest[j] = '\0';
+	if (!check_char(dest))
+	{
+		free(dest);
+		return (NULL);
+	}
+	return (dest);
+}
+
+char	*return_cmd_after(char *str, t_data *data, char *dest)
+{
+	int		i;
+	char	*dest2;
+
+	i = 0;
+	dest2 = NULL;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			i = end_word(str, i);
+			free(dest);
+			dest = NULL;
+			dest = return_word(str, i);
+			if (is_cmd(data->cmd_paths, dest))
+			{
+				dest2 = return_cmd(str, i);
+				break ;
+			}
+		}
+		i++;
+	}
+	return (dest2);
+}
+
+char	*new_command(char *str, t_data *data)
+{
+	int		i;
+	char	*dest;
+	char	*dest2;
+
+	i = 0;
+	dest = return_word(str, i);
+	dest2 = NULL;
+	if (is_cmd(data->cmd_paths, dest))
+		dest2 = return_cmd(str, i);
+	else
+	{
+		dest2 = return_cmd_after(str, data, dest);
+	}
+	free(dest);
+	return (dest2);
+}
+
+int	check_file(t_data *data, char *dest)
+{
+	if (is_file(dest))
+	{
+		data->infile = open(dest, O_RDONLY);
+		if (data->infile < 0)
+		{
+			free(dest);
+			return (2);
+		}
+		return (1);
+	}
+	else
+	{
+		write_perror(dest);
+		free_str(dest);
+		exit(1);
+	}
+	free(dest);
+	return (0);
+}
