@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/03 04:17:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:20:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	loop_shell(t_data *data)
 		add_history(buf);
 		if (buf == NULL)
 		{
-			ft_putstr_fd("exit", 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("exit\n", 1);
 			exit(128);
 		}
 		if (!ft_strncmp("exit", buf, 5))
