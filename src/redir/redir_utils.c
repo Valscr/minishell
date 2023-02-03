@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 04:17:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:57:41 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ int	find_cmd_after(char *str, t_data *data)
 			else
 				break ;
 			if (is_cmd(data->cmd_paths, dest2))
-			{
-				free_str(dest2);
-				return (1);
-			}
+				return (free_str(dest2), 1);
+			else
+				return (error_cmd_after(dest2), free_str(dest2), 0);
 		}
 		i++;
 	}

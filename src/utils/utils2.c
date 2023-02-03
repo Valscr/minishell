@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:44 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:06:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*util_limiter(char **str, t_data *data, char *dest, int i)
 
 int	is_meta(char *str, int i, char c)
 {
-	if (str[i] == c && !check_quotes(str, i))
+	if (str[i] == c && check_quotes(str, i))
 		return (1);
 	else
 		return (0);

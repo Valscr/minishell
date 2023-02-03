@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:04:54 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:12:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	iter_pipe(char *argv)
 	i = 0;
 	while (argv[i++])
 	{
-		if (argv[i] == '|' && !check_quotes(argv, i))
+		if (argv[i] == '|' && check_quotes(argv, i))
 			j++;
 	}
 	return (j);

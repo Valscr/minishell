@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 04:16:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 15:38:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	find_char(char *str, char c)
 	{
 		if (str[i] == c)
 		{
-			if (!check_quotes(str, i))
+			if (check_quotes(str, i))
 				j++;
 		}
 		i++;
