@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 16:31:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:47:30 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ int	ft_redir(t_data *d)
 			|| d->cmd[d->count][1] == '<')) || ft_strlen(d->cmd[d->count]) <= 1)
 	{
 		write(2, "syntax error near unexpected token `newline'\n", 46);
-		exit(1);
+		exit (127);
 	}
 	if (ft_strnstr(d->cmd[d->count], "<", ft_strlen(d->cmd[d->count])))
 	{
 		if (!pars_redir_in(d->cmd[d->count], d))
-			exit(1);
+			exit (127);
 		redir = 1;
 	}
 	if (ft_strnstr(d->cmd[d->count], ">", ft_strlen(d->cmd[d->count])))

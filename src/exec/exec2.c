@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:52:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 17:57:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	wait_fonct(t_data *data, char *argv)
 	{
 		close_pipes(data, iter_pipe(argv));
 		while (i++ < 2 * (iter_pipe(argv) - 1))
-			waitpid(g_sig.pid, &status, 0);
+			waitpid(0, &status, 0);
 		parent_free(data);
 	}
 	else
-		waitpid(g_sig.pid, &status, 0);
+		waitpid(0, &status, 0);
 	if (WIFEXITED(status))
 	{
 		red = WEXITSTATUS(status);
