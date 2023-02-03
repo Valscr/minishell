@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/02 23:41:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:01:12 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_sig
 {
 	int			code_error;
 	int			sigint;
+	int			sigquit;
 	pid_t		pid;
 }				t_sig;
 
@@ -75,6 +76,7 @@ int		init_redir(t_data *data);
 char	*find_path(t_env *head);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
+void	sig_quit(int code);
 int		shell(t_data *data);
 char	*get_next_line(int fd);
 char	*new_save(char *str);
@@ -89,7 +91,7 @@ int		ft_echo(char **args);
 int		ft_pwd(void);
 void	child_free(char **cmd_args, char *cmd);
 char	*get_cmd(char **paths, char *cmd);
-int		find_cmd(char *str, t_data *data);
+int		find_cmd(char *str, t_data *data, int type);
 int		find_char(char *str, char c);
 int		check_redir(char *str);
 int		ft_redir(t_data *d);
@@ -144,8 +146,8 @@ char	*get_env(char *str, t_data *data);
 int		wait_fonct(t_data *data, char *argv);
 char	*replace_code_error(char *str, int i);
 int		check_file(t_data *data, char *dest);
-char	*return_cmd_after(char *str, t_data *data, char *dest);
-int		find_cmd_after(char *str, t_data *data, char *dest);
+char	*return_cmd_after(char *str, t_data *data);
+int		find_cmd_after(char *str, t_data *data);
 void	open_here_doc(t_data *data);
 
 extern t_sig	g_sig;

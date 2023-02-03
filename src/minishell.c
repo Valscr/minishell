@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/03 01:12:43 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:17:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	loop_pipe(t_data data, char *argv)
 	data.count = 0;
 	free(argv);
 	free_tab_str(data.cmd_paths);
-	if (g_sig.sigint)
+	if (g_sig.sigint || g_sig.sigquit)
 		return (g_sig.code_error);
 	return (error);
 }
@@ -47,6 +47,7 @@ int	loop_shell(t_data *data)
 	while (1)
 	{
 		signal(SIGINT, (void (*)(int))ctrl_c_handler);
+		signal(SIGQUIT, (void (*)(int))sig_quit);
 		g_sig.pid = 0;
 		buf = readline("\033[1;94mminishell\033[0m$ ");
 		add_history(buf);
@@ -61,6 +62,7 @@ int	loop_shell(t_data *data)
 		check_arg2(buf, data);
 		g_sig.code_error = loop_pipe(*data, buf);
 		g_sig.sigint = 0;
+		g_sig.sigquit = 0;
 		write(data->file, buf, ft_strlen(buf));
 		write(data->file, "\n", 1);
 		free_str(buf);

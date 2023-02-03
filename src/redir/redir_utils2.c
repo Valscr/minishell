@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:11 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:17:07 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,25 @@ char	*return_cmd(char *str, int i)
 	return (dest);
 }
 
-char	*return_cmd_after(char *str, t_data *data, char *dest)
+char	*return_cmd_after(char *str, t_data *data)
 {
 	int		i;
 	char	*dest2;
+	char	*dest3;
 
 	i = 0;
 	dest2 = NULL;
+	dest3 = NULL;
 	while (str[i])
 	{
 		if (str[i] == '>' || str[i] == '<')
 		{
 			i = end_word(str, i);
-			free(dest);
-			dest = NULL;
-			dest = return_word(str, i);
-			if (is_cmd(data->cmd_paths, dest))
+			free(dest3);
+			dest3 = NULL;
+			if (str[i])
+				dest3 = return_word(str, i);
+			if (is_cmd(data->cmd_paths, dest3))
 			{
 				dest2 = return_cmd(str, i);
 				break ;
@@ -78,7 +81,7 @@ char	*return_cmd_after(char *str, t_data *data, char *dest)
 		}
 		i++;
 	}
-	return (dest2);
+	return (free_str(dest3), dest2);
 }
 
 char	*new_command(char *str, t_data *data)
@@ -92,10 +95,8 @@ char	*new_command(char *str, t_data *data)
 	dest2 = NULL;
 	if (is_cmd(data->cmd_paths, dest))
 		dest2 = return_cmd(str, i);
-	else
-	{
-		dest2 = return_cmd_after(str, data, dest);
-	}
+	else if (find_cmd_after(str, data))
+		dest2 = return_cmd_after(str, data);
 	free(dest);
 	return (dest2);
 }

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:16:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,14 @@ int	init_redir(t_data *data)
 	while (i <= (count_tab(data->cmd)))
 		data->cmd_redir[i++] = NULL;
 	return (1);
+}
+
+int	end_word(char *str, int i)
+{
+	while (str[i] == ' ' || str[i] == '>' || str[i] == '<')
+		i++;
+	while (str[i] != ' ' && str[i] && str[i] != '>' && str[i] != '<'
+		&& str[i] != '"' && str[i] != '\'' && str[i] != '\0')
+		i++;
+	return (i);
 }

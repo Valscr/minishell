@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:04:45 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:12:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,18 +119,20 @@ void	child(t_data *data, char *argv, t_env **env)
 	if (argv == NULL)
 		exit(0);
 	if (check_arg(argv))
-		exit (127);
-	cmd_args = ft_split(argv, " '\"");
+		exit(127);
+	cmd_args = ft_split(argv, "  '\"");
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd)
 	{
-		if (argv[0] != '\0')
+		if (cmd_args[0] && cmd_args[0][0] != '\0')
+		{
 			write(2, cmd_args[0], ft_strlen(cmd_args[0]));
-		write(2, ": command not found\n", 21);
+			write(2, ": command not found\n", 21);
+		}
 		child_free(cmd_args, cmd);
 		exit(127);
 	}
 	execve(cmd, cmd_args, env_list_to_string_array(*env));
-	exit (127);
+	exit(127);
 	return ;
 }

@@ -6,21 +6,11 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/03 04:17:26 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	end_word(char *str, int i)
-{
-	while (str[i] == ' ' || str[i] == '>' || str[i] == '<')
-		i++;
-	while (str[i] != ' ' && str[i] && str[i] != '>' && str[i] != '<'
-		&& str[i] != '"' && str[i] != '\'')
-		i++;
-	return (i);
-}
 
 int	return_file(char *str)
 {
@@ -50,61 +40,62 @@ int	return_file(char *str)
 	return (1);
 }
 
-void	error_cmd(char *str, char *dest)
+void	error_cmd(char *str, char *dest, int type)
 {
-	char	*str2;
-
-	str2 = NULL;
-	if (!return_file(str))
+	if (type == 1)
 	{
-		free_str(str2);
-		return ;
+		if (!return_file(str))
+			return ;
 	}
-	if (dest != NULL)
+	if (dest[0])
 	{
 		write_error(dest);
 		write_error(": command not found\n");
-		free_str(str2);
 		return ;
 	}
-	str2 = return_word(str, 0);
-	if (str2 != NULL)
-	{
-		write_error(str2);
-		write_error(": command not found\n");
-	}
-	free_str(str2);
 	return ;
 }
 
-int	find_cmd_after(char *str, t_data *data, char *dest)
+void	error_cmd_after(char *str)
 {
-	int	i;
+	if (str != NULL)
+	{
+		write_error(str);
+		write_error(": command not found\n");
+	}
+	return ;
+}
+
+int	find_cmd_after(char *str, t_data *data)
+{
+	int		i;
+	char	*dest2;
 
 	i = 0;
+	dest2 = NULL;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '>' || str[i] == '<')
 		{
 			i = end_word(str, i);
-			free_str(dest);
-			dest = NULL;
+			free_str(dest2);
+			dest2 = NULL;
 			if (str[i])
-				dest = return_word(str, i);
+				dest2 = return_word(str, i);
 			else
 				break ;
-			if (is_cmd(data->cmd_paths, dest))
+			if (is_cmd(data->cmd_paths, dest2))
 			{
-				free_str(dest);
+				free_str(dest2);
 				return (1);
 			}
 		}
 		i++;
 	}
-	return (0);
+	return (error_cmd_after(dest2), free_str(dest2), 0);
 }
 
-int	find_cmd(char *str, t_data *data)
+int	find_cmd(char *str, t_data *data, int type)
 {
 	int		i;
 	char	*dest;
@@ -119,13 +110,13 @@ int	find_cmd(char *str, t_data *data)
 	}
 	else
 	{
-		if (find_cmd_after(str, data, dest))
+		if (find_cmd_after(str, data))
 		{
 			free_str(dest);
 			return (1);
 		}
 	}
-	error_cmd(str, dest);
+	error_cmd(str, dest, type);
 	free_str(dest);
 	return (0);
 }
