@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/05 21:31:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/05 21:44:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	loop_shell(t_data *data)
 		if (buf == NULL)
 		{
 			ft_putstr_fd("exit\n", 1);
-			exit(128);
+			exit(0);
 		}
 		if (!ft_strncmp("exit", buf, 5))
 			break ;
