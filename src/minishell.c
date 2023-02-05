@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/03 22:46:07 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/05 21:31:04 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ int	loop_pipe(t_data data, char *argv)
 	return (error);
 }
 
+int	check_empty_line(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] != ' ' && buf[i] != '\t')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	loop_shell(t_data *data)
 {
 	char	*buf;
@@ -49,7 +63,7 @@ int	loop_shell(t_data *data)
 		signal(SIGINT, (void (*)(int))ctrl_c_handler);
 		signal(SIGQUIT, (void (*)(int))sig_quit);
 		g_sig.pid = 0;
-		buf = readline("\033[1;94mminishell\033[0m$ ");
+		buf = readline("\001\033[1;94m\002minishell\001\033[0m\002$ ");
 		if (buf == NULL)
 		{
 			ft_putstr_fd("exit\n", 1);
@@ -63,7 +77,8 @@ int	loop_shell(t_data *data)
 		g_sig.sigquit = 0;
 		write(data->file, buf, ft_strlen(buf));
 		write(data->file, "\n", 1);
-		add_history(buf);
+		if (check_empty_line(buf))
+			add_history(buf);
 		free_str(buf);
 	}
 	return (free_str(buf), 1);

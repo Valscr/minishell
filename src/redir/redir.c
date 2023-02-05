@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 22:47:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/05 20:22:37 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	ft_redir(t_data *d)
 	if (ft_strnstr(d->cmd[d->count], ">", ft_strlen(d->cmd[d->count])))
 	{
 		if (!pars_redir_out(d->cmd[d->count], d))
-			exit (1);
+			exit (127);
 		redir += 2;
 	}
 	d->cmd_redir[d->count] = new_command(d->cmd[d->count], d);
