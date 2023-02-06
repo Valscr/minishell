@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 22:46:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:07:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,20 @@ int	exec(t_data *data, char *argv, t_env **env)
 {
 	int	rd;
 
+	signal(SIGQUIT, (void (*)(int))sig_quit);
 	init_redir(data);
 	while (data->count < (iter_pipe(argv)))
 	{
 		rd = 0;
 		g_sig.pid = fork();
 		if (g_sig.pid == 0)
-		{
+		{	
 			signal(SIGINT, (void (*)(int))ctrl_c2_handler);
 			if (check_redir(data->cmd[data->count]))
 				rd = ft_redir(data);
 			if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir[data->count]))
 				get_in_out(argv, data, rd);
+			signal(SIGQUIT, SIG_DFL);
 			if (rd > 0)
 				child(data, data->cmd_redir[data->count], env);
 			else if (rd == 0)
@@ -116,6 +118,7 @@ void	child(t_data *data, char *argv, t_env **env)
 	char	**cmd_args;
 	char	*cmd;
 
+	signal(SIGQUIT, (void (*)(int))sig_quit);
 	if (argv == NULL)
 		exit(0);
 	if (check_arg(argv))

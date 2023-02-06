@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 04:01:12 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:05:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_sig
 	int			code_error;
 	int			sigint;
 	int			sigquit;
+	int			autorize;
 	pid_t		pid;
 }				t_sig;
 
@@ -149,6 +150,7 @@ int		check_file(t_data *data, char *dest);
 char	*return_cmd_after(char *str, t_data *data);
 int		find_cmd_after(char *str, t_data *data);
 void	open_here_doc(t_data *data);
+void	sig_quit2(int code);
 
 extern t_sig	g_sig;
 
