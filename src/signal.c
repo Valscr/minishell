@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:24:48 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 12:08:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:01:53 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sig_quit(int code)
 	{
 		ft_putstr_fd("\b\b  \b\b", 1);
 		g_sig.code_error = 131;
-	}*/	
+	}*/
 	g_sig.sigquit = 1;
 	g_sig.code_error = 131;
 	return ;

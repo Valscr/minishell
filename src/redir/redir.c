@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 10:15:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:50:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	pars_redir_in(char *str, t_data *data)
 				return (free(dest), 0);
 			free(dest);
 		}
-		limiter_heredoc(str, data, i++);
+		if (limiter_heredoc(str, data, i++))
+			return (1);
 	}
 	return (1);
 }
@@ -79,18 +80,18 @@ int	ft_redir(t_data *d)
 			|| d->cmd[d->count][1] == '<')) || ft_strlen(d->cmd[d->count]) <= 1)
 	{
 		write(2, "syntax error near unexpected token `newline'\n", 46);
-		exit (127);
+		return (-1);
 	}
 	if (ft_strnstr(d->cmd[d->count], "<", ft_strlen(d->cmd[d->count])))
 	{
 		if (!pars_redir_in(d->cmd[d->count], d))
-			exit (127);
+			return (-1);
 		redir = 1;
 	}
 	if (ft_strnstr(d->cmd[d->count], ">", ft_strlen(d->cmd[d->count])))
 	{
 		if (!pars_redir_out(d->cmd[d->count], d))
-			exit (127);
+			return (-1);
 		redir += 2;
 	}
 	d->cmd_redir[d->count] = new_command(d->cmd[d->count], d);

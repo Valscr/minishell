@@ -6,13 +6,13 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:04:40 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:57:54 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_arg(char *str)
+int	check_arg(char *str, t_data *data)
 {
 	char	**strg;
 	int		end;
@@ -23,22 +23,25 @@ int	check_arg(char *str)
 	{	
 		end = ft_echo(strg);
 		free_tab_str(strg);
-		exit(end);
+		free_end_process(data);
+		exit (end);
 	}
 	if (!ft_strncmp("cd", str, 2))
 	{
 		end = ft_cd(strg);
 		free_tab_str(strg);
-		exit(end);
+		free_end_process(data);
+		exit (end);
 	}
 	if (!ft_strncmp("pwd", str, 3))
 	{
 		free_tab_str(strg);
-		exit(ft_pwd());
+		return (1);
 	}
 	if (!ft_strncmp("export", str, 6))
 	{
 		free_tab_str(strg);
+		free_end_process(data);
 		exit (0);
 	}
 	/*if (!ft_strncmp("unset", str, 5))

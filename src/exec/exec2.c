@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 17:57:46 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/06 21:28:53 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	wait_fonct(t_data *data, char *argv)
 
 	i = 0;
 	red = 0;
+	status = 0;
 	if (iter_pipe(argv) > 1)
 	{
 		close_pipes(data, iter_pipe(argv));

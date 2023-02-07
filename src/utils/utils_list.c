@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:42:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	add_env_front(t_env **head, const char *name, const char *value)
 	str2 = ft_strjoin(str, value);
 	new_node = (t_env *) malloc(sizeof(t_env));
 	new_node->value = ft_strdup(str2);
+	new_node->next = NULL;
 	ft_lstadd_front((t_list **)head, (t_list *)new_node);
 	free(str);
 	free(str2);

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 10:05:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/07 13:58:47 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	int			redir;
 	int			error;
 	char		*paths;
+	char		*argv;
 	char		**envp;
 	char		**cmd_redir;
 	char		**cmd_paths;
@@ -79,7 +80,7 @@ void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
 void	sig_quit(int code);
 int		shell(t_data *data);
-char	*get_next_line(int fd);
+int		get_next_line(int fd, char **str, int last);
 char	*new_save(char *str);
 char	*ft_cut_dest(char *dest);
 char	*ft_strjoin1(char *s1, char *s2);
@@ -108,7 +109,7 @@ char	*return_cmd(char *str, int i);
 int		pars_redir_in(char *str, t_data *data);
 void	here_doc(char *argv, t_data *data);
 int		is_meta(char *str, int i, char c);
-void	limiter_heredoc(char *str, t_data *data, int i);
+int		limiter_heredoc(char *str, t_data *data, int i);
 char	*util_limiter(char **str, t_data *data, char *dest, int i);
 int		pars_redir_out(char *str, t_data *data);
 int		get_in_out(char *argv, t_data *data, int redir);
@@ -119,7 +120,7 @@ void	child(t_data *data, char *argv, t_env **env);
 int		loop_pipe(t_data data, char *argv);
 int		loop_shell(t_data *data);
 int		open_file(char *str, t_data *data, int i, int type);
-int		check_arg(char *str);
+int		check_arg(char *str, t_data *data);
 int		check_arg2(char *str, t_data *data);
 char	*cut_arg(char *str, int j, int i);
 char	*return_word(char *str, int i);
@@ -151,6 +152,8 @@ char	*return_cmd_after(char *str, t_data *data);
 int		find_cmd_after(char *str, t_data *data);
 void	open_here_doc(t_data *data);
 void	sig_quit2(int code);
+void	free_t_env_list(t_env *head);
+void	free_end_process(t_data *data);
 
 extern t_sig	g_sig;
 
