@@ -18,11 +18,11 @@ Built-in commands:
 - export
 - exit
 
-To compile the program, use make:
+To compile the program :
 
 ```make```
 
-To run the program, use ./minishell:
+To run the program :
 
 ```./minishell```
 
