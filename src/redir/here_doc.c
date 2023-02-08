@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 14:57:56 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:46:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	here_doc(char *argv, t_data *data)
 	file = open(".heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file < 0)
 		return ;
+	signal(SIGINT, (void (*)(int))ctrl_c2_handler);
 	while (1)
 	{
 		signal(SIGQUIT, SIG_IGN);
@@ -35,7 +36,11 @@ void	here_doc(char *argv, t_data *data)
 		if (buf == NULL)
 		{
 			ft_putstr_fd("\n", 1);
-			break ;
+			free_str(buf);
+			free_str(argv);
+			close(file);
+			free_end_process(data);
+			exit (0);
 		}
 		if (!ft_strncmp(argv, buf, ft_strlen(argv) + 1))
 			break ;

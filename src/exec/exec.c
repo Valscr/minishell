@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 10:08:56 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:41:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	exec(t_data *data, char *argv, t_env **env)
 		if (g_sig.pid == 0)
 		{	
 			data->cmd = ft_split2(argv, "|");
-			signal(SIGINT, (void (*)(int))ctrl_c2_handler);
 			if (check_redir(data->cmd[data->count]))
 			{
 				init_redir(data);
@@ -63,7 +62,8 @@ int	exec(t_data *data, char *argv, t_env **env)
 				child(data, data->cmd[data->count], env);
 			else
 			{
-				parent_free(data);
+				if (iter_pipe(argv) > 1)
+					parent_free(data);
 				free_end_process(data);
 				exit (127);
 			}

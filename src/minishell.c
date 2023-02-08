@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/07 13:49:38 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 11:47:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	loop_pipe(t_data data, char *argv)
 	data.cmd_paths = ft_split(data.paths, ":");
 	error = exec(&data, data.argv, &data.env);
 	data.count = 0;
-	g_sig.autorize = 0;
 	free_tab_str(data.cmd_paths);
 	free_str(data.argv);
 	if (g_sig.sigint || g_sig.sigquit)
