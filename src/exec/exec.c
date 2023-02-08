@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 14:02:41 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 10:08:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	exec(t_data *data, char *argv, t_env **env)
 				child(data, data->cmd[data->count], env);
 			else
 			{
+				parent_free(data);
 				free_end_process(data);
 				exit (127);
 			}

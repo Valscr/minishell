@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:48:11 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 10:02:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	error_cmd(char *str, char *dest, int type)
 		if (!return_file(str))
 			return ;
 	}
-	if (dest[0])
+	if (ft_isprint(dest[0]))
 	{
 		write_error(dest);
 		write_error(": command not found\n");
@@ -58,7 +58,7 @@ void	error_cmd(char *str, char *dest, int type)
 
 void	error_cmd_after(char *str)
 {
-	if (str != NULL)
+	if (ft_isprint(str[0]))
 	{
 		write_error(str);
 		write_error(": command not found\n");
@@ -91,7 +91,7 @@ int	find_cmd_after(char *str, t_data *data)
 		}
 		i++;
 	}
-	return (error_cmd_after(dest2), free_str(dest2), 0);
+	return (free_str(dest2), 0);
 }
 
 int	find_cmd(char *str, t_data *data, int type)

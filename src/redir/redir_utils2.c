@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:35:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:40:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,18 +107,12 @@ int	check_file(t_data *data, char *dest)
 	{
 		data->infile = open(dest, O_RDONLY);
 		if (data->infile < 0)
-		{
-			free(dest);
-			return (2);
-		}
+			return (0);
 		return (1);
 	}
 	else
 	{
 		write_perror(dest);
-		free_str(dest);
-		exit(1);
 	}
-	free(dest);
 	return (0);
 }

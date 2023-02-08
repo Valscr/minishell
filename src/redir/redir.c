@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:50:59 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:39:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	pars_redir_in(char *str, t_data *data)
 {
 	int		i;
 	char	*dest;
-	int		d;
 
 	i = 0;
 	dest = NULL;
@@ -29,17 +28,15 @@ int	pars_redir_in(char *str, t_data *data)
 			if (!find_cmd(str, data, 1))
 				return (0);
 			dest = return_word(str, i + 1);
-			d = check_file(data, dest);
-			if (d == 1)
-				return (free(dest), 1);
-			else if (d == 2)
+			if (!check_file(data, dest))
 				return (free(dest), 0);
-			free(dest);
+			free_str(dest);
+			dest = NULL;
 		}
 		if (limiter_heredoc(str, data, i++))
-			return (1);
+			return (free_str(dest), 1);
 	}
-	return (1);
+	return (free_str(dest), 1);
 }
 
 int	pars_redir_out(char *str, t_data *data)
@@ -95,5 +92,6 @@ int	ft_redir(t_data *d)
 		redir += 2;
 	}
 	d->cmd_redir[d->count] = new_command(d->cmd[d->count], d);
+	printf("redir = %d", redir);
 	return (redir);
 }
