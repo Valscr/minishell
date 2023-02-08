@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 11:46:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:41:45 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	here_doc(char *argv, t_data *data)
 		return ;
 	signal(SIGINT, (void (*)(int))ctrl_c2_handler);
 	while (1)
-	{
-		signal(SIGQUIT, SIG_IGN);
+	{	
 		buf = readline("> ");
 		if (buf == NULL)
 		{

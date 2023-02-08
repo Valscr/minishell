@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:24:48 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 11:42:13 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:43:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,12 @@ void	ctrl_c2_handler(int sig)
 void	sig_quit(int code)
 {
 	(void)code;
-	/*if (g_sig.pid != 0)
+	if (g_sig.pid != 0)
 	{
-		ft_putstr_fd("Quit (core dumped)\n", 1);
+		/*ft_putstr_fd("Quit (core dumped)\n", 1);*/
 		g_sig.code_error = 131;
 		g_sig.sigquit = 1;
 	}
-	else
-	{
-		ft_putstr_fd("\b\b  \b\b", 1);
-		g_sig.code_error = 131;
-	}*/
-	g_sig.sigquit = 1;
-	g_sig.code_error = 131;
 	return ;
 }
 

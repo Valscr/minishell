@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 09:39:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/08 13:30:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,5 @@ int	ft_redir(t_data *d)
 		redir += 2;
 	}
 	d->cmd_redir[d->count] = new_command(d->cmd[d->count], d);
-	printf("redir = %d", redir);
 	return (redir);
 }
