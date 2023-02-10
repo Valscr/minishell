@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 13:23:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:12:32 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_sig
 	int			sigquit;
 	int			autorize;
 	pid_t		pid;
+	pid_t		pid2;
 }				t_sig;
 
 typedef struct s_data
@@ -67,7 +68,7 @@ typedef struct s_data
 	char		**cmd_paths;
 	char		**cmd;
 	char		**cmd_tab;
-	char		*limiter;
+	int			limiter;
 	int			file;
 	int			ctrl_c;
 	t_env		*env;
@@ -107,9 +108,9 @@ char	*replace_word(t_data *data, char *str, int i);
 char	*new_command(char *str, t_data *data);
 char	*return_cmd(char *str, int i);
 int		pars_redir_in(char *str, t_data *data);
-void	here_doc(char *argv, t_data *data);
+int		here_doc(char *argv, t_data *data);
 int		is_meta(char *str, int i, char c);
-int		limiter_heredoc(char *str, t_data *data, int i);
+int		limiter_heredoc(char *str, t_data *data);
 char	*util_limiter(char **str, t_data *data, char *dest, int i);
 int		pars_redir_out(char *str, t_data *data);
 int		get_in_out(char *argv, t_data *data, int redir);

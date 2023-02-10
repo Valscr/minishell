@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 13:23:36 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/10 19:20:47 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int	exec(t_data *data, char *argv, t_env **env)
 {
 	int		rd;
 
+	if (iter_pipe(argv) > 1)
+	{
+		data->tube = malloc(sizeof(int) * (2 * (iter_pipe(argv) - 1)));
+		if (!get_pipes(data, argv))
+			return (write_error("Error\n"));
+	}
 	signal(SIGQUIT, (void (*)(int))sig_quit);
 	while (data->count < (iter_pipe(argv)))
 	{

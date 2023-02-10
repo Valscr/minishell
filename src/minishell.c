@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/08 13:22:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/10 19:02:06 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,17 @@ int	loop_pipe(t_data data, char *argv)
 
 	if (argv[0] == 0)
 		return (0);
-	if (iter_pipe(argv) > 1)
-	{
-		data.tube = malloc(sizeof(int) * (2 * (iter_pipe(argv) - 1)));
-		if (!get_pipes(&data, argv))
-			return (write_error("Error\n"));
-	}
 	data.argv = get_env(argv, &data);
 	data.paths = find_path(data.env);
 	data.cmd_paths = ft_split(data.paths, ":");
-	error = exec(&data, data.argv, &data.env);
+	if (limiter_heredoc(data.argv, &data) != 2)
+		error = exec(&data, data.argv, &data.env);
+	else
+		error = 130;
 	data.count = 0;
 	free_tab_str(data.cmd_paths);
 	free_str(data.argv);
+	data.limiter = 0;
 	if (g_sig.sigint || g_sig.sigquit)
 		return (g_sig.code_error);
 	return (error);
