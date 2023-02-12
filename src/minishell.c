@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/12 21:25:47 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 22:05:42 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int	loop_shell(t_data *data)
 			i = check_exit(buf);
 			break ;
 		}
-		check_arg2(buf, data);
-		g_sig.code_error = loop_pipe(*data, buf);
+		if (!check_arg2(buf, data))
+			g_sig.code_error = loop_pipe(*data, buf);
 		write(data->file, buf, ft_strlen(buf));
 		write(data->file, "\n", 1);
 		if (check_empty_line(buf))

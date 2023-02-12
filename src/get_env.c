@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:45:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:29:30 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,27 @@ char	*get_env(char *str, t_data *data)
 
 	if (!str || !str[0])
 		return (NULL);
+	dest = NULL;
 	dest = ft_strdup(str);
 	i = 0;
 	while (dest[i])
 	{
-		if (i > 0 && dest[i] == '$' && dest[i - 1] != '$' && dest[i + 1] == '?')
-			dest = replace_code_error(dest, i);
-		else if (i > 0 && dest[i] == '$' && isprint(dest[i + 1])
-			&& dest[i + 1] != ' ' && dest[i - 1] != '$'
-			&& (!check_quotes1(dest, i, '\'')))
+		if (i > 0 && dest[i] == '?' && dest[i - 1] == '$')
 		{
-			dest = replace_word(data, dest, i);
+			dest = replace_code_error(dest, i - 1);
+			if (i + 1 > ft_strlen(dest))
+				break ;
 		}
-		else if (i == 0 && dest[i] == '$' && dest[i + 1] == '?')
+		else if (i > 0 && isprint(dest[i]) && dest[i - 1] == '$'
+			&& dest[i] != ' ' && (!check_quotes1(dest, i - 1, '\'')))
+		{
+			dest = replace_word(data, dest, i - 1);
+			if (i + 1 > ft_strlen(dest))
+				break ;
+		}
+		else if (i == 0 && dest[i] == '$' && dest[i + 1] && dest[i + 1] == '?')
 			dest = replace_code_error(dest, i);
-		else if (i == 0 && dest[i] == '$' && isprint(dest[i + 1])
+		else if (i == 0 && dest[i] == '$' && dest[i + 1] && isprint(dest[i + 1])
 			&& (!check_quotes1(dest, i, '\'')))
 			dest = replace_word(data, dest, i);
 		i++;
@@ -77,10 +83,12 @@ char	*get_env_list(t_env *head, char *name)
 	current = head;
 	while (current->next != NULL)
 	{
-		if (strncmp(current->value, name, strlen(name)) == 0
+		if (strncmp(current->value, name, ft_strlen(name)) == 0
 			&& current->value[strlen(name)] == '=')
 		{
-			return (ft_strdup(current->value + strlen(name) + 1));
+			if (ft_strlen(current->value) < (ft_strlen(name) + 1))
+				return (printf("salut"), NULL);
+			return (ft_strdup(current->value + ft_strlen(name) + 1));
 		}
 		current = current->next;
 	}

@@ -6,18 +6,18 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 17:42:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 23:00:05 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**env_list_to_string_array(t_env *head)
+char **env_list_to_string_array(t_env *head)
 {
-	int		count;
-	t_env	*current;
-	char	**str;
-	int		i;
+	int count;
+	t_env *current;
+	char **str;
+	int i;
 
 	current = head;
 	count = 0;
@@ -39,11 +39,11 @@ char	**env_list_to_string_array(t_env *head)
 	return (str);
 }
 
-void	copy_string_array_to_env_list(t_env **head, char *string_array[])
+void copy_string_array_to_env_list(t_env **head, char *string_array[])
 {
-	char	*name;
-	char	*value;
-	int		i;
+	char *name;
+	char *value;
+	int i;
 
 	i = 0;
 	while (string_array[i])
@@ -61,57 +61,62 @@ void	copy_string_array_to_env_list(t_env **head, char *string_array[])
 	}
 }
 
-void	add_env_front(t_env **head, const char *name, const char *value)
+void add_env_front(t_env **head, const char *name, const char *value)
 {
-	t_env	*new_node;
-	char	*str;
-	char	*str2;
+	t_env *new_node;
+	char *str;
+	char *str2;
 
 	str = ft_strjoin(name, "=");
-	str2 = ft_strjoin(str, value);
-	new_node = (t_env *) malloc(sizeof(t_env));
+	if (value != NULL)
+		str2 = ft_strjoin(str, value);
+	else
+		str2 = ft_strdup(str);
+	new_node = (t_env *)malloc(sizeof(t_env));
 	new_node->value = ft_strdup(str2);
 	new_node->next = NULL;
 	ft_lstadd_front((t_list **)head, (t_list *)new_node);
 	free(str);
 	free(str2);
-	return ;
+	return;
 }
 
-void	add_env_back(t_env **head, const char *name, const char *value)
+void add_env_back(t_env **head, const char *name, const char *value)
 {
-	t_env	*new_node;
+	t_env *new_node;
 
-	new_node = (t_env *) malloc(sizeof(t_env));
+	new_node = (t_env *)malloc(sizeof(t_env));
 	new_node->value = ft_strdup(ft_strjoin(ft_strjoin(name, "="), value));
 	new_node->next = NULL;
 	ft_lstadd_back((t_list **)head, (t_list *)new_node);
-	return ;
+	return;
 }
 
-void	add_env_variable(t_env **head, const char *name, const char *val)
+void add_env_variable(t_env **head, const char *name, const char *val)
 {
-	t_env	*current ;
-	char	*str;
-	char	*str2;
+	t_env *current;
+	char *str;
+	char *str2;
 
 	str = ft_strjoin(name, "=");
-	str2 = ft_strjoin(str, val);
+	if (val != NULL)
+		str2 = ft_strjoin(str, val);
+	else
+		str2 = ft_strdup(str);
 	free(str);
 	current = *head;
 	while (current != NULL && current->next != NULL)
 	{
-		if (strncmp(current->value, name, strlen(name)) == 0
-			&& current->value[strlen(name)] == '=')
+		if (strncmp(current->value, name, strlen(name)) == 0 && current->value[strlen(name)] == '=')
 		{
 			free(current->value);
 			current->value = ft_strdup(str2);
 			free(str2);
-			return ;
+			return;
 		}
 		current = current->next;
 	}
 	add_env_front(head, name, val);
 	free(str2);
-	return ;
+	return;
 }

@@ -6,43 +6,43 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:57:54 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 22:56:15 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_arg(char *str, t_data *data)
+int check_arg(char *str, t_data *data)
 {
-	char	**strg;
-	int		end;
+	char **strg;
+	int end;
 
 	end = 0;
 	strg = ft_split(str, " '\"");
 	if (!ft_strncmp("echo", str, 4))
-	{	
+	{
 		end = ft_echo(strg);
 		free_tab_str(strg);
 		free_end_process(data);
-		exit (end);
+		exit(end);
 	}
 	if (!ft_strncmp("cd", str, 2))
 	{
 		end = ft_cd(strg);
 		free_tab_str(strg);
 		free_end_process(data);
-		exit (end);
+		exit(end);
 	}
 	if (!ft_strncmp("pwd", str, 3))
 	{
 		free_tab_str(strg);
-		return (1);
+		exit(0);
 	}
 	if (!ft_strncmp("export", str, 6))
 	{
 		free_tab_str(strg);
 		free_end_process(data);
-		exit (0);
+		exit(0);
 	}
 	/*if (!ft_strncmp("unset", str, 5))
 	{
@@ -56,16 +56,15 @@ int	check_arg(char *str, t_data *data)
 	return (0);
 }
 
-int	check_arg2(char *str, t_data *data)
+int check_arg2(char *str, t_data *data)
 {
-	char	**dest;
+	char **dest;
 
 	dest = ft_split(str, " =");
 	if (!ft_strncmp("export", str, 6))
 	{
 		ft_export(dest[1], dest[2], data);
-		free_tab_str(dest);
-		return (1);
+		return (free_tab_str(dest), 1);
 	}
 	free_tab_str(dest);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/11 13:00:05 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:14:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,26 @@ int	quotes_after(char const *str, int j)
 	return (y);
 }
 
+char	*return_word2(char *str, int i)
+{
+	char	*dest;
+	int		j;
+
+	dest = NULL;
+	if (!str[i] || str[i] == '\0')
+		return (NULL);
+	while (str[i] && (str[i] == ' ' || str[i] == '\'' || str[i] == '"'))
+		i++;
+	j = i;
+	if (!str[i] || str[i] == '\0')
+		return (NULL);
+	while (str[i] != ' ' && str[i] && str[i] != '"'
+		&& str[i] != '\'' && str[i] != '$')
+		i++;
+	dest = cut_arg(str, j, i - 1);
+	return (dest);
+}
+
 char	*replace_word(t_data *data, char *str, int i)
 {
 	char	*dest;
@@ -76,10 +96,10 @@ char	*replace_word(t_data *data, char *str, int i)
 
 	j = 0;
 	y = 0;
-	dest = return_word(str, i + 1);
+	dest = return_word2(str, i + 1);
 	str2 = get_env_list(data->env, dest);
 	str3 = malloc(sizeof(char) * (ft_strlen(str2)
-				+ ft_strlen(str) - ft_strlen(dest) + 1));
+				+ ft_strlen(str) - ft_strlen(dest) + 3));
 	while (j < i)
 	{
 		str3[j] = str[j];
@@ -88,8 +108,11 @@ char	*replace_word(t_data *data, char *str, int i)
 	while (y < ft_strlen(str2))
 		str3[j++] = str2[y++];
 	i += ft_strlen(dest) + 1;
-	while (str[i])
-		str3[j++] = str[i++];
+	if (i < ft_strlen(str))
+	{
+		while (str[i])
+			str3[j++] = str[i++];
+	}
 	str3[j] = '\0';
 	return (free_str(dest), free_str(str), free_str(str2), str3);
 }
