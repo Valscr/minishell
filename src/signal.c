@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:24:48 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/10 16:43:36 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:24:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ void	ctrl_c_handler(int sig)
 void	ctrl_c2_handler(int sig)
 {
 	(void)sig;
-	/*ft_putstr_fd("\b\b", 1);
+	 /*ft_putstr_fd("\b\b", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();*/
-	/*g_sig.code_error = 130;
-	g_sig.sigint = 1;*/
-	exit(130);
+	close (0);
+	g_sig.code_error = 130;
 	return ;
 }
 

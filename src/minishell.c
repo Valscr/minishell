@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/10 19:02:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 18:10:33 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	loop_shell(t_data *data)
 		signal(SIGINT, (void (*)(int))ctrl_c_handler);
 		signal(SIGQUIT, SIG_IGN);
 		g_sig.pid = 0;
+		g_sig.sigint = 0;
+		g_sig.sigquit = 0;
 		ft_putstr_fd("\b\b", 1);
 		buf = readline("\001\033[1;94m\002minishell\001\033[0m\002$ ");
 		if (buf == NULL)
@@ -71,8 +73,6 @@ int	loop_shell(t_data *data)
 			break ;
 		check_arg2(buf, data);
 		g_sig.code_error = loop_pipe(*data, buf);
-		g_sig.sigint = 0;
-		g_sig.sigquit = 0;
 		write(data->file, buf, ft_strlen(buf));
 		write(data->file, "\n", 1);
 		if (check_empty_line(buf))

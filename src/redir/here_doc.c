@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/10 20:17:32 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:24:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	here_doc(char *argv, t_data *data)
 				free_str(buf);
 				free_str(argv);
 				close(file);
-				exit (0);
+				exit (g_sig.code_error);
 			}
 			if (!ft_strncmp(argv, buf, ft_strlen(argv) + 1))
 				break ;

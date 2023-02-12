@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 15:06:18 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:00:05 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*cut_arg(char *str, int j, int i)
 	return (dest);
 }
 
-char	*util_limiter(char **str, t_data *data, char *dest, int i)
+/*char	*util_limiter(char **str, t_data *data, char *dest, int i)
 {
 	while (str[i] && !is_file(str[i])
 		&& ft_strncmp(str[i], data->limiter, ft_strlen(data->limiter)))
@@ -39,7 +39,7 @@ char	*util_limiter(char **str, t_data *data, char *dest, int i)
 	free(data->limiter);
 	data->limiter = NULL;
 	return (dest);
-}
+}*/
 
 int	is_meta(char *str, int i, char c)
 {
