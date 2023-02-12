@@ -1,4 +1,4 @@
-# MINISHELL
+# Minishell
 
 A basic shell written in C
 
