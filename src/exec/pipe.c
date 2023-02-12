@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/10 17:54:46 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:40:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	get_dup2(int in, int out)
 void	parent_free(t_data *data)
 {
 	if (data->tube)
+	{
 		free(data->tube);
+		data->tube = NULL;
+	}
 }
 
 void	close_pipes(t_data *data, int len)

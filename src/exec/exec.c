@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/12 17:56:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/12 20:32:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,26 @@ int	exec(t_data *data, char *argv, t_env **env)
 	return (free_tab_str(data->cmd), wait_fonct(data, argv));
 }
 
+int	is_slash(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*get_cmd(char **paths, char *cmd)
 {
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL)
+	if (cmd == NULL || !is_slash(cmd))
 		return (NULL);
 	while (*paths)
 	{
@@ -105,7 +119,7 @@ int	is_cmd(char **paths, char *cmd)
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL || cmd[0] == 0)
+	if (cmd == NULL || cmd[0] == 0 )
 		return (0);
 	while (*paths)
 	{
@@ -125,11 +139,27 @@ int	is_cmd(char **paths, char *cmd)
 	return (0);
 }
 
+int	find_slash(char *str)
+{
+	int	i;	
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	child(t_data *data, char *argv, t_env **env)
 {
 	char	**cmd_args;
 	char	*cmd;
 
+	if (data->tube != NULL)
+		parent_free(data);
 	if (argv == NULL)
 	{
 		free_end_process(data);
@@ -140,7 +170,17 @@ void	child(t_data *data, char *argv, t_env **env)
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd)
 	{
-		if (cmd_args[0] && cmd_args[0][0] != '\0')
+		if (!is_slash(cmd_args[0]))
+		{
+			write(2, cmd_args[0], ft_strlen(cmd_args[0]));
+			write(2, ": Is a directory\n", 18);
+			free_end_process(data);
+			child_free(cmd_args, cmd);
+			exit (126);
+		}
+		else if (find_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
+			write_perror(cmd_args[0]);
+		else if (is_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
 		{
 			write(2, cmd_args[0], ft_strlen(cmd_args[0]));
 			write(2, ": command not found\n", 21);
@@ -150,5 +190,6 @@ void	child(t_data *data, char *argv, t_env **env)
 		exit(127);
 	}
 	execve(cmd, cmd_args, env_list_to_string_array(*env));
+	exit (127);
 	return ;
 }
