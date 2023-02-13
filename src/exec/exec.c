@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:33:47 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:47:28 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	child(t_data *data, char *argv, t_env **env)
 		child_free(cmd_args, cmd);
 		exit(error);
 	}
-	signal(SIGINT, (void (*)(int))ctrl_c3_handler);
+	signal(SIGINT, SIG_DFL);
 	execve(cmd, cmd_args, env_list_to_string_array(*env));
 	exit (127);
 	return ;

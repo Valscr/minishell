@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:24:48 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:33:05 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:48:07 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	ctrl_c_handler(int sig)
 	return ;
 }
 
-void	ctrl_c3_handler(int sig)
-{
-	(void)sig;
-	code_error = 130;
-}
-
 void	ctrl_c2_handler(int sig)
 {
 	(void)sig;
@@ -42,11 +36,5 @@ void	sig_quit(int code)
 	(void)code;
 	ft_putstr_fd("Quit (core dumped)\n", 1);
 	code_error = 131;
-	return ;
-}
-
-void	sig_quit2(int code)
-{
-	(void)code;
 	return ;
 }
