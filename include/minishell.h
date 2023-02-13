@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:32:28 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:54:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,8 @@ typedef struct s_sig
 {
 	int			code_error;
 	int			sigint;
-	int			sigint2;
 	int			sigquit;
-	int			autorize;
 	pid_t		pid;
-	pid_t		pid2;
 }				t_sig;
 
 typedef struct s_data
