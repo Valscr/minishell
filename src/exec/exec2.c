@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:44:13 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:06:33 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	wait_fonct(t_data *data, char *argv)
 	}
 	else
 		waitpid(0, &status, 0);
+	if (g_sig.code_error)
+		return (g_sig.code_error);
 	if (WIFEXITED(status))
 	{
 		red = WEXITSTATUS(status);
@@ -75,4 +77,10 @@ int	is_slash(char *str)
 		i++;
 	}
 	return (0);
+}
+
+void	get_dup2(int in, int out)
+{
+	dup2(in, 0);
+	dup2(out, 1);
 }

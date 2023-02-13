@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/03 00:05:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:46:00 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_countdest2(char const *s, char const *sep)
 			i++;
 		if (s[i] != '\0' && ft_strchr(sep, s[i]) && !check_quotes2(s, i))
 		{
-			while (ft_strchr(sep, s[i]) && !check_quotes2(s, i))
+			while (ft_strchr(sep, s[i]) && !check_quotes2(s, i) && s[i] != '\0')
 				i++;
 			j++;
 		}

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:54:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:17:19 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	init(t_data	*data, char **envp)
 	data->limiter = 0;
 	data->paths = NULL;
 	g_sig.pid = 0;
-	g_sig.sigint = 0;
-	g_sig.sigquit = 0;
 	g_sig.code_error = 0;
 	data->cmd_paths = NULL;
 	data->argv = NULL;

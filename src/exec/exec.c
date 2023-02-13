@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:51:17 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:16:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 	int	rd;
 
 	rd = 0;
-	data->cmd = ft_split2(argv, "|");
+	if (iter_pipe(argv) > 1)
+		data->cmd = ft_split2(argv, "|");
+	else
+		data->cmd = ft_split2(argv, "");
 	if (check_redir(data->cmd[data->count]))
 		rd = ft_redir(data);
 	if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir))
@@ -63,7 +66,7 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 int	exec(t_data *data, char *argv, t_env **env)
 {
 	if (!init_exec(argv, data))
-		return (0);
+		return (g_sig.code_error);
 	while (data->count < (iter_pipe(argv)))
 	{
 		g_sig.pid = fork();

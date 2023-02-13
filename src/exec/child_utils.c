@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:51:09 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:30:34 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ void	error_cmdnotfound(char **cmd_args)
 
 int	init_exec(char *argv, t_data *data)
 {
+	if (!check_pipe(argv))
+	{
+		g_sig.code_error = 2;
+		return (write_error("syntax error near unexpected token `|'\n"));
+	}
 	if (iter_pipe(argv) > 1)
 	{
 		data->tube = malloc(sizeof(int) * (2 * (iter_pipe(argv) - 1)));

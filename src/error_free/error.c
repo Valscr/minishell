@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 02:39:45 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/03 00:04:18 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:22:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,13 @@ int	write_perror(char *str)
 {
 	perror(str);
 	return (0);
+}
+
+void	parent_free(t_data *data)
+{
+	if (data->tube)
+	{
+		free(data->tube);
+		data->tube = NULL;
+	}
 }

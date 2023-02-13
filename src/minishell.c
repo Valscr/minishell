@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/13 13:20:43 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:43:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	loop_pipe(t_data data, char *argv)
 	free_tab_str(data.cmd_paths);
 	free_str(data.argv);
 	data.limiter = 0;
-	if (g_sig.sigint || g_sig.sigquit)
+	if (g_sig.code_error)
 		return (g_sig.code_error);
 	return (error);
 }
