@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:38:50 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:34:15 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_here_doc(t_data *data, int file, char *buf, char *argv)
 			free_str(buf);
 			free_str(argv);
 			close(file);
-			exit (g_sig.code_error);
+			exit (code_error);
 		}
 		if (!ft_strncmp(argv, buf, ft_strlen(argv) + 1))
 			break ;

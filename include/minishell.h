@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 15:56:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:31:26 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-typedef struct s_sig
-{
-	int			code_error;
-	pid_t		pid;
-}				t_sig;
+int			code_error;
 
 typedef struct s_data
 {
@@ -163,6 +159,6 @@ int		init_exec(char *argv, t_data *data);
 int		check_pipe(char *argv);
 void	ctrl_c3_handler(int sig);
 
-extern t_sig	g_sig;
+extern int	code_error;
 
 #endif

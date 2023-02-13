@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 14:30:34 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:35:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	init_exec(char *argv, t_data *data)
 {
 	if (!check_pipe(argv))
 	{
-		g_sig.code_error = 2;
+		code_error = 2;
 		return (write_error("syntax error near unexpected token `|'\n"));
 	}
 	if (iter_pipe(argv) > 1)

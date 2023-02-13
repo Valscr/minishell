@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:08:32 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:24:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	wait_fonct(t_data *data, char *argv)
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == 2)
-			return (130);
+			return (ft_putstr_fd("\n", 1), 130);
+		if (WTERMSIG(status) == 3)
+			return (131);
 	}
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
