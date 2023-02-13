@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:46:17 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:53:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	check_arg(char *str, t_data *data)
 	}
 	if (!ft_strncmp("pwd", str, 3))
 	{
+		ft_pwd();
 		free_tab_str(strg);
+		free_end_process(data);
 		exit(0);
 	}
 	if (!ft_strncmp("export", str, 6))
