@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:42:12 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:06:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ void	init_child(t_data *data, char *argv)
 	check_arg(argv, data);
 }
 
-int	error_slash(char **cmd_args, t_data *data)
+int	error_slash(char **cmd_args)
 {
 	write(2, cmd_args[0], ft_strlen(cmd_args[0]));
 	write(2, ": Is a directory\n", 18);
-	free_end_process(data);
 	return (126);
 }
 

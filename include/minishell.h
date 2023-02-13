@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:44:51 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:07:00 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	init_shell(void);
 int		find_slash(char *str);
 int		is_slash(char *str);
 void	init_child(t_data *data, char *argv);
-int		error_slash(char **cmd_args, t_data *data);
+int		error_slash(char **cmd_args);
 void	error_cmdnotfound(char **cmd_args);
 int		init_exec(char *argv, t_data *data);
 

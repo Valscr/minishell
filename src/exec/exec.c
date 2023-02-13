@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:44:22 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:06:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	child(t_data *data, char *argv, t_env **env)
 	if (!cmd)
 	{
 		if (!is_slash(cmd_args[0]))
-			error = error_slash(cmd_args, data);
+			error = error_slash(cmd_args);
 		else if (find_slash(cmd_args[0]) && cmd_args[0])
 			write_perror(cmd_args[0]);
 		else if (is_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
