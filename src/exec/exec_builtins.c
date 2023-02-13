@@ -6,16 +6,16 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/12 22:56:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:46:17 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int check_arg(char *str, t_data *data)
+int	check_arg(char *str, t_data *data)
 {
-	char **strg;
-	int end;
+	char	**strg;
+	int		end;
 
 	end = 0;
 	strg = ft_split(str, " '\"");
@@ -56,9 +56,9 @@ int check_arg(char *str, t_data *data)
 	return (0);
 }
 
-int check_arg2(char *str, t_data *data)
+int	check_arg2(char *str, t_data *data)
 {
-	char **dest;
+	char	**dest;
 
 	dest = ft_split(str, " =");
 	if (!ft_strncmp("export", str, 6))

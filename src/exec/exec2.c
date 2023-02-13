@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/06 21:28:53 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:44:13 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,45 @@ int	wait_fonct(t_data *data, char *argv)
 	{
 		red = WEXITSTATUS(status);
 		return (red);
+	}
+	return (0);
+}
+
+int	is_cmd(char **paths, char *cmd)
+{
+	char	*tmp;
+	char	*command;
+
+	if (cmd == NULL || cmd[0] == 0)
+		return (0);
+	while (*paths)
+	{
+		if (access(cmd, X_OK) == 0)
+			return (1);
+		tmp = ft_strjoin(*paths, "/");
+		command = ft_strjoin(tmp, cmd);
+		free(tmp);
+		if (access(command, 0) == 0)
+		{
+			free(command);
+			return (1);
+		}
+		free(command);
+		paths++;
+	}
+	return (0);
+}
+
+int	is_slash(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '/')
+			return (1);
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/12 18:08:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:44:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ char	*find_env(t_data *data, char *str);
 int		free_tab_str(char **str);
 void	free_str(char *str);
 void	free_all(t_data *data);
-void	add_env_variable(t_env **head, const char *name, const char *value);
+int		add_env_variable(t_env **head, const char *name, const char *value);
 void	copy_string_array_to_env_list(t_env **head, char *string_array[]);
 char	*get_env_value(t_env *head, const char *name);
 char	**env_list_to_string_array(t_env *head);
@@ -156,6 +156,16 @@ void	open_here_doc(t_data *data);
 void	sig_quit2(int code);
 void	free_t_env_list(t_env *head);
 void	free_end_process(t_data *data);
+int		check_exit(char *str);
+int		is_number(char	*str);
+int		check_empty_line(char *buf);
+void	init_shell(void);
+int		find_slash(char *str);
+int		is_slash(char *str);
+void	init_child(t_data *data, char *argv);
+int		error_slash(char **cmd_args, t_data *data);
+void	error_cmdnotfound(char **cmd_args);
+int		init_exec(char *argv, t_data *data);
 
 extern t_sig	g_sig;
 

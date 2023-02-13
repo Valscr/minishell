@@ -6,11 +6,23 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/10 17:04:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:54:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	redir_in(char *str, char *dest, t_data *data, int i)
+{
+	if (!find_cmd(str, data, 1))
+		return (0);
+	dest = return_word(str, i + 1);
+	if (!check_file(data, dest))
+		return (free(dest), 0);
+	free_str(dest);
+	dest = NULL;
+	return (1);
+}
 
 int	pars_redir_in(char *str, t_data *data)
 {
@@ -25,22 +37,14 @@ int	pars_redir_in(char *str, t_data *data)
 			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
 				&& !ft_strchr("<>", str[i + 1])))
 		{
-			if (!find_cmd(str, data, 1))
+			if (!redir_in(str, dest, data, i))
 				return (0);
-			dest = return_word(str, i + 1);
-			if (!check_file(data, dest))
-				return (free(dest), 0);
-			free_str(dest);
-			dest = NULL;
 		}
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
 			if (data->limiter == 1)
-			{
-				open_here_doc(data);
-				return (free_str(dest), 1);
-			}
+				return (open_here_doc(data), free_str(dest), 1);
 			else
 				return (free_str(dest), 0);
 		}

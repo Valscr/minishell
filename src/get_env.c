@@ -6,11 +6,21 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 00:29:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:29:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+char	*loop_env(char *dest, t_data *data, int i)
+{
+	if (i == 0 && dest[i] == '$' && dest[i + 1] && dest[i + 1] == '?')
+		dest = replace_code_error(dest, i);
+	else if (i == 0 && dest[i] == '$' && dest[i + 1] && isprint(dest[i + 1])
+		&& (!check_quotes1(dest, i, '\'')))
+		dest = replace_word(data, dest, i);
+	return (dest);
+}
 
 char	*get_env(char *str, t_data *data)
 {
@@ -19,7 +29,6 @@ char	*get_env(char *str, t_data *data)
 
 	if (!str || !str[0])
 		return (NULL);
-	dest = NULL;
 	dest = ft_strdup(str);
 	i = 0;
 	while (dest[i])
@@ -37,12 +46,7 @@ char	*get_env(char *str, t_data *data)
 			if (i + 1 > ft_strlen(dest))
 				break ;
 		}
-		else if (i == 0 && dest[i] == '$' && dest[i + 1] && dest[i + 1] == '?')
-			dest = replace_code_error(dest, i);
-		else if (i == 0 && dest[i] == '$' && dest[i + 1] && isprint(dest[i + 1])
-			&& (!check_quotes1(dest, i, '\'')))
-			dest = replace_word(data, dest, i);
-		i++;
+		dest = loop_env(dest, data, i++);
 	}
 	return (dest);
 }

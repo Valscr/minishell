@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 00:14:40 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:02:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,14 @@ char	*replace_word(t_data *data, char *str, int i)
 	int		j;
 	int		y;
 
-	j = 0;
+	j = -1;
 	y = 0;
 	dest = return_word2(str, i + 1);
 	str2 = get_env_list(data->env, dest);
-	str3 = malloc(sizeof(char) * (ft_strlen(str2)
-				+ ft_strlen(str) - ft_strlen(dest) + 3));
-	while (j < i)
-	{
+	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
+				- ft_strlen(dest) + 1));
+	while (++j < i)
 		str3[j] = str[j];
-		j++;
-	}
 	while (y < ft_strlen(str2))
 		str3[j++] = str2[y++];
 	i += ft_strlen(dest) + 1;

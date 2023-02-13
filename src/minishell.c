@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/12 22:05:42 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:02:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,59 +36,15 @@ int	loop_pipe(t_data data, char *argv)
 	return (error);
 }
 
-int	check_empty_line(char *buf)
+void	execute(char *buf, t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] != ' ' && buf[i] != '\t')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	is_number(char	*str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] != '+' && str[i] != '-' && !ft_isdigit(str[i]))
-		return (0);
-	i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	check_exit(char *str)
-{
-	int		i;
-	int		j;
-	char	*dest;
-
-	j = 0;
-	i = 5;
-	if (ft_strlen(str) < 6)
-		return (0);
-	dest = malloc(sizeof(char) * (ft_strlen(str) - 5 + 1));
-	while (str[i])
-		dest[j++] = str[i++];
-	dest[j] = '\0';
-	if (is_number(dest))
-	{
-		i = ft_atoi(dest);
-		free(dest);
-		return (i);
-	}
-	free(dest);
-	return (2);
+	if (!check_arg2(buf, data))
+			g_sig.code_error = loop_pipe(*data, buf);
+	write(data->file, buf, ft_strlen(buf));
+	write(data->file, "\n", 1);
+	if (check_empty_line(buf))
+		add_history(buf);
+	return ;
 }
 
 int	loop_shell(t_data *data)
@@ -100,11 +56,7 @@ int	loop_shell(t_data *data)
 	i = 0;
 	while (1)
 	{
-		signal(SIGINT, (void (*)(int))ctrl_c_handler);
-		signal(SIGQUIT, SIG_IGN);
-		g_sig.pid = 0;
-		g_sig.sigint = 0;
-		g_sig.sigquit = 0;
+		init_shell();
 		ft_putstr_fd("\b\b", 1);
 		buf = readline("\001\033[1;94m\002minishell\001\033[0m\002$ ");
 		if (buf == NULL)
@@ -117,12 +69,7 @@ int	loop_shell(t_data *data)
 			i = check_exit(buf);
 			break ;
 		}
-		if (!check_arg2(buf, data))
-			g_sig.code_error = loop_pipe(*data, buf);
-		write(data->file, buf, ft_strlen(buf));
-		write(data->file, "\n", 1);
-		if (check_empty_line(buf))
-			add_history(buf);
+		execute(buf, data);
 		free_str(buf);
 	}
 	return (free_str(buf), i);
@@ -140,23 +87,6 @@ int	shell(t_data *data)
 		unlink(".heredoc_tmp");
 	clear_history();
 	return (1);
-}
-
-void	free_t_env_list(t_env *head)
-{
-	t_env	*current;
-	t_env	*next;
-
-	current = head;
-	while (current->next != NULL)
-	{
-		next = current->next;
-		if (current->value)
-			free_str(current->value);
-		free(current);
-		current = next;
-	}
-	free(next);
 }
 
 int	main(int argc, char **argv, char *envp[])
