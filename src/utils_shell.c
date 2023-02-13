@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:05:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,8 @@ void	init_shell(void)
 {
 	signal(SIGINT, (void (*)(int))ctrl_c_handler);
 	signal(SIGQUIT, SIG_IGN);
+	if (g_sig.code_error == 0)
+		ft_putstr_fd("\001\033[1;90m\002○\033[0m ", 1);
+	else
+		ft_putstr_fd("\001\033[1;31m\002○\033[0m ", 1);
 }
