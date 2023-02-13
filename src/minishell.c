@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/13 02:02:56 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:13:50 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	loop_pipe(t_data data, char *argv)
 
 void	execute(char *buf, t_data *data)
 {
-	if (!check_arg2(buf, data))
-			g_sig.code_error = loop_pipe(*data, buf);
+	g_sig.code_error = loop_pipe(*data, buf);
+	check_arg2(buf, data);
 	write(data->file, buf, ft_strlen(buf));
 	write(data->file, "\n", 1);
 	if (check_empty_line(buf))
