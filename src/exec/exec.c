@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:06:40 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:24:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 	if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir[data->count]))
 		get_in_out(argv, data, rd);
 	if (rd > 0)
-		child(data, data->cmd_redir[data->count], env);
+		child(data, data->cmd_redir, env);
 	else if (rd == 0)
 		child(data, data->cmd[data->count], env);
 	else

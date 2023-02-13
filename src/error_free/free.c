@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:20:06 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/07 13:53:31 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:27:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	free_all(t_data *data)
 void	free_end_process(t_data *data)
 {
 	free_tab_str(data->cmd);
-	free_tab_str(data->cmd_redir);
+	free_str(data->cmd_redir);
 	free_tab_str(data->cmd_paths);
 	free_t_env_list(data->env);
 	free_str(data->argv);
