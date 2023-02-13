@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 14:35:12 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:06:03 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,14 @@ int	check_pipe(char *argv)
 
 	j = 1;
 	i = 0;
-	while (argv[i++])
+	while (argv[i])
 	{
 		if (argv[i] == '|' && check_quotes(argv, i)
 			&& check_empty_pipe(argv, i))
 			j++;
 		if (argv[i] == '|' && !check_empty_pipe(argv, i))
 			return (0);
+		i++;
 	}
 	return (j);
 }

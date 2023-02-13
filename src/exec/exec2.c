@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 15:06:33 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:08:32 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 int	wait_fonct(t_data *data, char *argv)
 {	
 	int	i;
-	int	red;
 	int	status;
 
 	i = 0;
-	red = 0;
 	status = 0;
 	if (iter_pipe(argv) > 1)
 	{
@@ -30,13 +28,13 @@ int	wait_fonct(t_data *data, char *argv)
 	}
 	else
 		waitpid(0, &status, 0);
-	if (g_sig.code_error)
-		return (g_sig.code_error);
-	if (WIFEXITED(status))
+	if (WIFSIGNALED(status))
 	{
-		red = WEXITSTATUS(status);
-		return (red);
+		if (WTERMSIG(status) == 2)
+			return (130);
 	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
 	return (0);
 }
 

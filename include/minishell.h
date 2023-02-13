@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 15:17:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:56:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int		error_slash(char **cmd_args);
 void	error_cmdnotfound(char **cmd_args);
 int		init_exec(char *argv, t_data *data);
 int		check_pipe(char *argv);
+void	ctrl_c3_handler(int sig);
 
 extern t_sig	g_sig;
 
