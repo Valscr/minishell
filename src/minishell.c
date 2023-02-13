@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/13 15:27:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:35:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	loop_shell(t_data *data)
 	while (1)
 	{
 		init_shell();
-		ft_putstr_fd("\b\b", 1);
 		buf = readline("\001\033[1;94m\002minishell\001\033[0m\002$ ");
 		if (buf == NULL)
 		{
