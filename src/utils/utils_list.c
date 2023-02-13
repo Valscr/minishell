@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 00:57:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:49:11 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	copy_string_array_to_env_list(t_env **head, char *string_array[])
 	while (string_array[i])
 	{
 		name = ft_strdup(string_array[i]);
-		value = strchr(name, '=');
+		value = ft_strchr(name, '=');
 		if (value != NULL)
 		{
 			*value = '\0';
@@ -107,8 +107,8 @@ int	add_env_variable(t_env **head, const char *name, const char *val)
 	current = *head;
 	while (current != NULL && current->next != NULL)
 	{
-		if (strncmp(current->value, name, strlen(name)) == 0
-			&& current->value[strlen(name)] == '=')
+		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
+			&& current->value[ft_strlen(name)] == '=')
 		{
 			free(current->value);
 			current->value = ft_strdup(str2);

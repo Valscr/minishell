@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 01:29:01 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:47:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ char	*get_env_list(t_env *head, char *name)
 	current = head;
 	while (current->next != NULL)
 	{
-		if (strncmp(current->value, name, ft_strlen(name)) == 0
-			&& current->value[strlen(name)] == '=')
+		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
+			&& current->value[ft_strlen(name)] == '=')
 		{
 			if (ft_strlen(current->value) < (ft_strlen(name) + 1))
-				return (printf("salut"), NULL);
+				return (NULL);
 			return (ft_strdup(current->value + ft_strlen(name) + 1));
 		}
 		current = current->next;
