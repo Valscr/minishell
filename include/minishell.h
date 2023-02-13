@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:26:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:32:28 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_data
 }				t_data;
 
 void	init(t_data	*data, char **envp);
-int		init_redir(t_data *data);
 char	*find_path(t_env *head);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);

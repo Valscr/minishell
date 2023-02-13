@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:26:44 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:32:03 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,6 @@ int	check_redir(char *str)
 	if (ft_strnstr(str, ">>", ft_strlen(str)) && find_char(str, '>'))
 		return (1);
 	return (0);
-}
-
-int	init_redir(t_data *data)
-{
-	/*int	i;
-
-	data->cmd_redir = malloc(sizeof(char *) * (count_tab(data->cmd) + 1));
-	if (!data->cmd_redir)
-		return (0);
-	i = 0;
-	while (i <= (count_tab(data->cmd)))
-		data->cmd_redir[i++] = NULL;*/
-	data->cmd_redir = NULL;
-	return (1);
 }
 
 int	end_word(char *str, int i)

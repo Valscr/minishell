@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:25:07 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:31:54 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	ft_redir(t_data *d)
 	int	redir;
 
 	redir = 0;
+	d->cmd_redir = NULL;
 	if ((ft_strlen(d->cmd[d->count]) <= 2 && (d->cmd[d->count][1] == '>'
 			|| d->cmd[d->count][1] == '<')) || ft_strlen(d->cmd[d->count]) <= 1)
 	{
