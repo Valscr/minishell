@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:35:03 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:00:05 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ char	*get_env(char *str, t_data *data)
 char	*replace_code_error(char *str, int i)
 {
 	char	*dest;
-	char	*error;
+	char	*code_error;
 	int		j;
 	int		y;
 
 	j = 0;
 	y = 0;
-	error = ft_itoa(code_error);
+	code_error = ft_itoa(g_sig.code_error);
 	dest = malloc(sizeof(char) * (ft_strlen(str)
-				+ ft_strlen(error) - 2 + 1));
+				+ ft_strlen(code_error) - 2 + 1));
 	while (j < i)
 	{
 		dest[j] = str[j];
 		j++;
 	}
-	while (y < ft_strlen(error))
-		dest[j++] = error[y++];
+	while (y < ft_strlen(code_error))
+		dest[j++] = code_error[y++];
 	i += 2;
 	if (str[i])
 	{
@@ -77,7 +77,7 @@ char	*replace_code_error(char *str, int i)
 			dest[j++] = str[i++];
 	}
 	dest[j] = '\0';
-	return (free_str(error), free_str(str), dest);
+	return (free_str(code_error), free_str(str), dest);
 }
 
 char	*get_env_list(t_env *head, char *name)

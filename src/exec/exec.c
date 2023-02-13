@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:47:28 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:59:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 		if (iter_pipe(argv) > 1)
 			parent_free(data);
 		free_end_process(data);
-		exit (code_error);
+		exit (g_sig.code_error);
 	}
 	return ;
 }
@@ -68,7 +68,7 @@ int	exec(t_data *data, char *argv, t_env **env)
 	pid_t	pid;
 
 	if (!init_exec(argv, data))
-		return (code_error);
+		return (g_sig.code_error);
 	while (data->count < (iter_pipe(argv)))
 	{
 		signal(SIGINT, SIG_IGN);

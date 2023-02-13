@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:48:38 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:57:39 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
-int			code_error;
+typedef struct s_sig
+{
+	int			code_error;
+}				t_sig;
 
 typedef struct s_data
 {
@@ -158,6 +161,6 @@ void	error_cmdnotfound(char **cmd_args);
 int		init_exec(char *argv, t_data *data);
 int		check_pipe(char *argv);
 
-extern int	code_error;
+extern t_sig	g_sig;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:06:03 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:25:11 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	close_pipes(t_data *data, int len)
 
 int	check_empty_pipe(char *argv, int i)
 {
+	i++;
 	while (argv[i] == ' ')
 		i++;
 	if (argv[i] == '|' || argv[i] == '\0')

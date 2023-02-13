@@ -6,13 +6,13 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/13 16:32:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:12:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	code_error;
+t_sig	g_sig;
 
 int	loop_pipe(t_data data, char *argv)
 {
@@ -39,7 +39,7 @@ void	execute(char *buf, t_data *data)
 	if (check_empty_line(buf))
 	{
 		add_history(buf);
-		code_error = loop_pipe(*data, buf);
+		g_sig.code_error = loop_pipe(*data, buf);
 		check_arg2(buf, data);
 	}
 	write(data->file, buf, ft_strlen(buf));
@@ -79,7 +79,7 @@ int	shell(t_data *data)
 	data->file = open(".minishell_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (data->file < 0)
 		return (0);
-	code_error = loop_shell(data);
+	g_sig.code_error = loop_shell(data);
 	close(data->file);
 	data->infile = open(".minishell_tmp", O_RDONLY);
 	if (data->infile < 0)
@@ -99,5 +99,5 @@ int	main(int argc, char **argv, char *envp[])
 		return (0);
 	free_tab_str(data.cmd_paths);
 	free_t_env_list(data.env);
-	return (code_error);
+	return (g_sig.code_error);
 }
