@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:57:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/15 22:58:07 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	free_end_process(t_data *data);
 int		check_exit(char *str);
 int		is_number(char	*str);
 int		check_empty_line(char *buf);
-void	init_shell(void);
+char	*init_shell(void);
 int		find_slash(char *str);
 int		is_slash(char *str);
 void	init_child(t_data *data, char *argv);

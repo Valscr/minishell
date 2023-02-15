@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/15 21:20:34 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/15 23:15:19 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,14 @@ int	loop_shell(t_data *data)
 {
 	char	*buf;
 	int		i;
+	char	*prompt;
 
 	buf = NULL;
 	i = 0;
 	while (1)
 	{
-		init_shell();
-		buf = readline("\001\033[1;94m\002minishell\001\033[0m\002$ ");
+		prompt = init_shell();
+		buf = readline(prompt);
 		if (buf == NULL)
 		{
 			ft_putstr_fd("exit\n", 1);
@@ -68,10 +69,11 @@ int	loop_shell(t_data *data)
 			i = check_exit(buf);
 			break ;
 		}
+		free_str(prompt);
 		execute(buf, data);
 		free_str(buf);
 	}
-	return (free_str(buf), i);
+	return (free_str(prompt), free_str(buf), i);
 }
 
 int	shell(t_data *data)
