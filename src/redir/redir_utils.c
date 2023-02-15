@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 10:02:52 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:08:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	return_file(char *str)
 				break ;
 			else
 			{
+				g_sig.code_error = 1;
 				write_perror(str2);
 				free_str(str2);
 				return (0);
@@ -42,6 +43,7 @@ int	return_file(char *str)
 
 void	error_cmd(char *str, char *dest, int type)
 {
+	g_sig.code_error = 127;
 	if (type == 1)
 	{
 		if (!return_file(str))
@@ -58,6 +60,7 @@ void	error_cmd(char *str, char *dest, int type)
 
 void	error_cmd_after(char *str)
 {
+	g_sig.code_error = 127;
 	if (ft_isprint(str[0]))
 	{
 		write_error(str);

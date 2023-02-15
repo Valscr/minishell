@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:28 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/15 21:08:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	redir_in(char *str, char *dest, t_data *data, int i)
 		return (0);
 	dest = return_word(str, i + 1);
 	if (!check_file(data, dest))
+	{
+		g_sig.code_error = 1;
 		return (free(dest), 0);
+	}
 	free_str(dest);
 	dest = NULL;
 	return (1);
