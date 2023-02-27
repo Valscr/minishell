@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:49:11 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 16:11:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	copy_string_array_to_env_list(t_env **head, char *string_array[])
 	char	*value;
 	int		i;
 
-	i = 0;
+	i = count_tab(string_array) - 1;
 	while (string_array[i])
 	{
 		name = ft_strdup(string_array[i]);
@@ -57,7 +57,7 @@ void	copy_string_array_to_env_list(t_env **head, char *string_array[])
 			add_env_front(head, name, value);
 		}
 		free(name);
-		i++;
+		i--;
 	}
 }
 

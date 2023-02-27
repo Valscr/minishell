@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 16:00:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/27 16:39:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ size_t	ft_strlen1(char *s);
 int		write_perror(char *str);
 int		write_error(char *str);
 int		ft_cd(char **cmd_tab, t_env *env);
+int 	ft_unset(char *name, t_env *env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
 void	child_free(char **cmd_args, char *cmd);
