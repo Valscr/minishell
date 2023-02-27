@@ -6,13 +6,13 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/15 21:08:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 19:33:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	return_file(char *str)
+int	return_file(char *str, int type)
 {
 	int		i;
 	char	*str2;
@@ -31,9 +31,9 @@ int	return_file(char *str)
 			else
 			{
 				g_sig.code_error = 1;
-				write_perror(str2);
-				free_str(str2);
-				return (0);
+				if (type == 1)
+					write_perror(str2);
+				return (free_str(str2), 0);
 			}
 		}
 	}
@@ -41,15 +41,15 @@ int	return_file(char *str)
 	return (1);
 }
 
-void	error_cmd(char *str, char *dest, int type)
+void	error_cmd(char *str, char *dest, int type, int type2)
 {
 	g_sig.code_error = 127;
 	if (type == 1)
 	{
-		if (!return_file(str))
+		if (!return_file(str, type2))
 			return ;
 	}
-	if (ft_isprint(dest[0]))
+	if (ft_isprint(dest[0]) && type2 == 1)
 	{
 		write_error(dest);
 		write_error(": command not found\n");
@@ -58,10 +58,10 @@ void	error_cmd(char *str, char *dest, int type)
 	return ;
 }
 
-void	error_cmd_after(char *str)
+void	error_cmd_after(char *str, int type)
 {
 	g_sig.code_error = 127;
-	if (ft_isprint(str[0]))
+	if (ft_isprint(str[0]) && type == 1)
 	{
 		write_error(str);
 		write_error(": command not found\n");
@@ -90,7 +90,7 @@ int	find_cmd_after(char *str, t_data *data)
 			if (is_cmd(data->cmd_paths, dest2))
 				return (free_str(dest2), 1);
 			else
-				return (error_cmd_after(dest2), free_str(dest2), 0);
+				return (error_cmd_after(dest2, data->type), free_str(dest2), 0);
 		}
 		i++;
 	}
@@ -118,7 +118,7 @@ int	find_cmd(char *str, t_data *data, int type)
 			return (1);
 		}
 	}
-	error_cmd(str, dest, type);
+	error_cmd(str, dest, type, data->type);
 	free_str(dest);
 	return (0);
 }

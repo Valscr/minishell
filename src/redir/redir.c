@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/15 21:08:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:15:14 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	pars_redir_in(char *str, t_data *data)
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
-			if (data->limiter == 1)
+			if (data->limiter == 1 && data->type == 0)
 				return (open_here_doc(data), free_str(dest), 1);
 			else
 				return (free_str(dest), 0);
@@ -85,31 +85,38 @@ int	pars_redir_out(char *str, t_data *data)
 	return (1);
 }
 
-int	ft_redir(t_data *d)
+void	ft_redir_bis(t_data *data, char *cmd)
+{	
+	if (data->type == 0)
+		data->cmd_redir = new_command(cmd, data);
+	return ;
+}
+
+int	ft_redir(t_data *d, char *cmd)
 {
 	int	redir;
 
 	redir = 0;
 	d->cmd_redir = NULL;
-	if ((ft_strlen(d->cmd[d->count]) <= 2 && (d->cmd[d->count][1] == '>'
-			|| d->cmd[d->count][1] == '<')) || ft_strlen(d->cmd[d->count]) <= 1)
+	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
+		|| ft_strlen(cmd) <= 1)
 	{
 		write(2, "syntax error near unexpected token `newline'\n", 46);
 		g_sig.code_error = 2;
 		return (-1);
 	}
-	if (ft_strnstr(d->cmd[d->count], "<", ft_strlen(d->cmd[d->count])))
+	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
 	{
-		if (!pars_redir_in(d->cmd[d->count], d))
+		if (!pars_redir_in(cmd, d))
 			return (-1);
 		redir = 1;
 	}
-	if (ft_strnstr(d->cmd[d->count], ">", ft_strlen(d->cmd[d->count])))
+	if (ft_strnstr(cmd, ">", ft_strlen(cmd)))
 	{
-		if (!pars_redir_out(d->cmd[d->count], d))
+		if (!pars_redir_out(cmd, d))
 			return (-1);
 		redir += 2;
 	}
-	d->cmd_redir = new_command(d->cmd[d->count], d);
+	ft_redir_bis(d, cmd);
 	return (redir);
 }

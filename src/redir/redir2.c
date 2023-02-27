@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 03:32:03 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:48:03 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	open_file(char *str, t_data *data, int i, int type)
 {
 	char	*dest;
 
+	if (data->type == 1)
+		return (1);
 	dest = return_word(str, i + 1);
 	if (ft_strlen(dest) > 0)
 	{
@@ -75,4 +77,30 @@ int	end_word(char *str, int i)
 		&& str[i] != '"' && str[i] != '\'' && str[i] != '\0')
 		i++;
 	return (i);
+}
+
+int	check_error_redir(t_data *data, char *buf)
+{
+	char	**cmd;
+
+	data->type = 1;
+	data->count = 0;
+	cmd = NULL;
+	data->paths = find_path(data->env);
+	data->cmd_paths = ft_split(data->paths, ":");
+	if (iter_pipe(buf) > 1)
+		cmd = ft_split2(buf, "|");
+	else
+		cmd = ft_split2(buf, "");
+	while (cmd[data->count])
+	{
+		if (check_redir(cmd[data->count]))
+			ft_redir(data, cmd[data->count]);
+		data->count++;
+	}
+	free_tab_str(cmd);
+	free_tab_str(data->cmd_paths);
+	data->cmd_paths = NULL;
+	data->count = 0;
+	return (1);
 }

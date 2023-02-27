@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/08 09:40:31 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:30:50 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,19 @@ char	*new_command(char *str, t_data *data)
 
 int	check_file(t_data *data, char *dest)
 {
-	if (is_file(dest))
+	if (is_file(dest) && data->type == 0)
 	{
 		data->infile = open(dest, O_RDONLY);
 		if (data->infile < 0)
 			return (0);
 		return (1);
 	}
-	else
+	else if (data->type == 1 && !is_file(dest))
 	{
 		write_perror(dest);
+		return (0);
 	}
+	else if (data->type == 1 && is_file(dest))
+		return (1);
 	return (0);
 }
