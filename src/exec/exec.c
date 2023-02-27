@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/15 23:53:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:49:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 	int	rd;
 
 	rd = 0;
+	data->type = 0;
 	if (iter_pipe(argv) > 1)
 		data->cmd = ft_split2(argv, "|");
 	else
 		data->cmd = ft_split2(argv, "");
 	if (check_redir(data->cmd[data->count]))
-		rd = ft_redir(data);
+		rd = ft_redir(data, data->cmd[data->count]);
 	if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir))
 		get_in_out(argv, data, rd);
 	if (rd > 0)
@@ -58,7 +59,7 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 		if (iter_pipe(argv) > 1)
 			parent_free(data);
 		free_end_process(data);
-		exit (g_sig.code_error);
+		exit(g_sig.code_error);
 	}
 	return ;
 }
@@ -126,6 +127,6 @@ void	child(t_data *data, char *argv, t_env **env)
 	}
 	signal(SIGINT, SIG_DFL);
 	execve(cmd, cmd_args, env_list_to_string_array(*env));
-	exit (127);
+	exit(127);
 	return ;
 }
