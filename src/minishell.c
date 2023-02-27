@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/15 23:37:53 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 22:49:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	loop_pipe(t_data data, char *argv)
 		error = exec(&data, data.argv, &data.env);
 	else
 		error = 130;
-	data.count = 0;
-	free_tab_str(data.cmd_paths);
 	free_str(data.argv);
-	data.limiter = 0;
+	free_tab_str(data.cmd_paths);
 	return (error);
 }
 
@@ -39,8 +37,11 @@ void	execute(char *buf, t_data *data)
 	if (check_empty_line(buf))
 	{
 		add_history(buf);
+		data->type = 0;
 		g_sig.code_error = loop_pipe(*data, buf);
 		check_arg2(buf, data);
+		check_error_redir(data, buf);
+		data->limiter = 0;
 	}
 	write(data->file, buf, ft_strlen(buf));
 	write(data->file, "\n", 1);
