@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/26 23:52:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ void	init(t_data	*data, char **envp)
 	copy_string_array_to_env_list(&data->env, envp);
 	return ;
 }
-
-/*char	*find_path(char **envp)
-{
-	while (ft_strncmp("PATH", *envp, 4))
-		envp++;
-	return (*envp + 5);
-}*/
 
 char	*find_path(t_env *head)
 {

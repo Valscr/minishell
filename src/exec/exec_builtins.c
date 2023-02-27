@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 13:12:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 00:04:09 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ int	check_arg(char *str, t_data *data)
 	}
 	if (!ft_strncmp("cd", str, 2))
 	{
-		end = ft_cd(strg);
 		free_tab_str(strg);
 		free_end_process(data);
-		exit(end);
+		exit(0);
 	}
 	if (!ft_strncmp("pwd", str, 3))
 	{
@@ -61,12 +60,21 @@ int	check_arg(char *str, t_data *data)
 int	check_arg2(char *str, t_data *data)
 {
 	char	**dest;
+	char 	**strg;
 
-	dest = ft_split(str, " =");
+	dest = NULL;
+	strg = NULL;
+	if (!ft_strncmp("cd", str, 2))
+	{
+		strg = ft_split(str, " '\"");
+		g_sig.code_error = ft_cd(strg);
+		return (free_tab_str(strg), 0);
+	}
 	if (!ft_strncmp("export", str, 6))
 	{
+		dest = ft_split(str, " =");
 		ft_export(dest[1], dest[2], data);
-		return (free_tab_str(dest), 1);
+		return (free_tab_str(dest), 0);
 	}
 	free_tab_str(dest);
 	return (0);
