@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 16:39:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/27 23:28:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 {
 	pid_t		pid;
 	int			*tube;
+	int			type;
 	int			infile;
 	int			outfile;
 	int			count;
@@ -92,7 +93,7 @@ char	*get_cmd(char **paths, char *cmd);
 int		find_cmd(char *str, t_data *data, int type);
 int		find_char(char *str, char c);
 int		check_redir(char *str);
-int		ft_redir(t_data *d);
+int		ft_redir(t_data *d, char *cmd);
 char	**ft_split2(char const *s, char const *sep);
 int		count_tab(char **str);
 int		check_quotes(char *str, int i);
@@ -161,6 +162,7 @@ int		error_slash(char **cmd_args);
 void	error_cmdnotfound(char **cmd_args);
 int		init_exec(char *argv, t_data *data);
 int		check_pipe(char *argv);
+int		check_error_redir(t_data *data, char *buf);
 
 extern t_sig	g_sig;
 
