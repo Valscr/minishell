@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 22:48:03 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:32:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,30 @@ int	end_word(char *str, int i)
 	return (i);
 }
 
+int	check_cmd(t_data *data, char *argv)
+{
+	char	**cmd_args;
+	char	*cmd;
+	int		error;
+
+	error = 127;
+	cmd_args = ft_split(argv, "  '\"");
+	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
+	if (!cmd)
+	{
+		child_free(cmd_args, cmd);
+		return (error);
+	}
+	child_free(cmd_args, cmd);
+	return (0);
+}
+
 int	check_error_redir(t_data *data, char *buf)
 {
 	char	**cmd;
+	int		error;
 
+	error = 0;
 	data->type = 1;
 	data->count = 0;
 	cmd = NULL;
@@ -95,12 +115,17 @@ int	check_error_redir(t_data *data, char *buf)
 	while (cmd[data->count])
 	{
 		if (check_redir(cmd[data->count]))
+		{
 			ft_redir(data, cmd[data->count]);
+			error = g_sig.code_error;
+		}
+		else
+			error = check_cmd(data, cmd[data->count]);
 		data->count++;
 	}
 	free_tab_str(cmd);
 	free_tab_str(data->cmd_paths);
 	data->cmd_paths = NULL;
 	data->count = 0;
-	return (1);
+	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 19:33:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:40:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ int	return_file(char *str, int type)
 				return (free_str(str2), 0);
 			}
 		}
+		i++;
 	}
-	free_str(str2);
-	return (1);
+	return (free_str(str2), 1);
 }
 
 void	error_cmd(char *str, char *dest, int type, int type2)
 {
 	g_sig.code_error = 127;
+	if (str == NULL)
+		return ;
 	if (type == 1)
 	{
 		if (!return_file(str, type2))
@@ -61,6 +63,8 @@ void	error_cmd(char *str, char *dest, int type, int type2)
 void	error_cmd_after(char *str, int type)
 {
 	g_sig.code_error = 127;
+	if (str == NULL)
+		return ;
 	if (ft_isprint(str[0]) && type == 1)
 	{
 		write_error(str);
@@ -76,7 +80,7 @@ int	find_cmd_after(char *str, t_data *data)
 
 	i = 0;
 	dest2 = NULL;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str[i])
 	{
 		if (str[i] == '>' || str[i] == '<')
 		{
@@ -105,6 +109,8 @@ int	find_cmd(char *str, t_data *data, int type)
 	i = 0;
 	dest = NULL;
 	dest = return_word(str, i);
+	if (dest == NULL)
+		return (0);
 	if (is_cmd(data->cmd_paths, dest))
 	{
 		free_str(dest);

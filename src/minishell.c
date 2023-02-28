@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/27 23:56:46 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:43:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	execute(char *buf, t_data *data)
 		data->type = 0;
 		g_sig.code_error = loop_pipe(*data, buf);
 		check_arg2(buf, data);
-		check_error_redir(data, buf);
+		if (g_sig.code_error != 130 && g_sig.code_error != 131)
+			g_sig.code_error = check_error_redir(data, buf);
 		data->limiter = 0;
 	}
 	write(data->file, buf, ft_strlen(buf));
