@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 14:22:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 21:03:13 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	**env_list_to_string_array(t_env *head)
 	str = malloc(sizeof(char *) * (count));
 	current = head;
 	i = 0;
-	current = current->next;
 	while (current != NULL && current->next != NULL)
 	{
 		str[i] = ft_strdup(current->value);
@@ -111,6 +110,7 @@ int	add_env_variable(t_env **head, const char *name, const char *val)
 		str2 = ft_strdup(str);
 	free(str);
 	current = *head;
+	current = current->next;
 	while (current != NULL && current->next != NULL)
 	{
 		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0

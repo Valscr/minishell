@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 20:09:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 21:17:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	check_arg2(char *str, t_data *data)
 	if (!ft_strncmp("unset", str, 5))
 	{
 		dest = ft_split(str, " ");
-		g_sig.code_error = ft_unset(dest[1], data->env);
+		g_sig.code_error = ft_unset(dest[1], data);
 		return (free_tab_str(dest), 0);
 	}
 	free_tab_str(dest);
