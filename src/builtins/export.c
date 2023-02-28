@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/12 22:20:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:13:34 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**new_env(char **envp, char *value, char *name, int i)
 
 	j = 0;
 	dest = malloc(sizeof(char *) * count_tab(envp) + 1);
+	if (!dest)
+		return (NULL);
 	while (j < i)
 	{
 		dest[j] = ft_strdup(envp[j]);

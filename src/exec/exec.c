@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 16:57:22 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:05:04 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ char	*get_cmd(char **paths, char *cmd)
 			return (cmd);
 		tmp = ft_strjoin(*paths, "/");
 		command = ft_strjoin(tmp, cmd);
-		free(tmp);
+		free_str(tmp);
 		if (access(command, 0) == 0)
 			return (command);
-		free(command);
+		free_str(command);
 		paths++;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 00:19:44 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/01/13 00:03:14 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:00:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (0);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	dest = malloc(sizeof(char) * size);
 	if (!dest)

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 15:30:09 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:05:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	pars_redir_out(char *str, t_data *data)
 
 void	ft_redir_bis(t_data *data, char *cmd)
 {	
+	data->cmd_redir = NULL;
 	if (data->type == 0)
 		data->cmd_redir = new_command(cmd, data);
 	return ;
@@ -97,7 +98,8 @@ int	ft_redir(t_data *d, char *cmd)
 	int	redir;
 
 	redir = 0;
-	d->cmd_redir = NULL;
+	if (!cmd)
+		return (-1);
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
 		|| ft_strlen(cmd) <= 1)
 	{
@@ -117,6 +119,5 @@ int	ft_redir(t_data *d, char *cmd)
 			return (-1);
 		redir += 2;
 	}
-	ft_redir_bis(d, cmd);
-	return (redir);
+	return (ft_redir_bis(d, cmd), redir);
 }
