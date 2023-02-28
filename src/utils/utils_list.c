@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 16:11:44 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 14:22:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ char	**env_list_to_string_array(t_env *head)
 		count++;
 		current = current->next;
 	}
-	str = malloc(sizeof(char *) * (count + 1));
+	str = malloc(sizeof(char *) * (count));
 	current = head;
 	i = 0;
+	current = current->next;
 	while (current != NULL && current->next != NULL)
 	{
 		str[i] = ft_strdup(current->value);
@@ -43,9 +44,14 @@ void	copy_string_array_to_env_list(t_env **head, char *string_array[])
 {
 	char	*name;
 	char	*value;
+	t_env	*new_node;
 	int		i;
 
 	i = count_tab(string_array) - 1;
+	new_node = (t_env *)malloc(sizeof(t_env));
+	new_node->value = NULL;
+	new_node->next = NULL;
+	ft_lstadd_front((t_list **)head, (t_list *)new_node);
 	while (string_array[i])
 	{
 		name = ft_strdup(string_array[i]);

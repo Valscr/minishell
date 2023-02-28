@@ -6,13 +6,13 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 19:30:13 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:41:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	init(t_data	*data, char **envp)
+int	init(t_data	*data, char **envp)
 {
 	data->infile = 0;
 	data->outfile = 0;
@@ -31,9 +31,11 @@ void	init(t_data	*data, char **envp)
 	data->cmd_redir = NULL;
 	data->envp = NULL;
 	data->env = (t_env *)malloc(sizeof(t_env));
+	if (!data->env)
+		return (0);
 	data->env->next = NULL;
 	copy_string_array_to_env_list(&data->env, envp);
-	return ;
+	return (1);
 }
 
 char	*find_path(t_env *head)

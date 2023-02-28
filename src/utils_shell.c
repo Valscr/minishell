@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/16 00:20:11 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:44:05 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ char	*init_shell(void)
 	char	*prompt;
 
 	true = ft_strdup("\001\033[1;90m\002○\001\033[0m\002 ");
+	if (true == 0)
+		return (NULL);
 	false = ft_strdup("\001\033[1;31m\002○\001\033[0m\002 ");
+	if (false == 0)
+		return (NULL);
 	prompt = ft_strdup("\001\033[1;94m\002minishell\001\033[0m\002$ ");
+	if (prompt == 0)
+		return (NULL);
 	signal(SIGINT, (void (*)(int))ctrl_c_handler);
 	signal(SIGQUIT, SIG_IGN);
 	if (g_sig.code_error == 0)

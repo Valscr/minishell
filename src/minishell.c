@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/27 22:49:46 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:56:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	loop_shell(t_data *data)
 	while (1)
 	{
 		prompt = init_shell();
+		if (prompt == NULL)
+			return (free_str(buf), 0);
 		buf = readline(prompt);
 		if (buf == NULL)
 		{
@@ -97,7 +99,8 @@ int	main(int argc, char **argv, char *envp[])
 
 	if (argc > 1 || argv[1] != NULL)
 		return (0);
-	init(&data, envp);
+	if (!init(&data, envp))
+		return (0);
 	if (!shell(&data))
 		return (0);
 	free_tab_str(data.cmd_paths);

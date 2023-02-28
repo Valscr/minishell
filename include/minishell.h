@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 23:28:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/27 23:41:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_data
 	t_env		*env;
 }				t_data;
 
-void	init(t_data	*data, char **envp);
+int		init(t_data	*data, char **envp);
 char	*find_path(t_env *head);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
@@ -85,7 +85,7 @@ size_t	ft_strlen1(char *s);
 int		write_perror(char *str);
 int		write_error(char *str);
 int		ft_cd(char **cmd_tab, t_env *env);
-int 	ft_unset(char *name, t_env *env);
+int		ft_unset(char *name, t_env *env);
 int		ft_echo(char **args);
 int		ft_pwd(void);
 void	child_free(char **cmd_args, char *cmd);
