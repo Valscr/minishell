@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 23:41:01 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:18:45 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,12 @@ char	*init_shell(void);
 int		find_slash(char *str);
 int		is_slash(char *str);
 void	init_child(t_data *data, char *argv);
-int		error_slash(char **cmd_args);
+int		error_slash(char **cmd_args, int type);
 void	error_cmdnotfound(char **cmd_args);
 int		init_exec(char *argv, t_data *data);
 int		check_pipe(char *argv);
 int		check_error_redir(t_data *data, char *buf);
+int		check_cmd(t_data *data, char *argv);
 
 extern t_sig	g_sig;
 

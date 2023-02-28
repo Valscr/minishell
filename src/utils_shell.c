@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 23:44:05 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:33:34 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,30 @@ char	*init_shell(void)
 	free(false);
 	free(prompt);
 	return (dest);
+}
+
+int	check_cmd(t_data *data, char *argv)
+{
+	char	**cmd_args;
+	char	*cmd;
+	int		error;
+
+	error = 127;
+	cmd_args = ft_split(argv, "  '\"");
+	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
+	if (!cmd && ft_strncmp(cmd_args[0], "cd", 2)
+		&& ft_strncmp(cmd_args[0], "pwd", 3)
+		&& ft_strncmp(cmd_args[0], "export ", 7))
+	{
+		if (!is_slash(cmd_args[0]))
+			error = error_slash(cmd_args, 1);
+		else if (find_slash(cmd_args[0]) && cmd_args[0])
+			write_perror(cmd_args[0]);
+		else if (is_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
+			error_cmdnotfound(cmd_args);
+		child_free(cmd_args, cmd);
+		return (error);
+	}
+	child_free(cmd_args, cmd);
+	return (0);
 }

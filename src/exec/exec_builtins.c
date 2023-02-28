@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 15:44:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 17:11:15 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	check_arg(char *str, t_data *data)
 int	check_arg2(char *str, t_data *data)
 {
 	char	**dest;
-	char 	**strg;
+	char	**strg;
 
 	dest = NULL;
 	strg = NULL;

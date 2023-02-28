@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:43 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:15:11 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ void	init_child(t_data *data, char *argv)
 	check_arg(argv, data);
 }
 
-int	error_slash(char **cmd_args)
+int	error_slash(char **cmd_args, int type)
 {
-	write(2, cmd_args[0], ft_strlen(cmd_args[0]));
-	write(2, ": Is a directory\n", 18);
+	if (type == 1)
+	{
+		write(2, cmd_args[0], ft_strlen(cmd_args[0]));
+		write(2, ": Is a directory\n", 18);
+	}
 	return (126);
 }
 
@@ -53,6 +56,7 @@ void	error_cmdnotfound(char **cmd_args)
 
 int	init_exec(char *argv, t_data *data)
 {
+	data->count = 0;
 	if (!check_pipe(argv))
 	{
 		g_sig.code_error = 2;

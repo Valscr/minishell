@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 16:06:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 16:57:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,7 @@ void	child(t_data *data, char *argv, t_env **env)
 	if (!cmd)
 	{
 		if (!is_slash(cmd_args[0]))
-			error = error_slash(cmd_args);
-		else if (find_slash(cmd_args[0]) && cmd_args[0])
-			write_perror(cmd_args[0]);
-		else if (is_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
-			error_cmdnotfound(cmd_args);
+			error = error_slash(cmd_args, 0);
 		free_end_process(data);
 		child_free(cmd_args, cmd);
 		exit(error);

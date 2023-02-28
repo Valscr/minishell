@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:14:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 16:02:54 by marvin           ###   ########.fr       */
+/*   Updated: 2023/02/28 17:34:33 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	ft_cd(char **cmd_tab, t_env *env)
 		if (!splt)
 			return (write_perror("HOME not set\n"));
 		chdir(splt[1]);
-		free_tab_str(splt);
-		return (0);
+		return (free_tab_str(splt), 0);
 	}
 	if (chdir(cmd_tab[1]) == -1)
 	{
@@ -54,12 +53,8 @@ int	ft_cd(char **cmd_tab, t_env *env)
 		if (!str)
 			return (perror("Error malloc\n"), 1);
 		if (chdir(str) != 0)
-		{
-			free(str);
-			return (perror(cmd_tab[1]), 1);
-		}
-		free(str);
-		return (0);
+			return (free(str), perror(cmd_tab[1]), 1);
+		return (free(str), 0);
 	}
 	return (0);
 }

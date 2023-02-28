@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/28 16:43:22 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:23:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ void	execute(char *buf, t_data *data)
 		data->type = 0;
 		g_sig.code_error = loop_pipe(*data, buf);
 		check_arg2(buf, data);
-		if (g_sig.code_error != 130 && g_sig.code_error != 131)
+		if (g_sig.code_error != 130 && g_sig.code_error != 131
+			&& g_sig.code_error != 2)
+		{
 			g_sig.code_error = check_error_redir(data, buf);
+		}
 		data->limiter = 0;
 	}
 	write(data->file, buf, ft_strlen(buf));
@@ -60,8 +63,6 @@ int	loop_shell(t_data *data)
 	while (1)
 	{
 		prompt = init_shell();
-		if (prompt == NULL)
-			return (free_str(buf), 0);
 		buf = readline(prompt);
 		if (buf == NULL)
 		{
@@ -104,7 +105,6 @@ int	main(int argc, char **argv, char *envp[])
 		return (0);
 	if (!shell(&data))
 		return (0);
-	free_tab_str(data.cmd_paths);
 	free_t_env_list(data.env);
 	return (g_sig.code_error);
 }

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 15:32:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 17:20:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,33 +79,15 @@ int	end_word(char *str, int i)
 	return (i);
 }
 
-int	check_cmd(t_data *data, char *argv)
-{
-	char	**cmd_args;
-	char	*cmd;
-	int		error;
-
-	error = 127;
-	cmd_args = ft_split(argv, "  '\"");
-	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
-	if (!cmd)
-	{
-		child_free(cmd_args, cmd);
-		return (error);
-	}
-	child_free(cmd_args, cmd);
-	return (0);
-}
-
 int	check_error_redir(t_data *data, char *buf)
 {
 	char	**cmd;
 	int		error;
 
 	error = 0;
+	cmd = NULL;
 	data->type = 1;
 	data->count = 0;
-	cmd = NULL;
 	data->paths = find_path(data->env);
 	data->cmd_paths = ft_split(data->paths, ":");
 	if (iter_pipe(buf) > 1)
@@ -123,9 +105,5 @@ int	check_error_redir(t_data *data, char *buf)
 			error = check_cmd(data, cmd[data->count]);
 		data->count++;
 	}
-	free_tab_str(cmd);
-	free_tab_str(data->cmd_paths);
-	data->cmd_paths = NULL;
-	data->count = 0;
-	return (error);
+	return (free_tab_str(cmd), free_tab_str(data->cmd_paths), error);
 }
