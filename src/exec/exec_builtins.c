@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 17:11:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:21:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ int	check_arg(char *str, t_data *data)
 		free_end_process(data);
 		exit(0);
 	}
-	/*if (!ft_strncmp("unset", str, 5))
+	if (!ft_strncmp("unset ", str, 6))
 	{
+		free_tab_str(strg);
+		free_end_process(data);
 		exit (0);
 	}
-	if (!ft_strncmp("env", str, 3))
+	/*if (!ft_strncmp("env", str, 3))
 	{
 		exit (0);
 	}*/
@@ -74,6 +76,12 @@ int	check_arg2(char *str, t_data *data)
 	{
 		dest = ft_split(str, " =");
 		ft_export(dest[1], dest[2], data);
+		return (free_tab_str(dest), 0);
+	}
+	if (!ft_strncmp("unset", str, 5))
+	{
+		dest = ft_split(str, " ");
+		ft_unset(dest[1], data);
 		return (free_tab_str(dest), 0);
 	}
 	free_tab_str(dest);
