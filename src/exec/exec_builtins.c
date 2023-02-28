@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/28 19:20:56 by valentin         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/28 19:07:31 by marvin           ###   ########.fr       */
+>>>>>>> ee5de87 (ajout unset.c dans Makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +85,7 @@ int	check_arg2(char *str, t_data *data)
 	if (!ft_strncmp("unset", str, 5))
 	{
 		dest = ft_split(str, " ");
-		g_sig.code_error = ft_unset(dest[1], data);
+		g_sig.code_error = ft_unset(dest[1], data->env);
 		return (free_tab_str(dest), 0);
 	}
 	free_tab_str(dest);
