@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 18:14:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:03:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**env_list_to_string_array(t_env *head)
 	t_env	*current;
 	char	**str;
 
-	count = size_list(head) - 1;
+	count = size_list(head);
 	str = malloc(sizeof(char *) * (count + 1));
 	if (!str)
 		return (NULL);
