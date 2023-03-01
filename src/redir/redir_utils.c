@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 16:40:52 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:41:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	return_file(char *str, int type)
 	char	*str2;
 
 	i = 0;
-	str2 = NULL;
 	while (str[i])
 	{
 		if ((i == 0 && is_meta(str, i, '<') && !ft_strchr("<>", str[i + 1]))
@@ -26,15 +25,14 @@ int	return_file(char *str, int type)
 				&& !ft_strchr("<>", str[i + 1])))
 		{
 			str2 = return_word(str, i + 1);
+			if (!str2)
+				return (write_perror("Error malloc\n"));
 			if (is_file(str2))
 				break ;
-			else
-			{
-				g_sig.code_error = 1;
-				if (type == 1)
-					write_perror(str2);
-				return (free_str(str2), 0);
-			}
+			g_sig.code_error = 1;
+			if (type == 1)
+				write_perror(str2);
+			return (free_str(str2), 0);
 		}
 		i++;
 	}
@@ -85,12 +83,9 @@ int	find_cmd_after(char *str, t_data *data)
 		if (str[i] == '>' || str[i] == '<')
 		{
 			i = end_word(str, i);
-			free_str(dest2);
-			dest2 = NULL;
-			if (str[i])
-				dest2 = return_word(str, i);
-			else
+			if (!str[i])
 				break ;
+			dest2 = return_word(str, i);
 			if (is_cmd(data->cmd_paths, dest2))
 				return (free_str(dest2), 1);
 			else
@@ -98,7 +93,7 @@ int	find_cmd_after(char *str, t_data *data)
 		}
 		i++;
 	}
-	return (free_str(dest2), 0);
+	return (0);
 }
 
 int	find_cmd(char *str, t_data *data, int type)

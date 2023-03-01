@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 18:05:40 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:49:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	redir_in(char *str, char *dest, t_data *data, int i)
 	if (!find_cmd(str, data, 1))
 		return (0);
 	dest = return_word(str, i + 1);
+	if (!dest)
+		return (write_perror("Error malloc\n"));
 	if (!check_file(data, dest))
 	{
 		g_sig.code_error = 1;

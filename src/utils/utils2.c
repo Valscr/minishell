@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 01:02:58 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:17:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,12 @@ char	*cut_arg(char *str, int j, int i)
 	if (!str || j - i == 0)
 		return (NULL);
 	dest = malloc(sizeof(char) * (i - j + 2));
+	if (!dest)
+		return (write_perror("Error malloc\n"), NULL);
 	while (j <= i && str[j] != '\0')
 		dest[d++] = str[j++];
 	dest[d] = '\0';
 	return (dest);
-}
-
-/*char	*util_limiter(char **str, t_data *data, char *dest, int i)
-{
-	while (str[i] && !is_file(str[i])
-		&& ft_strncmp(str[i], data->limiter, ft_strlen(data->limiter)))
-	{
-		dest = ft_strjoin(dest, " ");
-		dest = ft_strjoin(dest, str[i]);
-		i++;
-	}
-	free(data->limiter);
-	data->limiter = NULL;
-	return (dest);
-}*/
-
-int	is_meta(char *str, int i, char c)
-{
-	if (str[i] == c && check_quotes(str, i))
-		return (1);
-	else
-		return (0);
 }
 
 int	quotes_after(char const *str, int j)
@@ -86,20 +66,36 @@ char	*return_word2(char *str, int i)
 	return (dest);
 }
 
-char	*replace_word(t_data *data, char *str, int i)
+char	*fill_replace_word(t_data *data, char *dest, char *str, char *str2)
+{
+	char	*str3;
+
+	str2 = get_env_list(data->env, dest);
+	if (!str2)
+		return (free(dest), NULL);
+	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
+				- ft_strlen(dest) + 1));
+	if (!str3)
+		return (free(dest), free(str2), NULL);
+	return (str3);
+}
+
+/*tjr initialiser y a 0*/
+char	*replace_word(t_data *data, char *str, int i, int y)
 {
 	char	*dest;
 	char	*str2;
 	char	*str3;
 	int		j;
-	int		y;
 
 	j = -1;
-	y = 0;
+	str2 = NULL;
 	dest = return_word2(str, i + 1);
-	str2 = get_env_list(data->env, dest);
-	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
-				- ft_strlen(dest) + 1));
+	if (!dest)
+		return (write_perror("Error malloc\n"), NULL);
+	str3 = fill_replace_word(data, dest, str, str2);
+	if (!str3)
+		return (NULL);
 	while (++j < i)
 		str3[j] = str[j];
 	while (y < ft_strlen(str2))

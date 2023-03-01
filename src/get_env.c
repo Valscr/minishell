@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 20:37:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:21:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*loop_env(char *dest, t_data *data, int i)
 		dest = replace_code_error(dest, i);
 	else if (i == 0 && dest[i] == '$' && dest[i + 1] && isprint(dest[i + 1])
 		&& (!check_quotes1(dest, i, '\'')))
-		dest = replace_word(data, dest, i);
+		dest = replace_word(data, dest, i, 0);
 	return (dest);
 }
 
@@ -29,9 +29,9 @@ char	*get_env(char *str, t_data *data)
 	int		i;
 	char	*dest;
 
-	if (!str || !str[0])
-		return (NULL);
 	dest = ft_strdup(str);
+	if (!dest)
+		return (write_perror("Error malloc\n"), NULL);
 	i = 0;
 	while (dest[i])
 	{
@@ -44,7 +44,7 @@ char	*get_env(char *str, t_data *data)
 		else if (i > 0 && isprint(dest[i]) && dest[i - 1] == '$'
 			&& dest[i] != ' ' && (!check_quotes1(dest, i - 1, '\'')))
 		{
-			dest = replace_word(data, dest, i - 1);
+			dest = replace_word(data, dest, i - 1, 0);
 			if (i + 1 > ft_strlen(dest))
 				break ;
 		}

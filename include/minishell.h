@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 20:38:16 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:20:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		check_quotes(char *str, int i);
 int		check_quotes1(char *str, int i, char c);
 int		quotes_after(char const *str, int j);
 int		ft_export(char *string, t_data *data);
-char	*replace_word(t_data *data, char *str, int i);
+char	*replace_word(t_data *data, char *str, int i, int y);
 char	*new_command(char *str, t_data *data);
 char	*return_cmd(char *str, int i);
 int		pars_redir_in(char *str, t_data *data);
@@ -155,6 +155,8 @@ int		add_last(t_env *list, char *string);
 int		size_list(t_env *env);
 void	process_exec(t_data *data, char *argv);
 char	*replace_code_error_bis(char *str, char *dest, char *code_error, int i);
+char	**check_error_redir_init(t_data *data, char *buf);
+char	*fill_replace_word(t_data *data, char *dest, char *str, char *str2);
 
 extern t_sig	g_sig;
 

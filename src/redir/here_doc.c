@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/27 22:23:00 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:27:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,16 @@ int	limiter_heredoc(char *str, t_data *data)
 	int		red;
 	char	*dest;
 
+	i = -1;
 	dest = NULL;
-	i = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
 			dest = return_word(str, i + 2);
+			if (!dest)
+				return (write_perror("Error malloc\n"));
 			red = here_doc(dest, data);
 			if (red == 0)
 			{
@@ -101,8 +103,6 @@ int	limiter_heredoc(char *str, t_data *data)
 			if (red == 130)
 				return (free_str(dest), 2);
 		}
-		i++;
 	}
-	free_str(dest);
-	return (0);
+	return (free_str(dest), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 20:03:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 23:52:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	find_string_in_list(t_env *head, const char *string)
 			if (!tmp)
 				return (1);
 			cur->next->value = ft_strdup(string);
+			printf("%s\n", cur->next->value);
+	fflush(stdout);
 			if (!cur->next->value)
 				return (-1);
 			return (1);

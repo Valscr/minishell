@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 19:19:33 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:06:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	check_cmd(t_data *data, char *argv)
 
 	error = 127;
 	cmd_args = ft_split(argv, "  '\"");
+	if (!cmd_args)
+		return (write_perror("Error malloc\n"));
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd && ft_strncmp(cmd_args[0], "cd", 2)
 		&& ft_strncmp(cmd_args[0], "pwd", 3)

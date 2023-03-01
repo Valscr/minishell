@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 17:56:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 21:57:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*return_cmd(char *str, int i)
 	while (str[j] && str[j] != '<' && str[j] != '>')
 		j++;
 	dest = malloc(sizeof(char) * ((j - i) + 1));
+	if (!dest)
+		return (write_perror("Error malloc\n"), NULL);
 	j = 0;
 	while (str[i] && str[i] != '<' && str[i] != '>')
 		dest[j++] = str[i++];
@@ -48,10 +50,7 @@ char	*return_cmd(char *str, int i)
 	else
 		dest[j] = '\0';
 	if (!check_char(dest))
-	{
-		free(dest);
-		return (NULL);
-	}
+		return (free(dest), NULL);
 	return (dest);
 }
 
@@ -92,6 +91,8 @@ char	*new_command(char *str, t_data *data)
 
 	i = 0;
 	dest = return_word(str, i);
+	if (!dest)
+		return (write_perror("Error malloc\n"), NULL);
 	dest2 = NULL;
 	if (is_cmd(data->cmd_paths, dest))
 		dest2 = return_cmd(str, i);

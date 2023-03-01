@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 17:30:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 23:17:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	process_exec(t_data *data, char *argv)
 		data->cmd = ft_split2(argv, "|");
 	else
 		data->cmd = ft_split2(argv, "");
+	if (!data->cmd)
+		return ;
 	if (check_redir(data->cmd[data->count]))
 		rd = ft_redir(data, data->cmd[data->count]);
 	if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir))
@@ -61,7 +63,6 @@ void	process_exec(t_data *data, char *argv)
 		free_end_process(data);
 		exit(g_sig.code_error);
 	}
-	return ;
 }
 
 int	exec(t_data *data, char *argv)
@@ -93,8 +94,12 @@ char	*get_cmd(char **paths, char *cmd)
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
 		tmp = ft_strjoin(*paths, "/");
+		if (!tmp)
+			return (write_perror("Error malloc\n"), NULL);
 		command = ft_strjoin(tmp, cmd);
 		free_str(tmp);
+		if (!command)
+			return (write_perror("Error malloc\n"), NULL);
 		if (access(command, 0) == 0)
 			return (command);
 		free_str(command);
@@ -112,6 +117,8 @@ void	child(t_data *data, char *argv)
 	error = 127;
 	init_child(data, argv);
 	cmd_args = ft_split(argv, "  '\"");
+	if (!cmd_args)
+		return ;
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd)
 	{

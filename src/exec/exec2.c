@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/15 23:20:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 23:17:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ int	is_cmd(char **paths, char *cmd)
 		if (access(cmd, X_OK) == 0)
 			return (1);
 		tmp = ft_strjoin(*paths, "/");
+		if (!tmp)
+			return (write_perror("Error malloc\n"), 0);
 		command = ft_strjoin(tmp, cmd);
 		free(tmp);
+		if (!command)
+			return (write_perror("Error malloc\n"), 0);
 		if (access(command, 0) == 0)
 		{
 			free(command);
