@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:00:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 02:05:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:49:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	check_exit(char *str)
 	if (ft_strlen(str) < 6)
 		return (0);
 	dest = malloc(sizeof(char) * (ft_strlen(str) - 5 + 1));
+	if (!dest)
+		return (0);
 	while (str[i])
 		dest[j++] = str[i++];
 	dest[j] = '\0';

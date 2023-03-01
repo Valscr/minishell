@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 16:51:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:50:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	**new_env(char **envp, char *value, char *name, int i)
 	while (j < i)
 	{
 		dest[j] = ft_strdup(envp[j]);
+		if (!dest[j])
+			return (free_tab_str(dest), NULL);
 		j++;
 	}
 	dest[j++] = ft_strdup(ft_strjoin(ft_strjoin(name, "="), value));
