@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 19:19:43 by valentin          #+#    #+#              #
-#    Updated: 2023/03/01 00:17:02 by marvin           ###   ########.fr        #
+#    Updated: 2023/03/01 18:09:43 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,12 @@ LIBSFLAGS	=  libft/libft.a
 CC		= cc
 RM		= rm -f
 
-$(NAME): ${OBJS} maker
+all: maker ${NAME}
+
+$(NAME): ${OBJS} $(LIBSFLAGS)
 		@$(CC) $(OBJS) $(CFLAGS) $(LIBSFLAGS) -lreadline -o $(NAME)
 		@echo " [ $(COLOUR_GREEN)OK$(COLOUR_END) ] ./minishell"
 		
-all: ${NAME}
-
 maker:
 		@make bonus -s -C libft
 		@echo "[ OK ] libft"
