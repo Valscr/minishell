@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 20:14:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:37:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*loop_env(char *dest, t_data *data, int i)
 {
+	if (!dest)
+		return (NULL);
 	if (i == 0 && dest[i] == '$' && dest[i + 1] && dest[i + 1] == '?')
 		dest = replace_code_error(dest, i);
 	else if (i == 0 && dest[i] == '$' && dest[i + 1] && isprint(dest[i + 1])
@@ -51,18 +53,13 @@ char	*get_env(char *str, t_data *data)
 	return (dest);
 }
 
-char	*replace_code_error(char *str, int i)
+char	*replace_code_error_bis(char *str, char *dest, char *code_error, int i)
 {
-	char	*dest;
-	char	*code_error;
 	int		j;
 	int		y;
 
 	j = 0;
 	y = 0;
-	code_error = ft_itoa(g_sig.code_error);
-	dest = malloc(sizeof(char) * (ft_strlen(str)
-				+ ft_strlen(code_error) - 2 + 1));
 	while (j < i)
 	{
 		dest[j] = str[j];
@@ -80,12 +77,26 @@ char	*replace_code_error(char *str, int i)
 	return (free_str(code_error), free_str(str), dest);
 }
 
+char	*replace_code_error(char *str, int i)
+{
+	char	*dest;
+	char	*code_error;
+
+	if (!str)
+		return (NULL);
+	code_error = ft_itoa(g_sig.code_error);
+	dest = malloc(sizeof(char) * (ft_strlen(str) + ft_strlen(code_error) - 1));
+	if (!dest)
+		return (NULL);
+	return (replace_code_error_bis(str, dest, code_error, i));
+}
+
 char	*get_env_list(t_env *head, char *name)
 {
 	t_env	*current;
 
-	current = head->next;
-	while (current)
+	current = head;
+	while (current->next != NULL)
 	{
 		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
 			&& current->value[ft_strlen(name)] == '=')

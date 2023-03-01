@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/01 17:07:15 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:26:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int	loop_pipe(t_data data, char *argv)
 	if (argv[0] == 0)
 		return (0);
 	data.argv = get_env(argv, &data);
+	if (!data.argv)
+		return (0);
 	data.paths = find_path(data.env);
 	data.cmd_paths = ft_split(data.paths, ":");
+	if (!data.cmd_paths)
+		return (0);
 	if (limiter_heredoc(data.argv, &data) != 2)
 		error = exec(&data, data.argv);
 	else

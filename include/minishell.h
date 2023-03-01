@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 17:42:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/01 20:38:16 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int		add_first(t_env *list, char *string);
 int		add_last(t_env *list, char *string);
 int		size_list(t_env *env);
 void	process_exec(t_data *data, char *argv);
+char	*replace_code_error_bis(char *str, char *dest, char *code_error, int i);
 
 extern t_sig	g_sig;
 
