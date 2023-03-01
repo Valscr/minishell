@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 17:00:05 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 20:14:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ char	*get_env_list(t_env *head, char *name)
 {
 	t_env	*current;
 
-	current = head;
-	while (current->next != NULL)
+	current = head->next;
+	while (current)
 	{
 		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
 			&& current->value[ft_strlen(name)] == '=')
