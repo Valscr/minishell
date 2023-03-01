@@ -3,125 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 21:03:13 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:46:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	size_list(t_env *env)
+{
+	int		count;
+	t_env	*current;
+
+	current = env;
+	count = 0;
+	while (current->next != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
 
 char	**env_list_to_string_array(t_env *head)
 {
 	int		count;
 	t_env	*current;
 	char	**str;
-	int		i;
 
+	count = size_list(head) - 1;
+	str = malloc(sizeof(char *) * (count + 1));
+	if (!str)
+		return (NULL);
 	current = head;
 	count = 0;
-	while (current != NULL)
+	while (current->next != NULL)
 	{
+		str[count] = ft_strdup(current->next->value);
+		if (!str[count])
+		{
+			free_tab_str(str);
+			return (NULL);
+		}
+		current = current->next;
 		count++;
-		current = current->next;
 	}
-	str = malloc(sizeof(char *) * (count));
-	current = head;
-	i = 0;
-	while (current != NULL && current->next != NULL)
-	{
-		str[i] = ft_strdup(current->value);
-		current = current->next;
-		i++;
-	}
-	str[i] = NULL;
+	str[count] = NULL;
 	return (str);
 }
 
-void	copy_string_array_to_env_list(t_env **head, char *string_array[])
+int	copy_string_array_to_env_list(t_env *head, char *string_array[])
 {
-	char	*name;
-	char	*value;
 	t_env	*new_node;
 	int		i;
 
-	i = count_tab(string_array) - 1;
-	new_node = (t_env *)malloc(sizeof(t_env));
-	new_node->value = NULL;
-	new_node->next = NULL;
-	ft_lstadd_front((t_list **)head, (t_list *)new_node);
+	i = 0;
+	new_node = head;
 	while (string_array[i])
 	{
-		name = ft_strdup(string_array[i]);
-		value = ft_strchr(name, '=');
-		if (value != NULL)
+		if (!add_first(new_node, string_array[i]))
 		{
-			*value = '\0';
-			value++;
-			add_env_front(head, name, value);
+			free_t_env_list(head);
+			return (0);
 		}
-		free(name);
-		i--;
+		new_node = new_node->next;
+		i++;
 	}
+	return (1);
 }
 
-void	add_env_front(t_env **head, const char *name, const char *value)
+int	find_string_in_list(t_env *head, const char *string)
 {
-	t_env	*new_node;
-	char	*str;
-	char	*str2;
+	int		len;
+	t_env	*cur;
+	char	*tmp;
 
-	str = ft_strjoin(name, "=");
-	if (value != NULL)
-		str2 = ft_strjoin(str, value);
-	else
-		str2 = ft_strdup(str);
-	new_node = (t_env *)malloc(sizeof(t_env));
-	new_node->value = ft_strdup(str2);
-	new_node->next = NULL;
-	ft_lstadd_front((t_list **)head, (t_list *)new_node);
-	free(str);
-	free(str2);
-	return ;
-}
-
-void	add_env_back(t_env **head, const char *name, const char *value)
-{
-	t_env	*new_node;
-
-	new_node = (t_env *)malloc(sizeof(t_env));
-	new_node->value = ft_strdup(ft_strjoin(ft_strjoin(name, "="), value));
-	new_node->next = NULL;
-	ft_lstadd_back((t_list **)head, (t_list *)new_node);
-	return ;
-}
-
-int	add_env_variable(t_env **head, const char *name, const char *val)
-{
-	t_env	*current;
-	char	*str;
-	char	*str2;
-
-	str = ft_strjoin(name, "=");
-	if (val != NULL)
-		str2 = ft_strjoin(str, val);
-	else
-		str2 = ft_strdup(str);
-	free(str);
-	current = *head;
-	current = current->next;
-	while (current != NULL && current->next != NULL)
+	cur = head;
+	tmp = ft_strchr(string, '=');
+	len = ft_strlen(string) - ft_strlen(tmp);
+	while (cur->next)
 	{
-		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
-			&& current->value[ft_strlen(name)] == '=')
+		if (ft_strncmp(cur->next->value, string, len) == 0)
 		{
-			free(current->value);
-			current->value = ft_strdup(str2);
-			return (free(str2), 0);
+			if (!tmp)
+				return (1);
+			cur->next->value = ft_strdup(string);
+			if (!cur->next->value)
+				return (-1);
+			return (1);
 		}
-		current = current->next;
+		cur = cur->next;
 	}
-	add_env_front(head, name, val);
-	return (free(str2), 0);
+	return (0);
+}
+
+/*si la fonction rencontre une erreur renvoie 1, sinon renvoie 0*/
+int	add_env_variable(t_env *head, char *string)
+{
+	int	res;
+
+	if (string[0] == '=')
+		return (write_perror("export: not a valid identifier"));
+	res = find_string_in_list(head, string);
+	if (res == -1)
+		return (write_perror("Error malloc\n"));
+	if (res == 1)
+		return (1);
+	return (add_last(head, string));
 }

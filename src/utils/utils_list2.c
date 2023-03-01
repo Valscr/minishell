@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:58:02 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/13 01:58:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 00:49:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,10 @@
 
 void	free_t_env_list(t_env *head)
 {
-	t_env	*current;
-	t_env	*next;
-
-	current = head;
-	while (current->next != NULL)
-	{
-		next = current->next;
-		if (current->value)
-			free_str(current->value);
-		free(current);
-		current = next;
-	}
-	free(next);
+	if (!head)
+		return ;
+	free_t_env_list(head->next);
+	if (head->value)
+		free_str(head->value);
+	free(head);
 }

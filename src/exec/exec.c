@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 18:05:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:30:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_in_out(char *arg, t_data *d, int redir)
 	return (1);
 }
 
-void	process_exec(t_data *data, char *argv, t_env **env)
+void	process_exec(t_data *data, char *argv)
 {
 	int	rd;
 
@@ -51,9 +51,9 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 	if (iter_pipe(argv) > 1 || (rd > 0 && data->cmd_redir))
 		get_in_out(argv, data, rd);
 	if (rd > 0)
-		child(data, data->cmd_redir, env);
+		child(data, data->cmd_redir);
 	else if (rd == 0)
-		child(data, data->cmd[data->count], env);
+		child(data, data->cmd[data->count]);
 	else
 	{
 		if (iter_pipe(argv) > 1)
@@ -64,7 +64,7 @@ void	process_exec(t_data *data, char *argv, t_env **env)
 	return ;
 }
 
-int	exec(t_data *data, char *argv, t_env **env)
+int	exec(t_data *data, char *argv)
 {
 	pid_t	pid;
 
@@ -75,7 +75,7 @@ int	exec(t_data *data, char *argv, t_env **env)
 		signal(SIGINT, SIG_IGN);
 		pid = fork();
 		if (pid == 0)
-			process_exec(data, argv, env);
+			process_exec(data, argv);
 		data->count++;
 	}
 	return (free_tab_str(data->cmd), wait_fonct(data, argv));
@@ -103,7 +103,7 @@ char	*get_cmd(char **paths, char *cmd)
 	return (NULL);
 }
 
-void	child(t_data *data, char *argv, t_env **env)
+void	child(t_data *data, char *argv)
 {
 	char	**cmd_args;
 	char	*cmd;
@@ -122,7 +122,7 @@ void	child(t_data *data, char *argv, t_env **env)
 		exit(error);
 	}
 	signal(SIGINT, SIG_DFL);
-	execve(cmd, cmd_args, env_list_to_string_array(*env));
+	execve(cmd, cmd_args, env_list_to_string_array(data->env));
 	exit(127);
 	return ;
 }

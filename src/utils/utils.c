@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 17:57:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:29:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	init(t_data	*data, char **envp)
 	data->env = (t_env *)malloc(sizeof(t_env));
 	if (!data->env)
 		return (0);
+	data->env->value = NULL;
 	data->env->next = NULL;
-	copy_string_array_to_env_list(&data->env, envp);
+	if (!copy_string_array_to_env_list(data->env, envp))
+		return (0);
 	return (1);
 }
 
@@ -42,7 +44,7 @@ char	*find_path(t_env *head)
 {
 	t_env	*current;
 
-	current = head;
+	current = head->next;
 	while (current != NULL)
 	{
 		if (strncmp(current->value, "PATH=", 5) == 0)

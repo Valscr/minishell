@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/28 18:13:34 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/01 16:51:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char	**new_env(char **envp, char *value, char *name, int i)
 	return (dest);
 }
 
-int	ft_export(char *name, char *value, t_data *data)
+int	ft_export(char *string, t_data *data)
 {
-	add_env_variable(&data->env, name, value);
+	add_env_variable(data->env, string);
 	return (0);
 }
