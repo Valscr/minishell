@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/02 15:33:55 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 15:47:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	check_arg(char *str, t_data *data)
 		free_end_process(data);
 		exit(0);
 	}
-	else if (!ft_strncmp("cd", str, 2) || !ft_strncmp("export ", str, 7)
-		|| !ft_strncmp("unset ", str, 6))
+	else if (!ft_strncmp("cd", str, 2) || !ft_strncmp("export", str, 6)
+		|| !ft_strncmp("unset", str, 5))
 	{
 		free_end_process(data);
 		exit(0);
@@ -56,15 +56,19 @@ int	check_arg2(char *str, t_data *data)
 		g_sig.code_error = ft_cd(strg, data->env);
 		return (free_tab_str(strg), 0);
 	}
-	if (!ft_strncmp("export ", str, 7))
+	if (!ft_strncmp("export", str, 6))
 	{
+		if (str[6] != ' ' && str[6] != '\0')
+			return (0);
 		dest = ft_split(str, " ");
 		if (dest[1])
 			ft_export(dest[1], data);
 		return (free_tab_str(dest), 0);
 	}
-	if (!ft_strncmp("unset ", str, 6))
+	if (!ft_strncmp("unset", str, 5))
 	{
+		if (str[5] != ' ' && str[5] != '\0')
+			return (0);
 		dest = ft_split(str, " ");
 		if (dest[1])
 			g_sig.code_error = ft_unset(dest[1], data->env);
