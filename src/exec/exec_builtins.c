@@ -14,20 +14,17 @@
 
 int	check_arg(char *str, t_data *data)
 {
-	char	**strg;
 	int		end;
 
 	end = 0;
 	if (!ft_strncmp("echo", str, 4))
 	{
-		strg = ft_split(str, " '\"");
-		end = ft_echo(strg);
-		free_tab_str(strg);
+		end = ft_echo(ft_split(str, " '\""));
 		free_end_process(data);
 		exit(end);
 	}
 	else if ((!ft_strncmp("pwd", str, 3) && ft_strlen(str) == 3)
-		|| (!ft_strncmp("pwd", str, 3) && str[ft_strlen(str)] == ' '))
+		|| (!ft_strncmp("pwd", str, 3) && str[3] == ' '))
 	{
 		ft_pwd();
 		free_end_process(data);
@@ -48,19 +45,14 @@ int	check_arg2(char *str, t_data *data)
 	char	**strg;
 
 	dest = NULL;
-	strg = NULL;
 	if (!ft_strncmp("cd", str, 2))
 	{
-		if (str[2] != ' ' && str[2] != '\0')
-			return (0);
 		strg = ft_split(str, " '\"");
 		g_sig.code_error = ft_cd(strg, data->env);
 		return (free_tab_str(strg), 0);
 	}
 	if (!ft_strncmp("export", str, 6))
 	{
-		if (str[6] != ' ' && str[6] != '\0')
-			return (0);
 		dest = ft_split(str, " ");
 		if (dest[1])
 			ft_export(dest[1], data);
@@ -68,13 +60,10 @@ int	check_arg2(char *str, t_data *data)
 	}
 	if (!ft_strncmp("unset", str, 5))
 	{
-		if (str[5] != ' ' && str[5] != '\0')
-			return (0);
 		dest = ft_split(str, " ");
 		if (dest[1])
 			g_sig.code_error = ft_unset(dest[1], data->env);
 		return (free_tab_str(dest), 0);
 	}
-	free_tab_str(dest);
-	return (0);
+	return (free_tab_str(dest), 0);
 }

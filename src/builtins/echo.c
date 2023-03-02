@@ -46,5 +46,6 @@ int	ft_echo(char **args)
 	}
 	if (n_option == 0)
 		write(1, "\n", 1);
+	free_tab_str(args);
 	return (0);
 }
