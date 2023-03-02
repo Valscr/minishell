@@ -26,7 +26,8 @@ int	check_arg(char *str, t_data *data)
 		free_end_process(data);
 		exit(end);
 	}
-	else if (!ft_strncmp("pwd", str, 3))
+	else if ((!ft_strncmp("pwd", str, 3) && ft_strlen(str) == 3)
+		|| (!ft_strncmp("pwd", str, 3) && str[ft_strlen(str)] == ' '))
 	{
 		ft_pwd();
 		free_end_process(data);
