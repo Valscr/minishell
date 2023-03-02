@@ -91,8 +91,6 @@ char	*replace_word(t_data *data, char *str, int i, int y)
 	if (!dest)
 		return (NULL);
 	str2 = get_env_list(data->env, dest);
-	if (!str2)
-		return (free(dest), NULL);
 	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
 				- ft_strlen(dest) + 1));
 	if (!str3)
