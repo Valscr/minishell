@@ -66,10 +66,10 @@ int	check_cmd(t_data *data, char *argv)
 	if (!cmd_args)
 		return (write_perror("Error malloc\n"));
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
-	if (!cmd && ft_strncmp(cmd_args[0], "cd", 2)
-		&& ft_strncmp(cmd_args[0], "pwd", 3)
-		&& ft_strncmp(cmd_args[0], "export", 6)
-		&& ft_strncmp(cmd_args[0], "unset", 5))
+	if (!cmd && ft_strncmp(argv, "cd", 2)
+		&& ft_strncmp(argv, "pwd", 3)
+		&& ft_strncmp(argv, "export ", 7)
+		&& ft_strncmp(argv, "unset ", 6))
 	{
 		if (!is_slash(cmd_args[0]))
 			error = error_slash(cmd_args, 1);
