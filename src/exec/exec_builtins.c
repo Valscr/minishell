@@ -52,7 +52,7 @@ int	check_arg2(char *str, t_data *data)
 	if (!ft_strncmp("cd", str, 2))
 	{
 		if (str[2] != ' ' && str[2] != '\0')
-			return (write_error("Command not found\n"), 0);
+			return (0);
 		strg = ft_split(str, " '\"");
 		g_sig.code_error = ft_cd(strg, data->env);
 		return (free_tab_str(strg), 0);
