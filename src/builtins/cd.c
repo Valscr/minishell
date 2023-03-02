@@ -34,6 +34,7 @@ int	ft_cd(char **cmd_tab, t_env *env)
 {
 	char	cwd[PATH_MAX];
 	char	*str;
+	char	*str2;
 	char	**splt;	
 
 	if (!cmd_tab[1])
@@ -41,20 +42,19 @@ int	ft_cd(char **cmd_tab, t_env *env)
 		splt = search_home(env);
 		if (!splt)
 			return (write_perror("HOME not set\n"));
-		chdir(splt[1]);
-		return (free_tab_str(splt), 0);
+		return (chdir(splt[1]), free_tab_str(splt), 0);
 	}
 	if (chdir(cmd_tab[1]) == -1)
 	{
 		str = ft_strjoin(getcwd(cwd, PATH_MAX), "/");
 		if (!str)
 			return (perror("Error malloc\n"), 1);
-		str = ft_strjoin(str, cmd_tab[1]);
-		if (!str)
-			return (perror("Error malloc\n"), 1);
-		if (chdir(str) != 0)
-			return (free(str), perror(cmd_tab[1]), 1);
-		return (free(str), 0);
+		str2 = ft_strjoin(str, cmd_tab[1]);
+		if (!str2)
+			return (free(str), perror("Error malloc\n"), 1);
+		if (chdir(str2) != 0)
+			return (free(str), free(str2), perror(cmd_tab[1]), 1);
+		return (free(str), free(str2), 0);
 	}
 	return (0);
 }
