@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/02 01:14:10 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/02 01:33:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_unset(char *name, t_env *env)
 			if (cur->next->value[len] == '=')
 			{
 				free(cur->next->value);
-				cur->next->value = NULL;
 				tmp = cur->next;
 				cur->next = cur->next->next;
 				free(tmp);
