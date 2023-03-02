@@ -66,17 +66,14 @@ char	*return_word2(char *str, int i)
 	return (dest);
 }
 
-char	*fill_replace_word(t_data *data, char *dest, char *str, char *str2)
+char	*fill_replace_word(char *str3, char *str, int i, int j)
 {
-	char	*str3;
-
-	str2 = get_env_list(data->env, dest);
-	if (!str2)
-		return (free(dest), NULL);
-	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
-				- ft_strlen(dest) + 1));
-	if (!str3)
-		return (free(dest), free(str2), NULL);
+	if (i < ft_strlen(str))
+	{
+		while (str[i])
+			str3[j++] = str[i++];
+	}
+	str3[j] = '\0';
 	return (str3);
 }
 
@@ -92,20 +89,19 @@ char	*replace_word(t_data *data, char *str, int i, int y)
 	str2 = NULL;
 	dest = return_word2(str, i + 1);
 	if (!dest)
-		return (write_perror("Error malloc\n"), NULL);
-	str3 = fill_replace_word(data, dest, str, str2);
-	if (!str3)
 		return (NULL);
+	str2 = get_env_list(data->env, dest);
+	if (!str2)
+		return (free(dest), NULL);
+	str3 = malloc(sizeof(char) * (ft_strlen(str2) + ft_strlen(str)
+				- ft_strlen(dest) + 1));
+	if (!str3)
+		return (free(dest), free(str2), NULL);
 	while (++j < i)
 		str3[j] = str[j];
 	while (y < ft_strlen(str2))
 		str3[j++] = str2[y++];
 	i += ft_strlen(dest) + 1;
-	if (i < ft_strlen(str))
-	{
-		while (str[i])
-			str3[j++] = str[i++];
-	}
-	str3[j] = '\0';
+	str3 = fill_replace_word(str3, str, i, j);
 	return (free_str(dest), free_str(str), free_str(str2), str3);
 }

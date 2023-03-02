@@ -69,7 +69,7 @@ int	check_cmd(t_data *data, char *argv)
 	if (!cmd && ft_strncmp(cmd_args[0], "cd", 2)
 		&& ft_strncmp(cmd_args[0], "pwd", 3)
 		&& ft_strncmp(cmd_args[0], "export", 6)
-		&& ft_strncmp(cmd_args[0], "unset", 6))
+		&& ft_strncmp(cmd_args[0], "unset", 5))
 	{
 		if (!is_slash(cmd_args[0]))
 			error = error_slash(cmd_args, 1);

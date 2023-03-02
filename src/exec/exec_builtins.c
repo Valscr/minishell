@@ -54,13 +54,13 @@ int	check_arg2(char *str, t_data *data)
 		g_sig.code_error = ft_cd(strg, data->env);
 		return (free_tab_str(strg), 0);
 	}
-	if (!ft_strncmp("export", str, 6))
+	if (!ft_strncmp("export ", str, 7))
 	{
 		dest = ft_split(str, " ");
 		ft_export(dest[1], data);
 		return (free_tab_str(dest), 0);
 	}
-	if (!ft_strncmp("unset", str, 5))
+	if (!ft_strncmp("unset ", str, 6))
 	{
 		dest = ft_split(str, " ");
 		g_sig.code_error = ft_unset(dest[1], data->env);

@@ -31,7 +31,7 @@ char	*get_env(char *str, t_data *data)
 
 	dest = ft_strdup(str);
 	if (!dest)
-		return (write_perror("Error malloc\n"), NULL);
+		return (write_error("Error malloc\n"), NULL);
 	i = 0;
 	while (dest[i])
 	{
@@ -95,8 +95,10 @@ char	*get_env_list(t_env *head, char *name)
 {
 	t_env	*current;
 
+	if (name[0] == '\0')
+		return (NULL);
 	current = head;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
 		if (ft_strncmp(current->value, name, ft_strlen(name)) == 0
 			&& current->value[ft_strlen(name)] == '=')

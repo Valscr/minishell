@@ -156,7 +156,7 @@ int		size_list(t_env *env);
 void	process_exec(t_data *data, char *argv);
 char	*replace_code_error_bis(char *str, char *dest, char *code_error, int i);
 char	**check_error_redir_init(t_data *data, char *buf);
-char	*fill_replace_word(t_data *data, char *dest, char *str, char *str2);
+char	*fill_replace_word(char *str3, char *str, int i, int j);
 
 extern t_sig	g_sig;
 
