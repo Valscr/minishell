@@ -14,16 +14,8 @@
 
 void	child_free(char **cmd_args, char *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (cmd_args[i])
-	{
-		free(cmd_args[i]);
-		i++;
-	}
-	free(cmd_args);
-	free(cmd);
+	free_tab_str(cmd_args);
+	free_str(cmd);
 }
 
 int	free_tab_str(char **str)
@@ -37,6 +29,8 @@ int	free_tab_str(char **str)
 	{
 		free_str(str[i++]);
 	}
+	if (!str)
+		return (0);
 	free(str);
 	return (0);
 }
