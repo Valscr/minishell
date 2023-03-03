@@ -55,7 +55,7 @@ char	*init_shell(void)
 	return (dest);
 }
 
-int	check_builtins(char *argv, char **cmd_args)
+int	check_builtins(char *argv, char *cmd_args)
 {
 	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
 	{
@@ -96,17 +96,17 @@ int	check_cmd(t_data *data, char *argv)
 	if (!cmd_args)
 		return (write_perror("Error malloc\n"));
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
-	i = check_builtins(argv, cmd_args);
+	i = check_builtins(argv, cmd_args[0]);
 	if (i > -1)
 		return (child_free(cmd_args, cmd), i);
 	if (!cmd)
 	{
 		if (!is_slash(cmd_args[0]))
-			error = error_slash(cmd_args, 1);
+			error = error_slash(cmd_args[0], 1);
 		else if (find_slash(cmd_args[0]) && cmd_args[0])
 			write_perror(cmd_args[0]);
 		else if (is_slash(cmd_args[0]) && cmd_args[0] && cmd_args[0][0] != '\0')
-			error_cmdnotfound(cmd_args);
+			error_cmdnotfound(cmd_args[0]);
 		return (child_free(cmd_args, cmd), error);
 	}
 	child_free(cmd_args, cmd);

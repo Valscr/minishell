@@ -86,16 +86,14 @@ char	*get_cmd(char **paths, char *cmd)
 {
 	char	*tmp;
 	char	*command;
-	int 		i;
 
-	i = 0;
 	if (cmd == NULL || !is_slash(cmd))
 		return (NULL);
-	while (paths[i])
+	while (*paths)
 	{
 		if (access(cmd, X_OK) == 0)
-			return (cmd);
-		tmp = ft_strjoin(paths[i], "/");
+			return (ft_strdup(cmd));
+		tmp = ft_strjoin(*paths, "/");
 		if (!tmp)
 			return (write_perror("Error malloc\n"), NULL);
 		command = ft_strjoin(tmp, cmd);
@@ -125,7 +123,7 @@ void	child(t_data *data, char *argv)
 	if (!cmd)
 	{
 		if (!is_slash(cmd_args[0]))
-			error = error_slash(cmd_args, 0);
+			error = error_slash(cmd_args[0], 0);
 		free_end_process(data);
 		child_free(cmd_args, cmd);
 		exit(error);

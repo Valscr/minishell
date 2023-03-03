@@ -38,19 +38,19 @@ void	init_child(t_data *data, char *argv)
 	check_arg(argv, data);
 }
 
-int	error_slash(char **cmd_args, int type)
+int	error_slash(char *cmd_args, int type)
 {
 	if (type == 1)
 	{
-		write(2, cmd_args[0], ft_strlen(cmd_args[0]));
+		write(2, cmd_args, ft_strlen(cmd_args));
 		write(2, ": Is a directory\n", 18);
 	}
 	return (126);
 }
 
-void	error_cmdnotfound(char **cmd_args)
+void	error_cmdnotfound(char *cmd_args)
 {
-	write(2, cmd_args[0], ft_strlen(cmd_args[0]));
+	write(2, cmd_args, ft_strlen(cmd_args));
 	write(2, ": command not found\n", 21);
 }
 

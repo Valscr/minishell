@@ -13,9 +13,10 @@
 #include "../../include/minishell.h"
 
 void	child_free(char **cmd_args, char *cmd)
-{
+{	
 	free_tab_str(cmd_args);
-	free_str(cmd);
+	if (cmd)
+		free_str(cmd);
 }
 
 int	free_tab_str(char **str)

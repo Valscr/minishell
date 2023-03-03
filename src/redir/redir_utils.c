@@ -18,6 +18,7 @@ int	return_file(char *str, int type)
 	char	*str2;
 
 	i = 0;
+	str2 = NULL;
 	while (str[i])
 	{
 		if ((i == 0 && is_meta(str, i, '<') && !ft_strchr("<>", str[i + 1]))
