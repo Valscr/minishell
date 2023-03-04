@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/02 00:44:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/04 01:10:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ int	find_string_in_list(t_env *head, const char *string)
 	len = ft_strlen(string) - ft_strlen(tmp);
 	while (cur->next)
 	{
-		if (ft_strncmp(cur->next->value, string, len) == 0)
+		if (ft_strncmp(cur->next->value, string, len)
+			== 0 && cur->next->value[len] == '=')
 		{
+			if (cur->next->value)
+				free(cur->next->value);
 			cur->next->value = ft_strdup(string);
 			if (!cur->next->value)
 				return (-1);
