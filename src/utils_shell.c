@@ -55,14 +55,8 @@ char	*init_shell(void)
 	return (dest);
 }
 
-int	check_builtins(char *argv, char *cmd_args)
+int	check_builtins2(char *argv, char *cmd_args)
 {
-	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
-	{
-		if (ft_strlen(argv) == 6 || argv[6] == ' ')
-			return (g_sig.code_error);
-		return (error_cmdnotfound(cmd_args), 127);
-	}
 	if (ft_strlen(argv) >= 5 && !ft_strncmp(argv, "unset", 5))
 	{
 		if (ft_strlen(argv) == 5 || argv[5] == ' ')
@@ -82,6 +76,29 @@ int	check_builtins(char *argv, char *cmd_args)
 		return (g_sig.code_error);
 	}
 	return (-1);
+}
+
+int	check_builtins(char *argv, char *cmd_args)
+{
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
+	{
+		if (ft_strlen(argv) == 3 || argv[3] == ' ')
+			return (g_sig.code_error);
+		return (error_cmdnotfound(cmd_args), 127);
+	}
+	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
+	{
+		if (ft_strlen(argv) == 4 || argv[4] == ' ')
+			return (g_sig.code_error);
+		return (error_cmdnotfound(cmd_args), 127);
+	}
+	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
+	{
+		if (ft_strlen(argv) == 6 || argv[6] == ' ')
+			return (g_sig.code_error);
+		return (error_cmdnotfound(cmd_args), 127);
+	}
+	return (check_builtins2(argv, cmd_args));
 }
 
 int	check_cmd(t_data *data, char *argv)

@@ -18,18 +18,12 @@ int	loop_pipe(t_data data, char *argv)
 {
 	int	error;
 
-	if (argv[0] == 0)
-		return (0);
 	if (!argv || !argv[0])
 		data.argv = NULL;
 	else
 		data.argv = get_env(argv, &data);
-	if (!data.argv)
-		return (0);
 	data.paths = find_path(data.env);
 	data.cmd_paths = ft_split(data.paths, ":");
-	if (!data.cmd_paths)
-		return (0);
 	if (limiter_heredoc(data.argv, &data) != 2)
 		error = exec(&data, data.argv);
 	else

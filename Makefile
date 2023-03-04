@@ -24,7 +24,6 @@ C_FILES = src/minishell.c src/builtins/cd.c src/builtins/echo.c src/builtins/pwd
 			src/get_env.c src/utils/utils_list.c src/exec/exec2.c src/redir/redir_utils.c \
 			src/redir/redir_utils2.c src/utils/check_quotes.c src/utils/utils_list2.c \
 			src/utils_shell.c src/builtins/exit.c src/exec/child_utils.c src/builtins/unset.c \
-			src/utils/utils_list3.c
 			
 DIR_OBJ = objs/
 

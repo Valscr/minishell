@@ -87,7 +87,7 @@ char	*get_cmd(char **paths, char *cmd)
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL || !is_slash(cmd))
+	if (cmd == NULL || !is_slash(cmd) || !paths)
 		return (NULL);
 	while (*paths)
 	{

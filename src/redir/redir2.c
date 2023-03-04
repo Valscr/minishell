@@ -61,17 +61,13 @@ char	**check_error_redir_init(t_data *data, char *buf)
 	data->type = 1;
 	data->count = 0;
 	data->paths = find_path(data->env);
-	if (!data->paths)
-		return (write_perror("Error Paths\n"), NULL);
 	data->cmd_paths = ft_split(data->paths, ":");
-	if (!data->cmd_paths)
-		return (NULL);
 	if (iter_pipe(buf) > 1)
 		cmd = ft_split2(buf, "|");
 	else
 		cmd = ft_split2(buf, "");
 	if (!cmd)
-		return (write_perror("Error malloc\n"), NULL);
+		return (write_error("Error malloc\n"), NULL);
 	return (cmd);
 }
 

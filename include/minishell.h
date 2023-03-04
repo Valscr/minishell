@@ -127,7 +127,7 @@ int		add_env_variable(t_env *head, char *string);
 int		copy_string_array_to_env_list(t_env *head, char *string_array[]);
 char	**env_list_to_string_array(t_env *head);
 char	*get_env_list(t_env *head, char *name);
-void	display_env_list(t_env **head);
+int		display_env_list(t_env *head);
 char	*get_env(char *str, t_data *data);
 int		wait_fonct(t_data *data, char *argv);
 char	*replace_code_error(char *str, int i);

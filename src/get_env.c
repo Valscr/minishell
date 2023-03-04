@@ -111,15 +111,3 @@ char	*get_env_list(t_env *head, char *name)
 	}
 	return (NULL);
 }
-
-/*void display_env_list(t_env **head)
-{
-    t_env *current = *head;
-	
-    while (current != NULL && current->next != NULL)
-	{
-        printf("%s\n", current->value);
-        current = current->next;
-    }
-	return ;
-}*/
