@@ -89,9 +89,6 @@ int	shell(t_data *data)
 		return (0);
 	g_sig.code_error = loop_shell(data);
 	close(data->file);
-	data->infile = open(".minishell_tmp", O_RDONLY);
-	if (data->infile < 0)
-		unlink(".heredoc_tmp");
 	clear_history();
 	return (1);
 }
