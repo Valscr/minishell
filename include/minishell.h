@@ -42,10 +42,6 @@
 # define STDOUT 1
 # define STDERR 2
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
-
 typedef struct s_env
 {
 	char			*value;
