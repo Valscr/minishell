@@ -43,11 +43,11 @@ void	free_str(char *str)
 	free(str);
 }
 
-void	free_all(t_data *data)
+/*void	free_all(t_data *data)
 {
 	free_tab_str(data->cmd);
 	free_tab_str(data->cmd_tab);
-}
+}*/
 
 void	free_end_process(t_data *data)
 {
