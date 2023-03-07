@@ -32,9 +32,10 @@
 # include <readline/history.h>
 # include <errno.h>
 
-# define ERROR_NOTFOUND 127
-# define ERROR_CTRLC 130
 # define ERROR_CTRLB 131
+# define ERROR_CTRLC 130
+# define ERROR_NOTFOUND 127
+# define ERROR_ISDIRECTORY 126
 # define ERROR_SYNTAX 2
 # define ERROR_FILE 1
 # define STDIN 0
