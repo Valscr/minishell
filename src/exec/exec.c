@@ -118,7 +118,10 @@ void	child(t_data *data, char *argv)
 	init_child(data, argv);
 	cmd_args = ft_split(argv, "  '\"");
 	if (!cmd_args)
-		return ;
+	{
+		free_end_process(data);
+		exit(error);
+	}
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd)
 	{
@@ -130,6 +133,5 @@ void	child(t_data *data, char *argv)
 	}
 	signal(SIGINT, SIG_DFL);
 	execve(cmd, cmd_args, env_list_to_string_array(data->env));
-	exit(127);
-	return ;
+	exit(error);
 }

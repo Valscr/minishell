@@ -54,6 +54,7 @@ typedef struct s_data
 	int			type;
 	int			infile;
 	int			outfile;
+	int			closefile;
 	int			count;
 	int			redir;
 	int			error;
