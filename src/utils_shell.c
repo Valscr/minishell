@@ -108,7 +108,7 @@ int	check_cmd(t_data *data, char *argv)
 	int		i;
 	int		error;
 
-	error = 127;
+	error = ERROR_NOTFOUND;
 	cmd_args = ft_split(argv, " '\"");
 	if (!cmd_args)
 		return (write_perror("Error malloc\n"));

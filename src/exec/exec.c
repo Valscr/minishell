@@ -116,7 +116,7 @@ void	child(t_data *data, char *argv)
 	char	*cmd;
 	int		error;
 
-	error = 127;
+	error = ERROR_NOTFOUND;
 	init_child(data, argv);
 	cmd_args = ft_split(argv, "  '\"");
 	if (!cmd_args)

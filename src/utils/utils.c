@@ -14,15 +14,15 @@
 
 int	init(t_data	*data, char **envp)
 {
-	data->infile = 0;
+	data->infile = STDIN;
 	data->outfile = 0;
-	data->file = 0;
 	data->tube = NULL;
 	data->type = 0;
 	data->count = 0;
 	data->redir = 0;
 	data->error = 0;
 	data->limiter = 0;
+	data->limiter2 = 0;
 	data->paths = NULL;
 	g_sig.code_error = 0;
 	data->cmd_paths = NULL;

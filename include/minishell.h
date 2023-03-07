@@ -32,6 +32,15 @@
 # include <readline/history.h>
 # include <errno.h>
 
+# define ERROR_NOTFOUND 127
+# define ERROR_CTRLC 130
+# define ERROR_CTRLB 131
+# define ERROR_SYNTAX 2
+# define ERROR_FILE 1
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
 # endif
@@ -54,7 +63,6 @@ typedef struct s_data
 	int			type;
 	int			infile;
 	int			outfile;
-	int			closefile;
 	int			count;
 	int			redir;
 	int			error;
@@ -66,7 +74,7 @@ typedef struct s_data
 	char		**cmd;
 	char		**cmd_tab;
 	int			limiter;
-	int			file;
+	int			limiter2;
 	int			ctrl_c;
 	t_env		*env;
 }				t_data;

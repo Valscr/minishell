@@ -27,7 +27,7 @@ int	loop_pipe(t_data data, char *argv)
 	if (limiter_heredoc(data.argv, &data) != 2)
 		error = exec(&data, data.argv);
 	else
-		error = 130;
+		error = ERROR_CTRLC;
 	free_str(data.argv);
 	free_tab_str(data.cmd_paths);
 	return (error);
@@ -41,8 +41,8 @@ void	execute(char *buf, t_data *data)
 		data->type = 0;
 		g_sig.code_error = loop_pipe(*data, buf);
 		check_arg2(buf, data);
-		if (g_sig.code_error != 130 && g_sig.code_error != 131
-			&& g_sig.code_error != 2)
+		if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB
+			&& g_sig.code_error != ERROR_SYNTAX)
 		{
 			g_sig.code_error = check_error_redir(data, buf);
 		}

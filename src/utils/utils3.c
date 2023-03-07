@@ -19,3 +19,17 @@ int	is_meta(char *str, int i, char c)
 	else
 		return (0);
 }
+
+int	is_slash(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}

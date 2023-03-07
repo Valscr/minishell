@@ -106,6 +106,8 @@ int	check_file(t_data *data, char *dest)
 {
 	if (dest == NULL)
 		return (0);
+	if (data->limiter2)
+		return (0);
 	if (is_file(dest) && data->type == 0)
 	{
 		data->infile = open(dest, O_RDONLY);

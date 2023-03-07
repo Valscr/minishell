@@ -66,6 +66,6 @@ fclean:	clean
 re:		fclean all
 
 norm:
-	norminette $(SRC_DIR)*.c $(BUIL_DIR)*.c include/*.h 
+	norminette $(SRC_DIR)*.c ${SRC_DIR}/builtins/*.c ${SRC_DIR}/utils/*.c ${SRC_DIR}/exec/*.c ${SRC_DIR}/redir/*.c ${SRC_DIR}/error_free/*.c include/*.h 
 
 .PHONY:         all clean fclean bonus re

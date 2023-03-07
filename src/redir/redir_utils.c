@@ -30,7 +30,7 @@ int	return_file(char *str, int type)
 				return (write_perror("Error malloc\n"));
 			if (is_file(str2))
 				break ;
-			g_sig.code_error = 1;
+			g_sig.code_error = ERROR_FILE;
 			if (type == 1)
 				write_perror(str2);
 			return (free_str(str2), 0);
@@ -42,7 +42,7 @@ int	return_file(char *str, int type)
 
 void	error_cmd(char *str, char *dest, int type, int type2)
 {
-	g_sig.code_error = 127;
+	g_sig.code_error = ERROR_NOTFOUND;
 	if (str == NULL)
 		return ;
 	if (type == 1)

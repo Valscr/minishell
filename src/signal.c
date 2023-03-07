@@ -19,7 +19,7 @@ void	ctrl_c_handler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_sig.code_error = 130;
+	g_sig.code_error = ERROR_CTRLC;
 	return ;
 }
 
@@ -27,7 +27,7 @@ void	ctrl_c2_handler(int sig)
 {
 	(void)sig;
 	close (0);
-	g_sig.code_error = 130;
+	g_sig.code_error = ERROR_CTRLC;
 	return ;
 }
 

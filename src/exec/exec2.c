@@ -55,17 +55,26 @@ int	wait_fonct(t_data *data, char *argv)
 	return (wait_fonct_bis(status, error));
 }
 
+int	is_cmd_bis(char **paths, char *cmd)
+{
+	if (cmd == NULL || !is_slash(cmd))
+		return (0);
+	if (access(cmd, X_OK) == 0)
+		return (1);
+	if (!paths)
+		return (0);
+	return (-1);
+}
+
 int	is_cmd(char **paths, char *cmd)
 {
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL || cmd[0] == 0)
-		return (0);
+	if (is_cmd_bis(paths, cmd) > -1)
+		return (is_cmd_bis(paths, cmd));
 	while (*paths)
 	{
-		if (access(cmd, X_OK) == 0)
-			return (1);
 		tmp = ft_strjoin(*paths, "/");
 		if (!tmp)
 			return (write_perror("Error malloc\n"), 0);
@@ -80,20 +89,6 @@ int	is_cmd(char **paths, char *cmd)
 		}
 		free(command);
 		paths++;
-	}
-	return (0);
-}
-
-int	is_slash(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '/')
-			return (1);
-		i++;
 	}
 	return (0);
 }

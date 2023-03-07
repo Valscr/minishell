@@ -20,7 +20,7 @@ int	write_error(char *str)
 	if (!str)
 		return (0);
 	while (str[i])
-		write(2, &str[i++], 1);
+		write(STDERR, &str[i++], 1);
 	return (0);
 }
 

@@ -21,7 +21,12 @@ int	redir_in(char *str, char *dest, t_data *data, int i)
 		return (write_perror("Error malloc\n"));
 	if (!check_file(data, dest))
 	{
-		g_sig.code_error = 1;
+		g_sig.code_error = ERROR_FILE;
+		if (data->limiter2)
+		{
+			g_sig.code_error = 0;
+			data->limiter2 = 0;
+		}
 		return (free(dest), 0);
 	}
 	free_str(dest);
@@ -34,26 +39,25 @@ int	pars_redir_in(char *str, t_data *data)
 	int		i;
 	char	*dest;
 
-	i = 0;
+	i = -1;
 	dest = NULL;
-	while (str[i])
+	while (str[++i])
 	{
 		if ((i == 0 && is_meta(str, i, '<') && !ft_strchr("<>", str[i + 1]))
 			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
 				&& !ft_strchr("<>", str[i + 1])))
-		{
 			if (!redir_in(str, dest, data, i))
 				return (0);
-		}
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
+			data->limiter2 = 1;
 			if (data->limiter == 1 && data->type == 0)
-				return (open_here_doc(data), free_str(dest), 1);
+				return (redir_in(str, dest, data, i),
+					open_here_doc(data), free_str(dest), 1);
 			else
-				return (free_str(dest), 0);
+				return (redir_in(str, dest, data, i), free_str(dest), 0);
 		}
-		i++;
 	}
 	return (free_str(dest), 1);
 }
