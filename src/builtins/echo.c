@@ -40,12 +40,12 @@ int	ft_echo(char **args)
 		{
 			ft_putstr_fd(args[i], 1);
 			if (args[i + 1] && args[i][0] != '\0')
-				write(1, " ", 1);
+				write(STDOUT, " ", 1);
 			i++;
 		}
 	}
 	if (n_option == 0)
-		write(1, "\n", 1);
+		write(STDOUT, "\n", 1);
 	free_tab_str(args);
 	return (0);
 }

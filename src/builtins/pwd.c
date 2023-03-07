@@ -18,7 +18,7 @@ int	ft_pwd(void)
 
 	if (getcwd(cwd, PATH_MAX))
 	{
-		ft_putendl_fd(cwd, 1);
+		ft_putendl_fd(cwd, STDOUT);
 		return (1);
 	}
 	else
