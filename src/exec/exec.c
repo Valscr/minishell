@@ -135,5 +135,6 @@ void	child(t_data *data, char *argv)
 	}
 	signal(SIGINT, SIG_DFL);
 	execve(cmd, cmd_args, env_list_to_string_array(data->env));
+	free_all(data, cmd_args, cmd);
 	exit(error);
 }

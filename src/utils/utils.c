@@ -22,14 +22,13 @@ int	init(t_data	*data, char **envp)
 	data->redir = 0;
 	data->error = 0;
 	data->limiter = 0;
-	data->limiter2 = 0;
+	data->limiter_error = 0;
 	data->paths = NULL;
 	g_sig.code_error = 0;
 	data->cmd_paths = NULL;
 	data->argv = NULL;
 	data->cmd = NULL;
 	data->cmd_redir = NULL;
-	data->envp = NULL;
 	data->env = (t_env *)malloc(sizeof(t_env));
 	if (!data->env)
 		return (0);

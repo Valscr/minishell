@@ -55,24 +55,21 @@ typedef struct s_sig
 
 typedef struct s_data
 {
-	pid_t		pid;
-	int			*tube;
-	int			type;
-	int			infile;
-	int			outfile;
 	int			count;
-	int			redir;
-	int			error;
-	char		*paths;
-	char		*argv;
-	char		**envp;
-	char		*cmd_redir;
-	char		**cmd_paths;
-	char		**cmd;
-	char		**cmd_tab;
-	int			limiter;
-	int			limiter2;
 	int			ctrl_c;
+	int			error;
+	int			infile;
+	int			limiter;
+	int			limiter_error;
+	int			outfile;
+	int			redir;
+	int			type;
+	int			*tube;
+	char		*argv;
+	char		**cmd;
+	char		**cmd_paths;
+	char		*cmd_redir;
+	char		*paths;
 	t_env		*env;
 }				t_data;
 
@@ -135,6 +132,7 @@ void	close_pipes(t_data *data, int len);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
 void	error_cmdnotfound(char *cmd_args);
+void	free_all(t_data *data, char **cmd_args, char *cmd);
 void	free_end_process(t_data *data);
 void	free_str(char *str);
 void	get_dup2(int in, int out);

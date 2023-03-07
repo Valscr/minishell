@@ -106,7 +106,7 @@ int	check_file(t_data *data, char *dest)
 {
 	if (dest == NULL)
 		return (0);
-	if (data->limiter2)
+	if (data->limiter_error)
 		return (0);
 	if (is_file(dest) && data->type == 0)
 	{

@@ -22,10 +22,10 @@ int	redir_in(char *str, char *dest, t_data *data, int i)
 	if (!check_file(data, dest))
 	{
 		g_sig.code_error = ERROR_FILE;
-		if (data->limiter2)
+		if (data->limiter_error)
 		{
 			g_sig.code_error = 0;
-			data->limiter2 = 0;
+			data->limiter_error = 0;
 		}
 		return (free(dest), 0);
 	}
@@ -51,7 +51,7 @@ int	pars_redir_in(char *str, t_data *data)
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
-			data->limiter2 = 1;
+			data->limiter_error = 1;
 			if (data->limiter == 1 && data->type == 0)
 				return (redir_in(str, dest, data, i),
 					open_here_doc(data), free_str(dest), 1);
