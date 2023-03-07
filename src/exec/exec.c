@@ -87,12 +87,14 @@ char	*get_cmd(char **paths, char *cmd)
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL || !is_slash(cmd) || !paths)
+	if (cmd == NULL || !is_slash(cmd))
+		return (NULL);
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	if (!paths)
 		return (NULL);
 	while (*paths)
 	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
 		tmp = ft_strjoin(*paths, "/");
 		if (!tmp)
 			return (write_perror("Error malloc\n"), NULL);
