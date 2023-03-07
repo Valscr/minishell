@@ -48,8 +48,6 @@ void	execute(char *buf, t_data *data)
 		}
 		data->limiter = 0;
 	}
-	write(data->file, buf, ft_strlen(buf));
-	write(data->file, "\n", 1);
 	return ;
 }
 
@@ -84,11 +82,7 @@ int	loop_shell(t_data *data)
 
 int	shell(t_data *data)
 {
-	data->file = open(".minishell_tmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (data->file < 0)
-		return (0);
 	g_sig.code_error = loop_shell(data);
-	close(data->file);
 	clear_history();
 	return (1);
 }
