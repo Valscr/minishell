@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 22:18:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:10:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	**check_error_redir_init(t_data *data, char *buf)
 	data->type = 1;
 	data->count = 0;
 	data->paths = find_path(data->env);
-	data->cmd_paths = ft_split(data->paths, ":");
 	if (iter_pipe(buf) > 1)
 		cmd = ft_split2(buf, "|");
 	else
@@ -91,5 +90,5 @@ int	check_error_redir(t_data *data, char *buf)
 			error = check_cmd(data, cmd[data->count]);
 		data->count++;
 	}
-	return (free_tab_str(cmd), free_tab_str(data->cmd_paths), error);
+	return (free_tab_str(cmd), error);
 }

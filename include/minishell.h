@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 13:12:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 15:54:09 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 	int			type;
 	int			*tube;
 	char		*argv;
+	char		*argv2;
 	char		**cmd;
 	char		**cmd_paths;
 	char		*cmd_redir;

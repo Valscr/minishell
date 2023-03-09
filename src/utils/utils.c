@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 17:29:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 15:54:30 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	init(t_data	*data, char **envp)
 	g_sig.code_error = 0;
 	data->cmd_paths = NULL;
 	data->argv = NULL;
+	data->argv2 = NULL;
 	data->cmd = NULL;
 	data->cmd_redir = NULL;
 	data->env = (t_env *)malloc(sizeof(t_env));

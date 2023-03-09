@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/01 23:13:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:29:39 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	loop_pipe(t_data data, char *argv)
 		error = exec(&data, data.argv);
 	else
 		error = ERROR_CTRLC;
+	check_arg2(data.argv, &data);
+	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB
+		&& g_sig.code_error != ERROR_SYNTAX)
+	{
+		g_sig.code_error = check_error_redir(&data, data.argv);
+	}
+	data.limiter = 0;
 	free_str(data.argv);
 	free_tab_str(data.cmd_paths);
 	return (error);
@@ -40,13 +47,6 @@ void	execute(char *buf, t_data *data)
 		add_history(buf);
 		data->type = 0;
 		g_sig.code_error = loop_pipe(*data, buf);
-		check_arg2(buf, data);
-		if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB
-			&& g_sig.code_error != ERROR_SYNTAX)
-		{
-			g_sig.code_error = check_error_redir(data, buf);
-		}
-		data->limiter = 0;
 	}
 	return ;
 }
