@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:21:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 21:36:13 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	*get_env(char *str, t_data *data)
 			if (i + 1 > ft_strlen(dest))
 				break ;
 		}
-		else if (i > 0 && isprint(dest[i]) && dest[i - 1] == '$'
-			&& dest[i] != ' ' && (!check_quotes1(dest, i - 1, '\'')))
+		else if (i > 0 && isprint(dest[i]) && dest[i] != '"' && dest[i - 1] == '$'
+			&& dest[i] != ' ' && dest[i] != '\'' && (!check_quotes1(dest, i - 1, '\'')))
 		{
 			dest = replace_word(data, dest, i - 1, 0);
 			if (i + 1 > ft_strlen(dest))
