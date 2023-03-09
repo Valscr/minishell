@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:49:26 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 20:41:56 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 22:10:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	check_quotes1(char *str, int i, char c)
 	while (str[i])
 	{
 		if (str[i] == c)
+		{
 			y++;
+			break ;
+		}
 		i++;
 	}
 	if (y == 0)
@@ -64,7 +67,10 @@ int	check_quotes2(char const *str, int i)
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '"')
+		{
 			y++;
+			break ;
+		}
 		i++;
 	}
 	if (y == 0)
