@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:06:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 14:24:47 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,5 @@ int	check_cmd(t_data *data, char *argv)
 			error_cmdnotfound(cmd_args[0]);
 		return (child_free(cmd_args, cmd), error);
 	}
-	child_free(cmd_args, cmd);
-	return (0);
+	return (child_free(cmd_args, cmd), 0);
 }

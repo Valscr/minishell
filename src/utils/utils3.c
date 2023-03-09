@@ -27,10 +27,12 @@ int	is_slash(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '/')
+		if (str[i] != '/' && str[i] != '.')
 			return (1);
 		i++;
 	}
+	if (access(str, X_OK) != 0)
+		return (1);
 	return (0);
 }
 
