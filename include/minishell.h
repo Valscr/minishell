@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 15:54:09 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:42:15 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		check_file(t_data *data, char *dest);
 int		check_pipe(char *argv);
 int		check_quotes(char *str, int i);
 int		check_quotes1(char *str, int i, char c);
+int		check_quotes2(char const *str, int i);
 int		check_redir(char *str);
 int		copy_string_array_to_env_list(t_env *head, char *string_array[]);
 int		count_tab(char **str);

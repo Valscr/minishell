@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 14:24:47 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:30:16 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	check_cmd(t_data *data, char *argv)
 	int		error;
 
 	error = ERROR_NOTFOUND;
-	cmd_args = ft_split(argv, " '\"");
+	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 		return (write_perror("Error malloc\n"));
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);

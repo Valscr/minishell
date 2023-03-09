@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:17:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 18:05:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	wait_fonct_bis(int status, int error)
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == 2)
-			return (ft_putstr_fd("\n", 1), 130);
+			return (ft_putstr_fd("\n", 1), ERROR_CTRLC);
 		if (WTERMSIG(status) == 3)
-			return (131);
+			return (ERROR_CTRLB);
 	}
 	if (error)
 		return (error);

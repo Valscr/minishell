@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:17:46 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:25:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ int	quotes_after(char const *str, int j)
 	while (j >= 0)
 	{
 		if (str[j] == '\'' || str[j] == '"')
-		{
 			y++;
-			break ;
-		}
 		j--;
 	}
 	return (y);
@@ -77,7 +74,6 @@ char	*fill_replace_word(char *str3, char *str, int i, int j)
 	return (str3);
 }
 
-/*tjr initialiser y a 0*/
 char	*replace_word(t_data *data, char *str, int i, int y)
 {
 	char	*dest;

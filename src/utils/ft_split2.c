@@ -6,33 +6,11 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/02/13 13:46:00 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 20:42:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	check_quotes2(char const *str, int i)
-{
-	int	j;
-	int	y;
-
-	y = 0;
-	j = i;
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '"')
-		{
-			y++;
-			break ;
-		}
-		i++;
-	}
-	y += quotes_after(str, j);
-	if (y == 2)
-		return (1);
-	return (0);
-}
 
 int	find_char2(char const *str, char c)
 {
@@ -75,11 +53,30 @@ int	ft_countdest2(char const *s, char const *sep)
 		}
 	}
 	if (s[0] != '\0' && (!ft_strchr(sep, s[0])
-			|| (ft_strchr(sep, s[i]) && check_quotes2(s, i))))
+			|| (ft_strchr(sep, s[i - 1]) && check_quotes2(s, i - 1))))
 		j++;
 	if (ft_strchr(sep, s[i - 1]) && !check_quotes2(s, i - 1))
 		j--;
 	return (j);
+}
+
+int	ft_fillcount(char const *s, int i, int j)
+{
+	int	d;
+	int	y;
+	int	count;
+
+	count = 0;
+	d = j - i;
+	y = i;
+	while (y > 0)
+	{
+		if (s[d] != '\'' && s[d] != '"')
+			count++;
+		d++;
+		y--;
+	}
+	return (count);
 }
 
 static char	*ft_filldest2(char const *s, int i, int j)
@@ -88,14 +85,16 @@ static char	*ft_filldest2(char const *s, int i, int j)
 	int		n;
 
 	n = 0;
-	dest = malloc(sizeof(char) * (i + 1));
+	dest = malloc(sizeof(char) * (ft_fillcount(s, i, j) + 1));
 	if (!dest)
 		return (0);
 	j = j - i;
 	while (i > 0)
 	{
-		dest[n++] = s[j++];
+		if (s[j] != '\'' && s[j] != '"')
+			dest[n++] = s[j];
 		i--;
+		j++;
 	}
 	dest[n] = '\0';
 	return (dest);

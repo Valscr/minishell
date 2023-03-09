@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 21:49:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 19:42:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	redir_in(char *str, char *dest, t_data *data, int i)
 {
+	printf("redirin\n");
 	if (!find_cmd(str, data, 1))
 		return (0);
 	dest = return_word(str, i + 1);
