@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 20:17:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:04:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	process_exec(t_data *data, char *argv)
 	rd = 0;
 	data->type = 0;
 	if (iter_pipe(argv) > 1)
-		data->cmd = ft_split(argv, "|");
+		data->cmd = ft_split3(argv, "|");
 	else
-		data->cmd = ft_split(argv, "");
+		data->cmd = ft_split3(argv, "");
 	if (!data->cmd)
 		return ;
 	if (check_redir(data->cmd[data->count]))
@@ -118,7 +118,8 @@ void	child(t_data *data, char *argv)
 
 	error = ERROR_NOTFOUND;
 	init_child(data, argv);
-	cmd_args = ft_split2(argv, "  '\"");
+	printf("argv = %s\n", argv);
+	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 	{
 		free_end_process(data);

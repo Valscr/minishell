@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 20:07:08 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:04:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ char	**check_error_redir_init(t_data *data, char *buf)
 	data->count = 0;
 	data->paths = find_path(data->env);
 	if (iter_pipe(buf) > 1)
-		cmd = ft_split(buf, "|");
+		cmd = ft_split3(buf, "|");
 	else
-		cmd = ft_split(buf, "");
+		cmd = ft_split3(buf, "");
 	if (!cmd)
 		return (write_error("Error malloc\n"), NULL);
 	return (cmd);

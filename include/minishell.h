@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 20:42:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:05:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		find_cmd_after(char *str, t_data *data);
 int		find_slash(char *str);
 int		free_tab_str(char **str);
 int		ft_cd(char **cmd_tab, t_env *env);
+int		ft_countdest2(char const *s, char const *sep);
 int		ft_echo(char **args);
 int		ft_export(char *string, t_data *data);
 int		ft_pwd(void);
@@ -150,6 +151,7 @@ char	**check_error_redir_init(t_data *data, char *buf);
 char	**env_list_to_string_array(t_env *head);
 char	*find_path(t_env *head);
 char	**ft_split2(char const *s, char const *sep);
+char	**ft_split3(char const *s, char const *sep);
 char	*get_cmd(char **paths, char *cmd);
 char	*get_env_list(t_env *head, char *name);
 char	*get_env(char *str, t_data *data);
