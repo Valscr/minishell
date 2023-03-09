@@ -49,3 +49,12 @@ int	is_point(char *str)
 	}
 	return (0);
 }
+
+int	is_get_env(char *dest, int i)
+{
+	if (i > 0 && isprint(dest[i]) && dest[i] != '"'
+		&& dest[i - 1] == '$' && dest[i] != ' '
+		&& dest[i] != '\'' && (!check_quotes1(dest, i - 1, '\'')))
+		return (1);
+	return (0);
+}

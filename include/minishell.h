@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 21:05:51 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 21:49:16 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		init(t_data *data, char **envp);
 int		init_exec(char *argv, t_data *data);
 int		is_cmd(char **paths, char *cmd);
 int		is_file(const char *filename);
+int		is_get_env(char *dest, int i);
 int		is_meta(char *str, int i, char c);
 int		is_number(char *str);
 int		is_point(char *str);
