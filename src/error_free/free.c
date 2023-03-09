@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:20:06 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 16:22:51 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 00:26:10 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	free_end_process(t_data *data)
 	free_tab_str(data->cmd_paths);
 	free_t_env_list(data->env);
 	free_str(data->argv);
+	close(data->outfile);
 	return ;
 }
