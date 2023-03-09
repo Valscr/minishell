@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:20:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 13:12:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int		is_cmd(char **paths, char *cmd);
 int		is_file(const char *filename);
 int		is_meta(char *str, int i, char c);
 int		is_number(char *str);
+int		is_point(char *str);
 int		is_slash(char *str);
 int		iter_pipe(char *argv);
 int		limiter_heredoc(char *str, t_data *data);
@@ -126,12 +127,13 @@ int		wait_fonct(t_data *data, char *argv);
 int		write_error(char *str);
 int		write_perror(char *str);
 void	child(t_data *data, char *argv);
+void	child_bis(t_data *data, char *cmd, char **cmd_args);
 void	child_free(char **cmd_args, char *cmd);
 void	close_pipes(t_data *data, int len);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
 void	error_cmdnotfound(char *cmd_args);
-void	free_all(t_data *data, char **cmd_args, char *cmd);
+void	free_all(t_data *data, char **cmd_args, char *cmd, char **env);
 void	free_end_process(t_data *data);
 void	free_str(char *str);
 void	get_dup2(int in, int out);

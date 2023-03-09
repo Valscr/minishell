@@ -33,3 +33,17 @@ int	is_slash(char *str)
 	}
 	return (0);
 }
+
+int	is_point(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '.')
+			return (1);
+		i++;
+	}
+	return (0);
+}

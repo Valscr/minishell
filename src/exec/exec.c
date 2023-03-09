@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 23:17:07 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/09 13:13:20 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*get_cmd(char **paths, char *cmd)
 	char	*tmp;
 	char	*command;
 
-	if (cmd == NULL || !is_slash(cmd))
+	if (cmd == NULL || !is_slash(cmd) || !is_point(cmd))
 		return (NULL);
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
@@ -133,8 +133,5 @@ void	child(t_data *data, char *argv)
 		child_free(cmd_args, cmd);
 		exit(error);
 	}
-	signal(SIGINT, SIG_DFL);
-	execve(cmd, cmd_args, env_list_to_string_array(data->env));
-	free_all(data, cmd_args, cmd);
-	exit(error);
+	child_bis(data, cmd, cmd_args);
 }

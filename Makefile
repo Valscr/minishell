@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: valentin <valentin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 19:19:43 by valentin          #+#    #+#              #
-#    Updated: 2023/03/02 19:31:06 by marvin           ###   ########.fr        #
+#    Updated: 2023/03/09 13:14:12 by valentin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ C_FILES = src/minishell.c src/builtins/cd.c src/builtins/echo.c src/builtins/pwd
 			src/get_env.c src/utils/utils_list.c src/exec/exec2.c src/redir/redir_utils.c \
 			src/redir/redir_utils2.c src/utils/check_quotes.c src/utils/utils_list2.c \
 			src/utils_shell.c src/builtins/exit.c src/exec/child_utils.c src/builtins/unset.c \
+			src/exec/child_utils2.c 
 			
 DIR_OBJ = objs/
 
