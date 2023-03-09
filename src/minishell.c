@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/09 17:29:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 23:04:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	loop_pipe(t_data data, char *argv)
 	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB
 		&& g_sig.code_error != ERROR_SYNTAX)
 	{
-		g_sig.code_error = check_error_redir(&data, data.argv);
+		g_sig.code_error = parse_error(&data, data.argv);
 	}
 	data.limiter = 0;
 	free_str(data.argv);

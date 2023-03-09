@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 21:49:16 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/09 23:08:07 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int		check_arg(char *str, t_data *data);
 int		check_arg2(char *str, t_data *data);
 int		check_cmd(t_data *data, char *argv);
 int		check_empty_line(char *buf);
-int		check_error_redir(t_data *data, char *buf);
 int		check_exit(char *str);
 int		check_file(t_data *data, char *dest);
 int		check_pipe(char *argv);
@@ -125,6 +124,7 @@ int		loop_shell(t_data *data);
 int		open_file(char *str, t_data *data, int i, int type);
 int		pars_redir_in(char *str, t_data *data);
 int		pars_redir_out(char *str, t_data *data);
+int		parse_error(t_data *data, char *buf);
 int		quotes_after(char const *str, int j);
 int		size_list(t_env *env);
 int		wait_fonct(t_data *data, char *argv);
@@ -148,7 +148,6 @@ void	sig_quit(int code);
 void	open_here_doc(t_data *data);
 void	free_t_env_list(t_env *head);
 char	*cut_arg(char *str, int j, int i);
-char	**check_error_redir_init(t_data *data, char *buf);
 char	**env_list_to_string_array(t_env *head);
 char	*find_path(t_env *head);
 char	**ft_split2(char const *s, char const *sep);
@@ -160,6 +159,7 @@ char	*get_env_list(t_env *head, char *name);
 char	*init_shell(void);
 char	*fill_replace_word(char *str3, char *str, int i, int j);
 char	*new_command(char *str, t_data *data);
+char	**parse_error_init(t_data *data, char *buf);
 char	*replace_code_error(char *str, int i);
 char	*replace_code_error_bis(char *str, char *dest, char *code_error, int i);
 char	*replace_word(t_data *data, char *str, int i, int y);
