@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:03:14 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 21:57:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/10 02:46:58 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int	check_file(t_data *data, char *dest)
 		return (0);
 	if (is_file(dest) && data->type == 0)
 	{
-		data->infile = open(dest, O_RDONLY);
+		data->infile = open(dest, O_CLOEXEC | O_RDONLY);
 		if (data->infile < 0)
 			return (0);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 00:30:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 02:44:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char	*return_word(char *str, int i)
 	dest = NULL;
 	if (!str[i] || str[i] == '\0')
 		return (NULL);
-	while (str[i] && (str[i] == ' ' || str[i] == '\'' || str[i] == '"'))
+	while (str[i] && (str[i] == ' ' || str[i] == '\''
+			|| str[i] == '"' || str[i] == '<' || str[i] == '>'))
 		i++;
 	j = i;
 	if (!str[i] || str[i] == '\0')
