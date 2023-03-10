@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 18:05:31 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:19:12 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,21 @@ int	wait_fonct(t_data *data, char *argv)
 
 int	is_cmd_bis(char **paths, char *cmd)
 {
+	int		i;
+	char	**cmd_args;
+
+	i = 0;
 	if (cmd == NULL || !is_slash(cmd))
 		return (0);
+	cmd_args = ft_split2(cmd, " ");
+	i = check_builtins(cmd, cmd_args[0]);
+	if (i > -1)
+		return (free_tab_str(cmd_args), 1);
 	if (access(cmd, X_OK) == 0)
-		return (1);
+		return (free_tab_str(cmd_args), 1);
 	if (!paths)
-		return (0);
-	return (-1);
+		return (free_tab_str(cmd_args), 0);
+	return (free_tab_str(cmd_args), -1);
 }
 
 int	is_cmd(char **paths, char *cmd)
@@ -72,7 +80,7 @@ int	is_cmd(char **paths, char *cmd)
 	char	*command;
 
 	if (is_cmd_bis(paths, cmd) > -1)
-		return (is_cmd_bis(paths, cmd));
+		return (0);
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");

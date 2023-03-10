@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 15:54:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 00:30:06 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	init(t_data	*data, char **envp)
 {
 	data->infile = STDIN;
-	data->outfile = 0;
+	data->outfile = STDOUT;
 	data->tube = NULL;
 	data->type = 0;
 	data->count = 0;

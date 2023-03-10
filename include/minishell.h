@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:08:07 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 00:56:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		add_first(t_env *list, char *string);
 int		add_last(t_env *list, char *string);
 int		check_arg(char *str, t_data *data);
 int		check_arg2(char *str, t_data *data);
+int		check_builtins(char *argv, char *cmd_args);
 int		check_cmd(t_data *data, char *argv);
 int		check_empty_line(char *buf);
 int		check_exit(char *str);
