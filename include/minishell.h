@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:41:00 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:46:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define ERROR_ISDIRECTORY 126
 # define ERROR_SYNTAX 2
 # define ERROR_FILE 1
+# define SUCESS_CODE 0
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2

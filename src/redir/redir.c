@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:46:41 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:25:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ int	pars_redir_out(char *str, t_data *data)
 	{
 		if (is_meta(str, i, '>') && !ft_strchr("><", str[i + 1]) && i == 0)
 		{
-			if (!find_cmd(str, data, 0) || !open_file(str, data, i, 2))
+			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
 				return (0);
 		}
 		else if (i > 0 && is_meta(str, i, '>') && !ft_strchr("<>", str[i + 1])
 			&& !ft_strchr("<>", str[i - 1]))
 		{
-			if (!find_cmd(str, data, 0) || !open_file(str, data, i, 2))
+			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
 				return (0);
 		}
 		if (is_meta(str, i, '>') && is_meta(str, i + 1, '>')
 			&& !ft_strchr("<>", str[i + 2]))
 		{
-			if (!find_cmd(str, data, 0) || !open_file(str, data, i + 1, 1))
+			if (!open_file(str, data, i + 1, 1) || !find_cmd(str, data, 0))
 				return (0);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 21:41:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/10 14:42:42 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	error_cmd(char *str, char *dest, int type, int type2)
 		if (!return_file(str, type2))
 			return ;
 	}
-	if (ft_isprint(dest[0]) && type2 == 1)
+	if (ft_isprint(dest[0]) && str[0] != '<' && str[0] != '>' && type2 == 1)
 	{
 		write_error(dest);
 		write_error(": command not found\n");
