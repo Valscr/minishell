@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 14:42:42 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:47:35 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	return_file(char *str, int type)
 		{
 			str2 = return_word(str, i + 1);
 			if (!str2)
-				return (write_perror("Error malloc\n"));
+				return (0);
 			if (is_file(str2))
 				break ;
 			g_sig.code_error = ERROR_FILE;

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 20:25:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:50:39 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*cut_arg(char *str, int j, int i)
 		return (NULL);
 	dest = malloc(sizeof(char) * (i - j + 2));
 	if (!dest)
-		return (write_perror("Error malloc\n"), NULL);
+		return (NULL);
 	while (j <= i && str[j] != '\0')
 		dest[d++] = str[j++];
 	dest[d] = '\0';

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 14:48:22 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:49:25 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**parse_error_init(t_data *data, char *buf)
 	else
 		cmd = ft_split3(buf, "");
 	if (!cmd)
-		return (write_error("Error malloc\n"), NULL);
+		return (NULL);
 	return (cmd);
 }
 
@@ -109,7 +109,7 @@ int	check_cmd(t_data *data, char *argv)
 	error = ERROR_NOTFOUND;
 	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
-		return (write_perror("Error malloc\n"));
+		return (0);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	i = check_builtins(argv, cmd_args[0]);
 	if (i > -1)

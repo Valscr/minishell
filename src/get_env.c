@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:57:11 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 21:49:47 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 21:49:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_env(char *str, t_data *data)
 
 	dest = ft_strdup(str);
 	if (!dest)
-		return (write_error("Error malloc\n"), NULL);
+		return (NULL);
 	i = 0;
 	while (dest[i])
 	{

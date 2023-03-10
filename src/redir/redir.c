@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 14:25:08 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 22:00:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	redir_in(char *str, char *dest, t_data *data, int i)
 		return (0);
 	dest = return_word(str, i + 1);
 	if (!dest)
-		return (write_perror("Error malloc\n"));
+		return (0);
 	if (!check_file(data, dest))
 	{
 		g_sig.code_error = ERROR_FILE;
 		if (data->limiter_error)
 		{
-			g_sig.code_error = 0;
+			g_sig.code_error = SUCESS_CODE;
 			data->limiter_error = 0;
 		}
 		return (free(dest), 0);
@@ -109,8 +109,8 @@ int	ft_redir(t_data *d, char *cmd)
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
 		|| ft_strlen(cmd) <= 1)
 	{
-		write(2, "syntax error near unexpected token `newline'\n", 46);
-		g_sig.code_error = 2;
+		write(STDERR, "syntax error\n", 14);
+		g_sig.code_error = ERROR_SYNTAX;
 		return (-1);
 	}
 	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
