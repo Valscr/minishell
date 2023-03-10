@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:19:12 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:36:03 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,54 @@ int	wait_fonct(t_data *data, char *argv)
 	return (wait_fonct_bis(status, error));
 }
 
+int	check_builtins_w2(char *argv)
+{
+	if (ft_strlen(argv) >= 5 && !ft_strncmp(argv, "unset", 5))
+	{
+		if (ft_strlen(argv) == 5 || argv[5] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 2 && !ft_strncmp(argv, "cd", 2))
+	{
+		if (argv[2] != ' ' && argv[2] != '\0')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "pwd", 3))
+	{
+		if (argv[3] != ' ' && argv[3] != '\0')
+			return (1);
+	}
+	return (0);
+}
+
+int	check_builtins_w(char *argv)
+{
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
+	{
+		if (ft_strlen(argv) == 3 || argv[3] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
+	{
+		if (ft_strlen(argv) == 4 || argv[4] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
+	{
+		if (ft_strlen(argv) == 6 || argv[6] == ' ')
+			return (1);
+	}
+	return (check_builtins_w2(argv));
+}
+
 int	is_cmd_bis(char **paths, char *cmd)
 {
-	int		i;
 	char	**cmd_args;
 
-	i = 0;
 	if (cmd == NULL || !is_slash(cmd))
 		return (0);
 	cmd_args = ft_split2(cmd, " ");
-	i = check_builtins(cmd, cmd_args[0]);
-	if (i > -1)
+	if (check_builtins_w(cmd))
 		return (free_tab_str(cmd_args), 1);
 	if (access(cmd, X_OK) == 0)
 		return (free_tab_str(cmd_args), 1);
@@ -80,7 +117,7 @@ int	is_cmd(char **paths, char *cmd)
 	char	*command;
 
 	if (is_cmd_bis(paths, cmd) > -1)
-		return (0);
+		return (is_cmd_bis(paths, cmd));
 	while (*paths)
 	{
 		tmp = ft_strjoin(*paths, "/");
