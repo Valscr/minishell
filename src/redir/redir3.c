@@ -22,9 +22,11 @@ int	open_file(char *str, t_data *data, int i, int type)
 	if (ft_strlen(dest) > 0)
 	{
 		if (type == 1)
-			data->outfile = open(dest, O_APPEND | O_CREAT | O_RDWR, 0644);
+			data->outfile = open(dest, O_CLOEXEC | O_APPEND
+					| O_CREAT | O_RDWR, 0644);
 		else if (type == 2)
-			data->outfile = open(dest, O_TRUNC | O_CREAT | O_RDWR, 0644);
+			data->outfile = open(dest, O_CLOEXEC | O_TRUNC
+					| O_CREAT | O_RDWR, 0644);
 		if (data->outfile < 0)
 		{
 			free_str(dest);

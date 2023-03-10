@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:41:17 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:53:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	child_bis(t_data *data, char *cmd, char **cmd_args)
 	write(STDERR, cmd, ft_strlen(cmd));
 	write(STDERR, ": Is a directory\n", 18);
 	free_all(data, cmd_args, cmd, env);
-	close(data->outfile);
 	exit(ERROR_ISDIRECTORY);
 }
 
