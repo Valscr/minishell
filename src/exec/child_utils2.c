@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:19:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/10 01:41:17 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,44 @@ void	child_bis(t_data *data, char *cmd, char **cmd_args)
 	free_all(data, cmd_args, cmd, env);
 	close(data->outfile);
 	exit(ERROR_ISDIRECTORY);
+}
+
+int	check_builtins_w2(char *argv)
+{
+	if (ft_strlen(argv) >= 5 && !ft_strncmp(argv, "unset", 5))
+	{
+		if (ft_strlen(argv) == 5 || argv[5] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 2 && !ft_strncmp(argv, "cd", 2))
+	{
+		if (argv[2] != ' ' && argv[2] != '\0')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "pwd", 3))
+	{
+		if (argv[3] != ' ' && argv[3] != '\0')
+			return (1);
+	}
+	return (0);
+}
+
+int	check_builtins_w(char *argv)
+{
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
+	{
+		if (ft_strlen(argv) == 3 || argv[3] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
+	{
+		if (ft_strlen(argv) == 4 || argv[4] == ' ')
+			return (1);
+	}
+	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
+	{
+		if (ft_strlen(argv) == 6 || argv[6] == ' ')
+			return (1);
+	}
+	return (check_builtins_w2(argv));
 }
