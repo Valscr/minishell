@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/11 21:55:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:00:45 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	loop_pipe(t_data data, char *argv)
 	else
 		error = ERROR_CTRLC;
 	check_arg2(data.argv, &data);
-	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB
-		&& g_sig.code_error != ERROR_SYNTAX)
+	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB)
 	{
 		error = parse_error(&data, data.argv);
 	}
@@ -80,13 +79,6 @@ int	loop_shell(t_data *data)
 	return (free_str(prompt), free_str(buf), i);
 }
 
-int	shell(t_data *data)
-{
-	g_sig.code_error = loop_shell(data);
-	clear_history();
-	return (1);
-}
-
 int	main(int argc, char **argv, char *envp[])
 {
 	t_data	data;
@@ -95,8 +87,8 @@ int	main(int argc, char **argv, char *envp[])
 		return (0);
 	if (!init(&data, envp))
 		return (0);
-	if (!shell(&data))
-		return (0);
+	g_sig.code_error = loop_shell(&data);
+	clear_history();
 	free_t_env_list(data.env);
 	return (g_sig.code_error);
 }

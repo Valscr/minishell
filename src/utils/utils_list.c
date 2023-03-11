@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:53:07 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:56:19 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int	find_string_in_list(t_env *head, const char *string)
 	return (0);
 }
 
-/*si la fonction rencontre une erreur renvoie 1, sinon renvoie 0*/
 int	add_env_variable(t_env *head, char *string)
 {
 	int	res;

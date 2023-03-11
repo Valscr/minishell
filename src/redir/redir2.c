@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:32:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:29:20 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,31 @@ int	end_word(char *str, int i)
 		&& str[i] != '"' && str[i] != '\'' && str[i] != '\0')
 		i++;
 	return (i);
+}
+
+int	open_file(char *str, t_data *data, int i, int type)
+{
+	char	*dest;
+
+	if (data->type == 1)
+		return (1);
+	dest = return_word(str, i + 1);
+	if (ft_strlen(dest) > 0)
+	{
+		if (type == 1)
+			data->outfile = open(dest, O_CLOEXEC | O_APPEND
+					| O_CREAT | O_RDWR, 0644);
+		else if (type == 2)
+			data->outfile = open(dest, O_CLOEXEC | O_TRUNC
+					| O_CREAT | O_RDWR, 0644);
+		if (data->outfile < 0)
+		{
+			free_str(dest);
+			return (0);
+		}
+		free_str(dest);
+		return (1);
+	}
+	free_str(dest);
+	return (0);
 }

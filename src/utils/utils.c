@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:10:23 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 02:44:36 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 23:21:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*find_path(t_env *head)
 	current = head->next;
 	while (current != NULL)
 	{
-		if (strncmp(current->value, "PATH=", 5) == 0)
+		if (ft_strncmp(current->value, "PATH=", 5) == 0)
 		{
 			return (current->value + 5);
 		}
@@ -73,7 +73,7 @@ char	*return_word(char *str, int i)
 	while (str[i] != ' ' && str[i] && str[i] != '>' && str[i] != '<'
 		&& str[i] != '"' && str[i] != '\'' && str[i] != '$')
 		i++;
-	dest = cut_arg(str, j, i - 1);
+	dest = cut_arg(str, j, i);
 	return (dest);
 }
 

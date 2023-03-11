@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:53:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:48:33 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	child_bis(t_data *data, char *cmd, char **cmd_args)
 	signal(SIGINT, SIG_DFL);
 	env = env_list_to_string_array(data->env);
 	execve(cmd, cmd_args, env);
-	write(STDERR, cmd, ft_strlen(cmd));
-	write(STDERR, ": Is a directory\n", 18);
+	write_error(cmd);
+	write_error(": Is a directory\n");
 	free_all(data, cmd_args, cmd, env);
 	exit(ERROR_ISDIRECTORY);
 }

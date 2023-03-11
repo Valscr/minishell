@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/10 22:06:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:55:25 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,4 @@ char	**ft_split3(char const *s, char const *sep)
 	}
 	dest[j] = NULL;
 	return (dest);
-}	
-
-/*int	main()
-{
-	char str[] = "";
-	char c = 'z';
-	printf("%s", ft_split(str, c)[0]);
-	printf("\n");
-	printf("%s", ft_split(str, c)[1]);
-        printf("\n");
-	printf("%s", ft_split(str, c)[2]);
-        printf("\n");
-	printf("%s", ft_split(str, c)[3]);
-        printf("\n");
-	printf("%s", ft_split(str, c)[4]);
-        printf("\n");
-	printf("%s", ft_split(str, c)[5]);
-        printf("\n");
-}*/
+}

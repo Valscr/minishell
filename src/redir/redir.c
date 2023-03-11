@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 21:42:28 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:03:32 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,28 @@ int	pars_redir_in(char *str, t_data *data)
 	{
 		if ((i == 0 && is_meta(str, i, '<') && !ft_strchr("<>", str[i + 1]))
 			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
-				&& !ft_strchr("<>", str[i + 1])))
+				&& (!ft_strchr("<>", str[i + 1]) || str[i + 1] == '\0')))
+		{
+			if (str[i + 1] == '\0')
+			{
+				if (data->type)
+					write(STDERR, "syntax error\n", 14);
+				g_sig.code_error = ERROR_SYNTAX;
+				return (0);
+			}
 			if (!redir_in(str, dest, data, i))
 				return (0);
+		}
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
-			&& !ft_strchr("<>", str[i + 2]))
+			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
 		{
+			if (str[i + 2] == '\0')
+			{
+				if (data->type)
+					write(STDERR, "syntax error\n", 14);
+				g_sig.code_error = ERROR_SYNTAX;
+				return (0);
+			}
 			data->limiter_error = 1;
 			if (data->limiter == 1 && data->type == 0)
 				return (open_here_doc(data), redir_in(str, dest, data, i),
@@ -74,15 +90,29 @@ int	pars_redir_out(char *str, t_data *data)
 			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
 				return (0);
 		}
-		else if (i > 0 && is_meta(str, i, '>') && !ft_strchr("<>", str[i + 1])
-			&& !ft_strchr("<>", str[i - 1]))
+		else if (i > 0 && is_meta(str, i, '>') && (!ft_strchr("<>", str[i + 1])
+				|| str[i + 1] == '\0') && !ft_strchr("<>", str[i - 1]))
 		{
+			if (str[i + 1] == '\0')
+			{
+				if (data->type)
+					write(STDERR, "syntax error\n", 14);
+				g_sig.code_error = ERROR_SYNTAX;
+				return (0);
+			}
 			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
 				return (0);
 		}
 		if (is_meta(str, i, '>') && is_meta(str, i + 1, '>')
-			&& !ft_strchr("<>", str[i + 2]))
+			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
 		{
+			if (str[i + 2] == '\0')
+			{
+				if (data->type)
+					write(STDERR, "syntax error\n", 14);
+				g_sig.code_error = ERROR_SYNTAX;
+				return (0);
+			}
 			if (!open_file(str, data, i + 1, 1) || !find_cmd(str, data, 0))
 				return (0);
 		}

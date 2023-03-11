@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 22:08:02 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:47:39 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,26 @@ void	init_child(t_data *data, char *argv)
 int	error_slash(char *cmd_args, int type)
 {
 	if ((cmd_args[0] == '.' && cmd_args[1] == '\0') && type == 1)
-	{
-		write(STDERR, ".: filename argument required\n", 31);
-		return (ERROR_SYNTAX);
-	}
+		return (write_error(".: filename argument required\n"), ERROR_SYNTAX);
 	if (cmd_args[0] == '.' && cmd_args[1] == '.'
 		&& cmd_args[2] == '\0' && type == 1)
 	{
-		write(STDERR, cmd_args, ft_strlen(cmd_args));
-		write(STDERR, ": command not found\n", 21);
+		write_error(cmd_args);
+		write_error(": command not found\n");
 		return (ERROR_NOTFOUND);
 	}
 	if (type == 1)
 	{
-		write(STDERR, cmd_args, ft_strlen(cmd_args));
-		write(STDERR, ": Is a directory\n", 18);
+		write_error(cmd_args);
+		write_error(": Is a directory\n");
 	}
 	return (ERROR_ISDIRECTORY);
 }
 
 void	error_cmdnotfound(char *cmd_args)
 {
-	write(STDERR, cmd_args, ft_strlen(cmd_args));
-	write(STDERR, ": command not found\n", 21);
+	write_error(cmd_args);
+	write_error(": command not found\n");
 }
 
 int	init_exec(char *argv, t_data *data)
