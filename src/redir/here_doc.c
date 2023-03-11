@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:56:41 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 21:57:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	open_here_doc(t_data *data)
 {
-	data->infile = open(".heredoc_tmp", O_RDONLY);
+	data->infile = open(".heredoc_tmp", O_CLOEXEC | O_RDONLY);
 	if (data->infile < 0)
 		unlink(".heredoc_tmp");
 	return ;
@@ -26,7 +26,7 @@ int	here_doc_init(t_data *data)
 
 	free_end_process(data);
 	signal(SIGINT, (void (*)(int))ctrl_c2_handler);
-	file = open(".heredoc_tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	file = open(".heredoc_tmp", O_CLOEXEC | O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file < 0)
 		return (0);
 	return (file);

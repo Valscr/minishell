@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 22:00:40 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/11 21:42:28 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	pars_redir_in(char *str, t_data *data)
 		{
 			data->limiter_error = 1;
 			if (data->limiter == 1 && data->type == 0)
-				return (redir_in(str, dest, data, i),
-					open_here_doc(data), free_str(dest), 1);
+				return (open_here_doc(data), redir_in(str, dest, data, i),
+					free_str(dest), 1);
 			else
 				return (redir_in(str, dest, data, i), free_str(dest), 0);
 		}
