@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:22:17 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 23:29:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:47:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,26 @@ int	open_file(char *str, t_data *data, int i, int type)
 	}
 	free_str(dest);
 	return (0);
+}
+
+int	redir_in(char *str, char *dest, t_data *data, int i)
+{
+	if (!find_cmd(str, data, 1))
+		return (0);
+	dest = return_word(str, i + 1);
+	if (!dest)
+		return (0);
+	if (!check_file(data, dest))
+	{
+		g_sig.code_error = ERROR_FILE;
+		if (data->limiter_error)
+		{
+			g_sig.code_error = SUCESS_CODE;
+			data->limiter_error = 0;
+		}
+		return (free(dest), 0);
+	}
+	free_str(dest);
+	dest = NULL;
+	return (1);
 }

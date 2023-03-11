@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 00:14:37 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/12 00:51:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ int		limiter_heredoc(char *str, t_data *data, int i);
 int		loop_pipe(t_data data, char *argv);
 int		loop_shell(t_data *data);
 int		open_file(char *str, t_data *data, int i, int type);
-int		pars_redir_in(char *str, t_data *data);
-int		pars_redir_out(char *str, t_data *data);
+int		pars_redir_in(char *str, t_data *data, int i);
+int		pars_redir_out(char *str, t_data *data, int i);
 int		parse_error(t_data *data, char *buf);
 int		quotes_after(char const *str, int j);
 int		size_list(t_env *env);
@@ -170,6 +170,8 @@ char	*replace_word(t_data *data, char *str, int i, int y);
 char	*return_cmd(char *str, int i);
 char	*return_cmd_after(char *str, t_data *data);
 char	*return_word(char *str, int i);
+int		test_redir(char *str, t_data *data, int i);
+int		redir_in(char *str, char *dest, t_data *data, int i);
 
 extern t_sig	g_sig;
 
