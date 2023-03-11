@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 23:53:47 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:11:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,11 @@ int	here_doc(char *argv, t_data *data)
 	return (0);
 }
 
-int	limiter_heredoc(char *str, t_data *data)
+int	limiter_heredoc(char *str, t_data *data, int i)
 {
-	int		i;
 	int		red;
 	char	*dest;
 
-	i = -1;
 	dest = NULL;
 	while (str[++i])
 	{

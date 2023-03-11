@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 14:46:44 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 00:14:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int		is_number(char *str);
 int		is_point(char *str);
 int		is_slash(char *str);
 int		iter_pipe(char *argv);
-int		limiter_heredoc(char *str, t_data *data);
+int		limiter_heredoc(char *str, t_data *data, int i);
 int		loop_pipe(t_data data, char *argv);
 int		loop_shell(t_data *data);
 int		open_file(char *str, t_data *data, int i, int type);
