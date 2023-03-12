@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 00:51:08 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/12 01:31:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	close_pipes(t_data *data, int len);
 void	ctrl_c_handler(int sig);
 void	ctrl_c2_handler(int sig);
 void	error_cmdnotfound(char *cmd_args);
+void	error_syntax(t_data *data);
 void	free_all(t_data *data, char **cmd_args, char *cmd, char **env);
 void	free_end_process(t_data *data);
 void	free_str(char *str);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 00:49:58 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/12 01:32:44 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	test_redir(char *str, t_data *data, int i)
+int	err_syntax(char *str, t_data *data, int i)
 {
 	if (str[i] == '\0')
 	{
@@ -34,16 +34,12 @@ int	pars_redir_in(char *str, t_data *data, int i)
 		if ((i == 0 && is_meta(str, i, '<') && !ft_strchr("<>", str[i + 1]))
 			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
 				&& (!ft_strchr("<>", str[i + 1]) || str[i + 1] == '\0')))
-		{
-			if (!test_redir(str, data, i + 1))
+			if (!err_syntax(str, data, i + 1) || !redir_in(str, dest, data, i))
 				return (0);
-			if (!redir_in(str, dest, data, i))
-				return (0);
-		}
 		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
 			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
 		{
-			if (!test_redir(str, data, i + 2))
+			if (!err_syntax(str, data, i + 2))
 				return (0);
 			data->limiter_error = 1;
 			if (data->limiter == 1 && data->type == 0)
@@ -60,23 +56,23 @@ int	pars_redir_out(char *str, t_data *data, int i)
 {
 	while (str[i])
 	{
-		if (is_meta(str, i, '>') && !ft_strchr("><", str[i + 1]) && i == 0
-			&&(!open_file(str, data, i, 2) || !find_cmd(str, data, 0)))
-			return (0);
+		if (is_meta(str, i, '>') && !ft_strchr("><", str[i + 1]) && i == 0)
+		{
+			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
+				return (0);
+		}
 		else if (i > 0 && is_meta(str, i, '>') && (!ft_strchr("<>", str[i + 1])
 				|| str[i + 1] == '\0') && !ft_strchr("<>", str[i - 1]))
 		{
-			if (!test_redir(str, data, i + 1))
-				return (0);
-			if (!open_file(str, data, i, 2) || !find_cmd(str, data, 0))
+			if (!err_syntax(str, data, i + 1) || !open_file(str, data, i, 2)
+				|| !find_cmd(str, data, 0))
 				return (0);
 		}
 		if (is_meta(str, i, '>') && is_meta(str, i + 1, '>')
 			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
 		{
-			if (!test_redir(str, data, i + 2))
-				return (0);
-			if (!open_file(str, data, i + 1, 1) || !find_cmd(str, data, 0))
+			if (!err_syntax(str, data, i + 2) || !open_file(str, data, i + 1, 1)
+				|| !find_cmd(str, data, 0))
 				return (0);
 		}
 		i++;
@@ -101,11 +97,7 @@ int	ft_redir(t_data *d, char *cmd)
 		return (-1);
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
 		|| ft_strlen(cmd) <= 1)
-	{
-		write(STDERR, "syntax error\n", 14);
-		g_sig.code_error = ERROR_SYNTAX;
-		return (-1);
-	}
+		return (error_syntax(d), -1);
 	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
 	{
 		if (!pars_redir_in(cmd, d, -1))
