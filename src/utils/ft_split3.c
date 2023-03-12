@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/11 22:55:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 04:20:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static char	*ft_filldest3(char const *s, int i, int j)
 	int		n;
 
 	n = 0;
+	while (s[j] == ' ')
+	{
+		j--;
+		i--;
+	}
 	dest = malloc(sizeof(char) * (i + 1));
 	if (!dest)
 		return (0);

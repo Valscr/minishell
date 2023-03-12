@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/12 00:13:11 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/12 05:53:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	loop_pipe(t_data data, char *argv)
 		error = exec(&data, data.argv);
 	else
 		error = ERROR_CTRLC;
+	g_sig.code_error = error;
 	check_arg2(data.argv, &data);
 	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB)
 	{

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:37:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 06:37:06 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_arg(char *str, t_data *data)
 	int		end;
 
 	end = 0;
-	if (!ft_strncmp("env", str, 3) && str[3] == '\0')
+	if (!ft_strncmp("env", str, 3) && (str[3] == ' ' || str[3] == '\0'))
 	{
 		end = display_env_list(data->env);
 		free_end_process(data);
@@ -43,6 +43,11 @@ int	check_arg(char *str, t_data *data)
 	}
 	if (!ft_strncmp("echo", str, 4))
 	{
+		if (str[4] != ' ')
+		{
+			g_sig.code_error = ERROR_NOTFOUND;
+			return (0);
+		}
 		end = ft_echo(ft_split(str, " '\""));
 		free_end_process(data);
 		exit(end);
@@ -60,21 +65,21 @@ int	check_arg2(char *str, t_data *data)
 	{
 		strg = ft_split(str, " '\"");
 		g_sig.code_error = ft_cd(strg, data->env);
-		return (free_tab_str(strg), 0);
+		free_tab_str(strg);
 	}
-	if (!ft_strncmp("export ", str, 7))
+	else if (!ft_strncmp("export", str, 6))
 	{
 		dest = ft_split(str, " ");
 		if (dest[1])
 			ft_export(dest[1], data);
-		return (free_tab_str(dest), 0);
+		else
+			print_sorted_env(data->env);
 	}
-	if (!ft_strncmp("unset ", str, 6))
+	else if (!ft_strncmp("unset", str, 5))
 	{
 		dest = ft_split(str, " ");
 		if (dest[1])
 			g_sig.code_error = ft_unset(dest[1], data->env);
-		return (free_tab_str(dest), 0);
 	}
 	return (free_tab_str(dest), 0);
 }

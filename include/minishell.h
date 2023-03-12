@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 01:31:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 05:11:50 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		add_first(t_env *list, char *string);
 int		add_last(t_env *list, char *string);
 int		check_arg(char *str, t_data *data);
 int		check_arg2(char *str, t_data *data);
-int		check_builtins(char *argv, char *cmd_args);
+int		check_builtins(char *argv);
 int		check_builtins_w(char *argv);
 int		check_builtins_w2(char *argv);
 int		check_cmd(t_data *data, char *argv);
@@ -145,13 +145,14 @@ void	error_syntax(t_data *data);
 void	free_all(t_data *data, char **cmd_args, char *cmd, char **env);
 void	free_end_process(t_data *data);
 void	free_str(char *str);
+void	free_t_env_list(t_env *head);
 void	get_dup2(int in, int out);
 void	init_child(t_data *data, char *argv);
+void	open_here_doc(t_data *data);
 void	parent_free(t_data *data);
+void	print_sorted_env(t_env *env);
 void	process_exec(t_data *data, char *argv);
 void	sig_quit(int code);
-void	open_here_doc(t_data *data);
-void	free_t_env_list(t_env *head);
 char	*cut_arg(char *str, int j, int i);
 char	**env_list_to_string_array(t_env *head);
 char	*find_path(t_env *head);

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:47:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 03:46:45 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	return_file(char *str, int type)
 
 void	error_cmd(char *str, char *dest, int type, int type2)
 {
-	g_sig.code_error = ERROR_NOTFOUND;
 	if (str == NULL)
 		return ;
 	if (type == 1)
@@ -52,6 +51,7 @@ void	error_cmd(char *str, char *dest, int type, int type2)
 	}
 	if (ft_isprint(dest[0]) && str[0] != '<' && str[0] != '>' && type2 == 1)
 	{
+		g_sig.code_error = ERROR_NOTFOUND;
 		write_error(dest);
 		write_error(": command not found\n");
 		return ;
@@ -61,11 +61,11 @@ void	error_cmd(char *str, char *dest, int type, int type2)
 
 void	error_cmd_after(char *str, int type)
 {
-	g_sig.code_error = 127;
 	if (str == NULL)
 		return ;
 	if (ft_isprint(str[0]) && type == 1)
 	{
+		g_sig.code_error = 127;
 		write_error(str);
 		write_error(": command not found\n");
 	}

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 21:49:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 05:48:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,50 +53,50 @@ int	parse_error(t_data *data, char *buf)
 	return (free_tab_str(cmd), error);
 }
 
-int	check_builtins2(char *argv, char *cmd_args)
+int	check_builtins2(char *argv)
 {
 	if (ft_strlen(argv) >= 5 && !ft_strncmp(argv, "unset", 5))
 	{
-		if (ft_strlen(argv) == 5 || argv[5] == ' ')
-			return (g_sig.code_error);
-		return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 5 && argv[5] != ' ')
+			return (-1);
+		return (g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 2 && !ft_strncmp(argv, "cd", 2))
 	{
-		if (argv[2] != ' ' && argv[2] != '\0')
-			return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 2 && argv[2] != ' ')
+			return (-1);
 		return (g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "pwd", 3))
 	{
-		if (argv[3] != ' ' && argv[3] != '\0')
-			return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 3 && argv[3] != ' ')
+			return (-1);
 		return (g_sig.code_error);
 	}
 	return (-1);
 }
 
-int	check_builtins(char *argv, char *cmd_args)
+int	check_builtins(char *argv)
 {
 	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
 	{
-		if (ft_strlen(argv) == 3 || argv[3] == ' ')
-			return (g_sig.code_error);
-		return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 3 && argv[3] != ' ')
+			return (-1);
+		return (g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
 	{
-		if (ft_strlen(argv) == 4 || argv[4] == ' ')
-			return (g_sig.code_error);
-		return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 4 && argv[4] != ' ')
+			return (-1);
+		return (g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
 	{
-		if (ft_strlen(argv) == 6 || argv[6] == ' ')
-			return (g_sig.code_error);
-		return (error_cmdnotfound(cmd_args), ERROR_NOTFOUND);
+		if (ft_strlen(argv) > 6 && argv[6] != ' ')
+			return (-1);
+		return (g_sig.code_error);
 	}
-	return (check_builtins2(argv, cmd_args));
+	return (check_builtins2(argv));
 }
 
 int	check_cmd(t_data *data, char *argv)
@@ -111,9 +111,9 @@ int	check_cmd(t_data *data, char *argv)
 	if (!cmd_args)
 		return (0);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
-	i = check_builtins(argv, cmd_args[0]);
+	i = check_builtins(argv);
 	if (i > -1)
-		return (child_free(cmd_args, cmd), SUCESS_CODE);
+		return (child_free(cmd_args, cmd), g_sig.code_error);
 	if (!cmd)
 	{
 		if (!is_slash(cmd_args[0]))
@@ -124,5 +124,5 @@ int	check_cmd(t_data *data, char *argv)
 			error_cmdnotfound(cmd_args[0]);
 		return (child_free(cmd_args, cmd), error);
 	}
-	return (child_free(cmd_args, cmd), SUCESS_CODE);
+	return (child_free(cmd_args, cmd), g_sig.code_error);
 }
