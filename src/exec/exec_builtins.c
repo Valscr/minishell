@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 06:37:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:09:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	check_arg(char *str, t_data *data)
 			g_sig.code_error = ERROR_NOTFOUND;
 			return (0);
 		}
-		end = ft_echo(ft_split(str, " '\""));
+		str += 5;
+		end = ft_echo(ft_split(str, "'\""));
 		free_end_process(data);
 		exit(end);
 	}
@@ -69,9 +70,10 @@ int	check_arg2(char *str, t_data *data)
 	}
 	else if (!ft_strncmp("export", str, 6))
 	{
-		dest = ft_split(str, " ");
-		if (dest[1])
-			ft_export(dest[1], data);
+		str += 7;
+		printf("argv test = %s\n", str);
+		if (str)
+			ft_export(str, data);
 		else
 			print_sorted_env(data->env);
 	}

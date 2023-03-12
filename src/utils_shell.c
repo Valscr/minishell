@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:01:51 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/09 23:33:15 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:31:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	check_empty_line(char *buf)
 			return (1);
 		i++;
 	}
-	g_sig.code_error = 0;
 	return (0);
 }
 

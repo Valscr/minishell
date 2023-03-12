@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 22:56:19 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 21:51:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	find_string_in_list(t_env *head, const char *string)
 	tmp = ft_strchr(string, '=');
 	if (!tmp)
 		return (1);
+	if (!check_quotes(tmp, 0))
+		tmp = delete_quotes(tmp);
 	len = ft_strlen(string) - ft_strlen(tmp);
 	while (cur->next)
 	{
@@ -102,12 +104,44 @@ int	find_string_in_list(t_env *head, const char *string)
 	return (0);
 }
 
+char	*delete_quotes(char *str)
+{
+	int		i;
+	int		j;
+	int		d;
+	char	*dest;
+
+	j = ft_strlen(str) - 1;
+	i = 0;
+	d = 0;
+	while (str[i] != '=')
+		i++;
+	while (str[i] == '\'' || str[i] == '\"')
+		i++;
+	while (str[j] == '\'' || str[j] == '\"')
+		j--;
+	dest = malloc(sizeof(char) * (j - i) + 1);
+	if (!dest)
+		return (free_str(str), NULL);
+	i++;
+	while (i <= j)
+		dest[d++] = str[i++];
+	dest[d] = '\0';
+	return (free_str(str), dest);
+}
+
 int	add_env_variable(t_env *head, char *string)
 {
 	int	res;
+	int	i;
 
+	i = 0;
 	if (string[0] == '=')
 		return (write_perror("export: not a valid identifier"));
+	while (string[i] != '=')
+		i++;
+	/*if (!check_quotes(string, i + 1))
+		string = delete_quotes(string);*/
 	res = find_string_in_list(head, string);
 	if (res == -1)
 		return (write_perror("Error malloc\n"));

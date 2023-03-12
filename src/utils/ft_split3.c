@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 01:36:01 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/12 04:20:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:29:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**ft_split3(char const *s, char const *sep)
 		return (NULL);
 	while (s[i] != '\0')
 	{
-		while (s[i] == ' ' && s[i])
+		while (s[i] == ' ' && s[i] != '\0')
 			i++;
 		n = i;
 		while (s[i] != '\0' && (!ft_strchr(sep, s[i])

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 05:30:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:34:06 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	print_sorted_env(t_env *env)
 
 int	ft_export(char *string, t_data *data)
 {
+	printf("string = %s\n", string);
 	add_env_variable(data->env, string);
 	return (0);
 }

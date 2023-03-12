@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/02/02 22:09:12 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/12 23:50:00 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,30 @@ static	int	nb_args(char **args)
 int	ft_echo(char **args)
 {
 	int		i;
+	int		d;
 	int		n_option;
 
-	i = 1;
+	i = 0;
+	d = 0;
 	n_option = 0;
-	if (nb_args(args) > 1)
+	if (nb_args(args) > 0)
 	{
-		while (args[i] && ft_strncmp(args[i], "-n", ft_strlen(args[i])) == 0)
+		while (args[i][d] == ' ')
+			d++;
+		if (args[i][d] == '-' && args[i][d + 1] == 'n' && (args[i][d + 2] == 'n' || args[i][d + 2] == ' '))
 		{
 			n_option = 1;
-			i++;
+			d += 2;
+			while (args[i][d] == 'n')
+				d++;
 		}
+		d++;
 		while (args[i])
 		{
-			ft_putstr_fd(args[i], 1);
-			if (args[i + 1] && args[i][0] != '\0')
-				write(STDOUT, " ", 1);
+			while (args[i][d])
+				write(STDOUT, &args[i][d++], 1);
 			i++;
+			d = 0;
 		}
 	}
 	if (n_option == 0)
