@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 21:51:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:48:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	add_env_variable(t_env *head, char *string)
 
 	i = 0;
 	if (string[0] == '=')
-		return (write_perror("export: not a valid identifier"));
+		return (write_perror("export: not a valid identifier"), 0);
 	while (string[i] != '=')
 		i++;
 	/*if (!check_quotes(string, i + 1))

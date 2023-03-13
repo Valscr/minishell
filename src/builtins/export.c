@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 20:34:06 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:15:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	print_sorted_env(t_env *env)
 
 int	ft_export(char *string, t_data *data)
 {
-	printf("string = %s\n", string);
+	//printf("string = %s\n", string);
+	take_away_quotes(string);
+	printf("-----------%s\n", string);
 	add_env_variable(data->env, string);
 	return (0);
 }

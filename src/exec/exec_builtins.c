@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 21:09:56 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:58:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	check_arg2(char *str, t_data *data)
 	}
 	else if (!ft_strncmp("export", str, 6))
 	{
-		str += 7;
-		printf("argv test = %s\n", str);
-		if (str)
+		str += 6;
+		printf("argv test = :%s:\n", str);
+		if (str[0])
 			ft_export(str, data);
 		else
 			print_sorted_env(data->env);

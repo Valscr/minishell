@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 05:11:50 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:12:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,8 @@ char	*return_cmd_after(char *str, t_data *data);
 char	*return_word(char *str, int i);
 int		test_redir(char *str, t_data *data, int i);
 int		redir_in(char *str, char *dest, t_data *data, int i);
+void	take_away_quotes(char *s);
+char	*delete_quotes(char *str);
 
 extern t_sig	g_sig;
 
