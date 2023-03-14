@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/13 21:48:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/14 19:56:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,14 @@ int	add_env_variable(t_env *head, char *string)
 	int	i;
 
 	i = 0;
-	if (string[0] == '=')
+	while (string[i] == ' ')
+		i++;
+	if (!string[i])
+		return (i);
+	if (string[i] == '=')
 		return (write_perror("export: not a valid identifier"), 0);
 	while (string[i] != '=')
 		i++;
-	/*if (!check_quotes(string, i + 1))
-		string = delete_quotes(string);*/
 	res = find_string_in_list(head, string);
 	if (res == -1)
 		return (write_perror("Error malloc\n"));
