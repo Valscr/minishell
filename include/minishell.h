@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/13 19:12:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/14 18:52:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		find_slash(char *str);
 int		free_tab_str(char **str);
 int		ft_cd(char **cmd_tab, t_env *env);
 int		ft_countdest2(char const *s, char const *sep);
-int		ft_echo(char **args);
+int		ft_echo(char *args);
 int		ft_export(char *string, t_data *data);
 int		ft_pwd(void);
 int		ft_redir(t_data *d, char *cmd);
@@ -176,6 +176,8 @@ int		test_redir(char *str, t_data *data, int i);
 int		redir_in(char *str, char *dest, t_data *data, int i);
 void	take_away_quotes(char *s);
 char	*delete_quotes(char *str);
+int		n_option(char *str);
+int		check_string_n_option(char *str);
 
 extern t_sig	g_sig;
 

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 19:19:43 by valentin          #+#    #+#              #
-#    Updated: 2023/03/13 19:13:07 by marvin           ###   ########.fr        #
+#    Updated: 2023/03/14 04:28:00 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ INCS	= -I ./include/
 
 OBJS = ${C_FILES:%.c=%.o}
 
-CFLAGS += -Wall -Wextra -Werror 
+CFLAGS += -Wall -Wextra #-Werror 
 
 LIBSFLAGS	=  libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/13 21:58:21 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/14 00:31:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_arg(char *str, t_data *data)
 			return (0);
 		}
 		str += 5;
-		end = ft_echo(ft_split(str, "'\""));
+		end = ft_echo(str);
 		free_end_process(data);
 		exit(end);
 	}

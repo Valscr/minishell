@@ -3,56 +3,115 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 23:50:00 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/14 19:01:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static	int	nb_args(char **args)
+int	check_string_n_option(char *str)
 {
-	int		size;
+	int	i;
 
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
+	i = 1;
+	if (str[0] != '-')
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == 'n')
+			i++;
+		else if (str[i] == '\t')
+			return (0);
+		else if (str[i] == ' ')
+			return (i);
+		else
+			return (0);
+	}
+	return (i);
 }
 
-int	ft_echo(char **args)
+int	n_option(char *str)
 {
-	int		i;
-	int		d;
-	int		n_option;
+	int	i;
+	int	res;
 
 	i = 0;
-	d = 0;
-	n_option = 0;
-	if (nb_args(args) > 0)
+	res = 1;
+	while (res)
 	{
-		while (args[i][d] == ' ')
-			d++;
-		if (args[i][d] == '-' && args[i][d + 1] == 'n' && (args[i][d + 2] == 'n' || args[i][d + 2] == ' '))
-		{
-			n_option = 1;
-			d += 2;
-			while (args[i][d] == 'n')
-				d++;
-		}
-		d++;
-		while (args[i])
-		{
-			while (args[i][d])
-				write(STDOUT, &args[i][d++], 1);
-			i++;
-			d = 0;
-		}
+		res = (check_string_n_option(str + i));
+		if (res)
+			i += res;
 	}
-	if (n_option == 0)
+	return (i);
+}
+
+static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
+{
+	if ((s[*i] == '\'' && *simpleq) || (s[*i] == '\''
+		&& !(*simpleq) && !(*doubleq)))
+		{
+			*simpleq = !(*simpleq);
+			(*i)++;
+			return (1);
+		}
+	if ((s[*i] == '\"' && *doubleq) || (s[*i] == '\"'
+		&& !(*simpleq) && !(*doubleq)))
+		{
+			*doubleq = !(*doubleq);
+			(*i)++;
+			return (1);
+		}
+	return (0);
+}
+
+static void	take_away_quotes_echo(char *s)
+{
+	int	i;
+	int	j;
+	int	simpleq;
+	int	doubleq;
+
+	i = 0;
+	j = 0;
+	simpleq = 0;
+	doubleq = 0;
+	while (s[i])
+	{
+		if (tests_quotes(s, &i, &simpleq, &doubleq))
+			continue ;
+		if (s[i] == ' ' && s[i + 1] == ' ' && !simpleq && !doubleq)
+			i++;
+		else if (s[i] == 'n' && s[i + 1] == ' ' && (simpleq || doubleq))
+			s[i + 1] = '\t';
+		else
+			s[j++] = s[i++];
+	}
+	s[j] = '\0';
+}
+
+int	ft_echo(char *str)
+{
+	int		i;
+	int		n;
+
+	take_away_quotes_echo(str);
+	n = n_option(str);
+	i = n;
+	//printf("--------%d----%s\n", n, str + n);
+	printf("--%d---%c\n", i, str[i+1]);
+	while (str[i])
+	{
+		if (str[i] == '\t')
+			write(STDOUT, " ", 1);
+		else
+			write(STDOUT, str + i, 1);
+		i++;
+	}
+	if (n == 0)
 		write(STDOUT, "\n", 1);
-	free_tab_str(args);
 	return (0);
 }
