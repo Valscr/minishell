@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:01:52 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/14 19:17:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ int	check_string_n_option(char *str)
 {
 	int	i;
 
-	i = 1;
-	if (str[0] != '-')
-		return (0);
+	i = 0;
+	if (str[i] == ' ')
+		i++;
+	if (str[i] != '-')
+		return(0);
+	i++;
 	while (str[i])
 	{
 		if (str[i] == 'n')
@@ -101,8 +104,8 @@ int	ft_echo(char *str)
 	take_away_quotes_echo(str);
 	n = n_option(str);
 	i = n;
-	//printf("--------%d----%s\n", n, str + n);
-	printf("--%d---%c\n", i, str[i+1]);
+	if (str[i] == ' ')
+			i++;
 	while (str[i])
 	{
 		if (str[i] == '\t')
