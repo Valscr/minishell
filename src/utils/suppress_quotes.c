@@ -15,19 +15,19 @@
 static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 {
 	if ((s[*i] == '\'' && *simpleq) || (s[*i] == '\''
-		&& !(*simpleq) && !(*doubleq)))
-		{
-			*simpleq = !(*simpleq);
-			(*i)++;
-			return (1);
-		}
+			&& !(*simpleq) && !(*doubleq)))
+	{
+		*simpleq = !(*simpleq);
+		(*i)++;
+		return (1);
+	}
 	if ((s[*i] == '\"' && *doubleq) || (s[*i] == '\"'
-		&& !(*simpleq) && !(*doubleq)))
-		{
-			*doubleq = !(*doubleq);
-			(*i)++;
-			return (1);
-		}
+			&& !(*simpleq) && !(*doubleq)))
+	{
+		*doubleq = !(*doubleq);
+		(*i)++;
+		return (1);
+	}
 	return (0);
 }
 

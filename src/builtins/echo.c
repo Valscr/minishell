@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:17:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:36:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_string_n_option(char *str)
 	if (str[i] == ' ')
 		i++;
 	if (str[i] != '-')
-		return(0);
+		return (0);
 	i++;
 	while (str[i])
 	{
@@ -55,19 +55,19 @@ int	n_option(char *str)
 static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 {
 	if ((s[*i] == '\'' && *simpleq) || (s[*i] == '\''
-		&& !(*simpleq) && !(*doubleq)))
-		{
-			*simpleq = !(*simpleq);
-			(*i)++;
-			return (1);
-		}
+			&& !(*simpleq) && !(*doubleq)))
+	{
+		*simpleq = !(*simpleq);
+		(*i)++;
+		return (1);
+	}
 	if ((s[*i] == '\"' && *doubleq) || (s[*i] == '\"'
-		&& !(*simpleq) && !(*doubleq)))
-		{
-			*doubleq = !(*doubleq);
-			(*i)++;
-			return (1);
-		}
+			&& !(*simpleq) && !(*doubleq)))
+	{
+		*doubleq = !(*doubleq);
+		(*i)++;
+		return (1);
+	}
 	return (0);
 }
 

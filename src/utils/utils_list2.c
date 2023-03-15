@@ -6,11 +6,26 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:58:02 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 00:49:28 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:40:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	size_list(t_env *env)
+{
+	int		count;
+	t_env	*current;
+
+	current = env;
+	count = 0;
+	while (current->next != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
 
 void	free_t_env_list(t_env *head)
 {

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:04:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:34:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ int	check_builtins2(char *argv)
 	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "pwd", 3))
 	{
 		if (ft_strlen(argv) > 3 && argv[3] != ' ')
+			return (-1);
+		return (g_sig.code_error);
+	}
+	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "exit", 4))
+	{
+		if (ft_strlen(argv) > 4 && argv[4] != ' ')
 			return (-1);
 		return (g_sig.code_error);
 	}

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 19:57:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:33:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_arg_bis(char *str, t_data *data)
 		exit(0);
 	}
 	if (!ft_strncmp("cd", str, 2) || !ft_strncmp("export", str, 6)
-		|| !ft_strncmp("unset", str, 5))
+		|| !ft_strncmp("unset", str, 5) || !ft_strncmp("exit", str, 4))
 	{
 		free_end_process(data);
 		exit(0);

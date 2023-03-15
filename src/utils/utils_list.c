@@ -6,26 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:50:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:56:27 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 20:59:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	size_list(t_env *env)
-{
-	int		count;
-	t_env	*current;
-
-	current = env;
-	count = 0;
-	while (current->next != NULL)
-	{
-		count++;
-		current = current->next;
-	}
-	return (count);
-}
 
 char	**env_list_to_string_array(t_env *head)
 {
@@ -74,9 +59,8 @@ int	copy_string_array_to_env_list(t_env *head, char *string_array[])
 	return (1);
 }
 
-int	find_string_in_list(t_env *head, const char *string)
+int	find_string_in_list(t_env *head, const char *string, int len)
 {
-	int		len;
 	t_env	*cur;
 	char	*tmp;
 
@@ -144,7 +128,7 @@ int	add_env_variable(t_env *head, char *string)
 		return (write_perror("export: not a valid identifier"), 0);
 	while (string[i] != '=')
 		i++;
-	res = find_string_in_list(head, string);
+	res = find_string_in_list(head, string, 0);
 	if (res == -1)
 		return (write_perror("Error malloc\n"));
 	if (res == 1)
