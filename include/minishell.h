@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/14 18:52:59 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 18:32:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ char	*return_cmd_after(char *str, t_data *data);
 char	*return_word(char *str, int i);
 int		test_redir(char *str, t_data *data, int i);
 int		redir_in(char *str, char *dest, t_data *data, int i);
-void	take_away_quotes(char *s);
+char	*take_away_quotes(char *s);
 char	*delete_quotes(char *str);
 int		n_option(char *str);
 int		check_string_n_option(char *str);

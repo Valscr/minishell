@@ -31,7 +31,7 @@ static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 	return (0);
 }
 
-void	take_away_quotes(char *s)
+char	*take_away_quotes(char *s)
 {
 	int	i;
 	int	j;
@@ -49,4 +49,5 @@ void	take_away_quotes(char *s)
 		s[j++] = s[i++];
 	}
 	s[j] = '\0';
+	return (s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 20:00:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:05:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	child(t_data *data, char *argv)
 	error = ERROR_NOTFOUND;
 	init_child(data, argv);
 	printf("argv = %s\n", argv);
-	cmd_args = ft_split2(argv, " ");
+	cmd_args = ft_split(argv, " \"'");
 	if (!cmd_args)
 	{
 		free_end_process(data);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/14 19:54:44 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/15 19:57:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	check_arg2(char *str, t_data *data)
 	else if (!ft_strncmp("export", str, 6))
 	{
 		str += 6;
-		printf("argv test = :%s:\n", str);
 		if (str[0] == ' ' && str[1])
 			ft_export(str, data);
 		else
