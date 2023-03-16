@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:00:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/01 20:49:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:49:51 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_exit(char *str)
 
 	j = 0;
 	i = 5;
+	ft_putstr_fd("exit\n", 1);
 	if (ft_strlen(str) < 6)
 		return (0);
 	dest = malloc(sizeof(char) * (ft_strlen(str) - 5 + 1));
