@@ -6,51 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:36:29 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/17 22:58:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	check_string_n_option(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == ' ')
-		i++;
-	if (str[i] != '-')
-		return (0);
-	i++;
-	while (str[i])
-	{
-		if (str[i] == 'n')
-			i++;
-		else if (str[i] == '\t')
-			return (0);
-		else if (str[i] == ' ')
-			return (i);
-		else
-			return (0);
-	}
-	return (i);
-}
-
-int	n_option(char *str)
-{
-	int	i;
-	int	res;
-
-	i = 0;
-	res = 1;
-	while (res)
-	{
-		res = (check_string_n_option(str + i));
-		if (res)
-			i += res;
-	}
-	return (i);
-}
 
 static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 {
@@ -96,11 +56,27 @@ static void	take_away_quotes_echo(char *s)
 	s[j] = '\0';
 }
 
+static int	check_end_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ' ' && str[i + 1] == '\0')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_echo(char *str)
 {
 	int		i;
 	int		n;
+	int		space;
 
+	space = check_end_space(str);
 	take_away_quotes_echo(str);
 	n = n_option(str);
 	i = n;
@@ -110,6 +86,8 @@ int	ft_echo(char *str)
 	{
 		if (str[i] == '\t')
 			write(STDOUT, " ", 1);
+		else if (str[i] == ' ' && str[i + 1] == '\0' && space)
+			break ;
 		else
 			write(STDOUT, str + i, 1);
 		i++;
