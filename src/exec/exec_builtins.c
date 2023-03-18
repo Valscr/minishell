@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:33:42 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/19 00:05:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_arg2(char *str, t_data *data)
 		g_sig.code_error = ft_cd(strg, data->env);
 		free_tab_str(strg);
 	}
-	else if (!ft_strncmp("export", str, 6))
+	else if (!ft_strncmp("export", str, 6) && (str[6] == ' ' || str[6] == '\0'))
 	{
 		str += 6;
 		if (str[0] == ' ' && str[1])

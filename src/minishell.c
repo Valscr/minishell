@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/15 19:58:09 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/19 00:05:48 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	loop_shell(t_data *data)
 			ft_putstr_fd("exit\n", 1);
 			break ;
 		}
-		if (!ft_strncmp("exit", buf, 4))
+		if (!ft_strncmp("exit", buf, 4) && (buf[4] == ' ' || buf[4] == '\0'))
 		{
 			i = check_exit(buf);
 			break ;

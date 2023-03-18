@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/16 19:51:09 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/19 00:04:57 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	child(t_data *data, char *argv)
 
 	error = ERROR_NOTFOUND;
 	init_child(data, argv);
-	cmd_args = ft_split(argv, " \"'");
+	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 	{
 		free_end_process(data);

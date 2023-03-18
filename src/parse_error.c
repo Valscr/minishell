@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:34:24 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/19 00:06:14 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	check_cmd(t_data *data, char *argv)
 	int		error;
 
 	error = ERROR_NOTFOUND;
-	cmd_args = ft_split(argv, " \"'");
+	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 		return (0);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
@@ -130,5 +130,5 @@ int	check_cmd(t_data *data, char *argv)
 			error_cmdnotfound(cmd_args[0]);
 		return (child_free(cmd_args, cmd), error);
 	}
-	return (child_free(cmd_args, cmd), g_sig.code_error);
+	return (child_free(cmd_args, cmd), 0);
 }
