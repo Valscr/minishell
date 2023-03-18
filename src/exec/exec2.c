@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/10 01:41:05 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/19 00:20:37 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int	wait_fonct_bis(int status, int error)
 		if (WTERMSIG(status) == 3)
 			return (ERROR_CTRLB);
 	}
-	if (error)
-		return (error);
-	return (0);
+	return (error);
 }
 
 int	wait_fonct(t_data *data, char *argv)
@@ -41,16 +39,14 @@ int	wait_fonct(t_data *data, char *argv)
 		while (i++ < 2 * (iter_pipe(argv) - 1))
 		{
 			waitpid(0, &status, 0);
-			if (WIFEXITED(status))
-				error = WEXITSTATUS(status);
+			error = WEXITSTATUS(status);
 		}
 		parent_free(data);
 	}
 	else
 	{
 		waitpid(0, &status, 0);
-		if (WIFEXITED(status))
-			error = WEXITSTATUS(status);
+		error = WEXITSTATUS(status);
 	}
 	return (wait_fonct_bis(status, error));
 }

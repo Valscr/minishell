@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 00:06:14 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/19 00:12:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,5 @@ int	check_cmd(t_data *data, char *argv)
 			error_cmdnotfound(cmd_args[0]);
 		return (child_free(cmd_args, cmd), error);
 	}
-	return (child_free(cmd_args, cmd), 0);
+	return (child_free(cmd_args, cmd), g_sig.code_error);
 }
