@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 19:56:10 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 00:00:54 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	here_doc_init(t_data *data)
 	file = open(".heredoc_tmp", O_CLOEXEC | O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (file < 0)
 		return (0);
+	g_sig.code_error = 0;
 	return (file);
 }
 
