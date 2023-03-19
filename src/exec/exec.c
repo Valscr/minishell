@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 00:04:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/19 22:17:23 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*get_cmd(char **paths, char *cmd)
 		free_str(tmp);
 		if (!command)
 			return (write_perror("Error malloc\n"), NULL);
-		if (access(command, 0) == 0)
+		if (access(command, X_OK) == 0)
 			return (command);
 		free_str(command);
 		paths++;

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 04:21:55 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/19 22:57:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,6 @@ char	*cut_arg(char *str, int j, int i)
 		dest[d++] = str[j++];
 	dest[d] = '\0';
 	return (dest);
-}
-
-int	quotes_after(char const *str, int j)
-{
-	int	y;
-
-	y = 0;
-	while (j >= 0)
-	{
-		if (str[j] == '\'' || str[j] == '"')
-			y++;
-		j--;
-	}
-	return (y);
 }
 
 char	*return_word2(char *str, int i)

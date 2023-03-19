@@ -22,7 +22,7 @@ int	check_string_n_option(char *str)
 	if (str[i] != '-')
 		return (0);
 	if (str[i] == '-' && str[i + 1] != 'n')
-        return (0);
+		return (0);
 	i++;
 	while (str[i])
 	{
