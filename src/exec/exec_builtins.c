@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 04:27:13 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:48:17 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	check_arg_bis(char *str, t_data *data)
 	if (!ft_strncmp("cd", str, 2) || !ft_strncmp("export", str, 6)
 		|| !ft_strncmp("unset", str, 5) || !ft_strncmp("exit", str, 4))
 	{
+		if (!ft_strncmp("export", str, 6) && (str[6] == '\0' || str[6] == ' ') && !ft_strnstr(str, "=", ft_strlen(str)))
+			print_sorted_env(data->env);
 		free_end_process(data);
 		exit(0);
 	}
@@ -90,8 +92,6 @@ int	check_arg2(char *str, t_data *data, int count)
 		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str))
 			&& count == 1)
 			ft_export(str, data);
-		else if (str[0] == '\0')
-			print_sorted_env(data->env);
 	}
 	return (free_tab_str(dest), check_arg2bis(str, data, count));
 }
