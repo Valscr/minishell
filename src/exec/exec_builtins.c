@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 03:21:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 03:25:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	check_arg2(char *str, t_data *data)
 		g_sig.code_error = ft_cd(strg, data->env);
 		free_tab_str(strg);
 	}
-	else if (!ft_strncmp("export", str, 6) && (str[6] == ' ' || str[6] == '\0'))
+	if (!ft_strncmp("export", str, 6) && (str[6] == ' ' || str[6] == '\0'))
 	{
 		str += 6;
 		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str)))
@@ -76,7 +76,7 @@ int	check_arg2(char *str, t_data *data)
 		else
 			print_sorted_env(data->env);
 	}
-	else if (!ft_strncmp("unset", str, 5))
+	if (!ft_strncmp("unset", str, 5))
 	{
 		dest = ft_split(str, " ");
 		if (dest[1])

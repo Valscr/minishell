@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 14:22:18 by vescaffr          #+#    #+#             */
-/*   Updated: 2023/03/19 22:02:28 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 03:31:16 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	loop_pipe(t_data data, char *argv)
 	else
 		error = ERROR_CTRLC;
 	g_sig.code_error = error;
-	check_arg2(data.argv, &data);
 	if (g_sig.code_error != ERROR_CTRLC && g_sig.code_error != ERROR_CTRLB)
 	{
 		error = parse_error(&data, data.argv);
