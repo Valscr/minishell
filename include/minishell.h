@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 22:57:37 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:12:52 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		add_env_variable(t_env *head, char *string);
 int		add_first(t_env *list, char *string);
 int		add_last(t_env *list, char *string);
 int		check_arg(char *str, t_data *data);
-int		check_arg2(char *str, t_data *data);
+int		check_arg2(char *str, t_data *data, int count);
 int		check_builtins(char *argv);
 int		check_builtins_w(char *argv);
 int		check_builtins_w2(char *argv);

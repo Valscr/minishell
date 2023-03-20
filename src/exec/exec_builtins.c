@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 03:44:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:12:11 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,20 @@ int	check_arg2bis(char *str, t_data *data)
 	return (free_tab_str(dest), 0);
 }
 
-int	check_arg2(char *str, t_data *data)
+int	check_arg2(char *str, t_data *data, int count)
 {
 	char	**dest;
 	char	**strg;
 
 	dest = NULL;
-	if (!ft_strncmp("cd", str, 2) && data->count == 0
+	if (!ft_strncmp("cd", str, 2) && count == 1
 		&& (str[2] == ' ' || str[2] == '\0'))
 	{
 		strg = ft_split(str, " '\"");
 		g_sig.code_error = ft_cd(strg, data->env);
 		free_tab_str(strg);
 	}
-	if (!ft_strncmp("export", str, 6) && data->count == 0
+	if (!ft_strncmp("export", str, 6) && count == 1
 		&& (str[6] == ' ' || str[6] == '\0'))
 	{
 		str += 6;

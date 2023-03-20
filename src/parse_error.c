@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 03:57:02 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:11:15 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_error(t_data *data, char *buf)
 		}
 		else
 		{
-			check_arg2(cmd[data->count], data);
+			check_arg2(cmd[data->count], data, count_tab(cmd));
 			error = check_cmd(data, cmd[data->count]);
 		}
 		data->count++;
