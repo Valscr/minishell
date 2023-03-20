@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 04:12:11 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 04:27:13 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	check_arg(char *str, t_data *data)
 	return (check_arg_bis(str, data));
 }
 
-int	check_arg2bis(char *str, t_data *data)
+int	check_arg2bis(char *str, t_data *data, int count)
 {
 	char	**dest;
 
 	dest = NULL;
-	if (!ft_strncmp("unset", str, 5))
+	if (!ft_strncmp("unset", str, 5) && count == 1)
 	{
 		dest = ft_split(str, " ");
 		if (dest[1])
@@ -83,14 +83,15 @@ int	check_arg2(char *str, t_data *data, int count)
 		g_sig.code_error = ft_cd(strg, data->env);
 		free_tab_str(strg);
 	}
-	if (!ft_strncmp("export", str, 6) && count == 1
+	if (!ft_strncmp("export", str, 6)
 		&& (str[6] == ' ' || str[6] == '\0'))
 	{
 		str += 6;
-		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str)))
+		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str))
+			&& count == 1)
 			ft_export(str, data);
-		else
+		else if (str[0] == '\0')
 			print_sorted_env(data->env);
 	}
-	return (free_tab_str(dest), check_arg2bis(str, data));
+	return (free_tab_str(dest), check_arg2bis(str, data, count));
 }
