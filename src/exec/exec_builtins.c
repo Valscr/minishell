@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 03:25:38 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/20 03:44:35 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,11 @@ int	check_arg(char *str, t_data *data)
 	return (check_arg_bis(str, data));
 }
 
-int	check_arg2(char *str, t_data *data)
+int	check_arg2bis(char *str, t_data *data)
 {
 	char	**dest;
-	char	**strg;
 
 	dest = NULL;
-	if (!ft_strncmp("cd", str, 2) && (str[2] == ' ' || str[2] == '\0'))
-	{
-		strg = ft_split(str, " '\"");
-		g_sig.code_error = ft_cd(strg, data->env);
-		free_tab_str(strg);
-	}
-	if (!ft_strncmp("export", str, 6) && (str[6] == ' ' || str[6] == '\0'))
-	{
-		str += 6;
-		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str)))
-			ft_export(str, data);
-		else
-			print_sorted_env(data->env);
-	}
 	if (!ft_strncmp("unset", str, 5))
 	{
 		dest = ft_split(str, " ");
@@ -83,4 +68,29 @@ int	check_arg2(char *str, t_data *data)
 			g_sig.code_error = ft_unset(dest[1], data->env);
 	}
 	return (free_tab_str(dest), 0);
+}
+
+int	check_arg2(char *str, t_data *data)
+{
+	char	**dest;
+	char	**strg;
+
+	dest = NULL;
+	if (!ft_strncmp("cd", str, 2) && data->count == 0
+		&& (str[2] == ' ' || str[2] == '\0'))
+	{
+		strg = ft_split(str, " '\"");
+		g_sig.code_error = ft_cd(strg, data->env);
+		free_tab_str(strg);
+	}
+	if (!ft_strncmp("export", str, 6) && data->count == 0
+		&& (str[6] == ' ' || str[6] == '\0'))
+	{
+		str += 6;
+		if (str[0] == ' ' && str[1] && ft_strnstr(str, "=", ft_strlen(str)))
+			ft_export(str, data);
+		else
+			print_sorted_env(data->env);
+	}
+	return (free_tab_str(dest), check_arg2bis(str, data));
 }
