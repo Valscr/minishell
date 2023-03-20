@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/15 18:27:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/20 03:11:20 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ char	*get_first_word(char *str)
 
 	i = 0;
 	j = 0;
-	while (str[i] != '=' && str[i])
+	while (str[i] && str[i] != '=')
 		i++;
-	while (str[i] != ' ' && str[i])
+	while (str[i] && str[i] != ' ')
 		i++;
 	dest = malloc(sizeof(char) * (i + 1));
 	if (!dest)
@@ -96,9 +96,11 @@ int	ft_export(char *string, t_data *data)
 
 	i = 0;
 	string += 1;
-	while (string[i] != '=' && string[i])
+	while (string[i] && string[i] != '=')
 		i++;
-	if (string[i] == '\0' || string[i + 1] == '\0')
+	if (string[i] == '\0')
+		return (0);
+	if (string[i] == '=' && string[i + 1] == '\0')
 		add_env_variable(data->env, string);
 	else if (string[i + 2] && !check_quotes(string, i + 2))
 	{
