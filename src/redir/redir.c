@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/21 18:26:49 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:06:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,33 +91,6 @@ void	ft_redir_bis(t_data *data, char *cmd)
 	return ;
 }
 
-int	check_redir_error(char *cmd)
-{	
-	int	i;
-	int	j;
-	int	y;
-
-	i = 0;
-	y = 0;
-	j = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '<')
-		{
-			while (cmd[i] == '<')
-			{
-				i++;
-				y++;
-			}
-		}
-		else
-			i++;
-	}
-	if (j > 2 || y > 2)
-		return (1);
-	return (0);
-}
-
 int	ft_redir(t_data *d, char *cmd)
 {
 	int	redir;
@@ -126,7 +99,7 @@ int	ft_redir(t_data *d, char *cmd)
 	if (!cmd)
 		return (-1);
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
-		|| ft_strlen(cmd) <= 1 || check_redir_error(cmd))
+		|| ft_strlen(cmd) <= 1)
 		return (error_syntax(d), -1);
 	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
 	{
