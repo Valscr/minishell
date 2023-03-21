@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 00:00:54 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:47:55 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,11 @@ int	limiter_heredoc(char *str, t_data *data, int i)
 	dest = NULL;
 	while (str[++i])
 	{
-		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
-			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
+		if ((i == 0 && is_meta(str, i, '<') && is_meta(str, i + 1, '<')
+				&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
+			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
+				&& is_meta(str, i + 1, '<') && (!ft_strchr("<>", str[i + 2])
+					|| str[i + 2] == '\0')))
 		{
 			if (str[i + 2] == '\0')
 				return (0);

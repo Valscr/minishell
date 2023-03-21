@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 07:51:10 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:26:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ int	pars_redir_in(char *str, t_data *data, int i)
 				&& (!ft_strchr("<>", str[i + 1]) || str[i + 1] == '\0')))
 			if (!err_syntax(str, data, i + 1) || !redir_in(str, dest, data, i))
 				return (0);
-		if (is_meta(str, i, '<') && is_meta(str, i + 1, '<')
-			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
+		if ((i == 0 && is_meta(str, i, '<') && is_meta(str, i + 1, '<')
+				&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
+			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
+				&& is_meta(str, i + 1, '<') && (!ft_strchr("<>", str[i + 2])
+					|| str[i + 2] == '\0')))
 		{
 			if (!err_syntax(str, data, i + 2))
 				return (0);
@@ -88,6 +91,33 @@ void	ft_redir_bis(t_data *data, char *cmd)
 	return ;
 }
 
+int	check_redir_error(char *cmd)
+{	
+	int	i;
+	int	j;
+	int	y;
+
+	i = 0;
+	y = 0;
+	j = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '<')
+		{
+			while (cmd[i] == '<')
+			{
+				i++;
+				y++;
+			}
+		}
+		else
+			i++;
+	}
+	if (j > 2 || y > 2)
+		return (1);
+	return (0);
+}
+
 int	ft_redir(t_data *d, char *cmd)
 {
 	int	redir;
@@ -96,7 +126,7 @@ int	ft_redir(t_data *d, char *cmd)
 	if (!cmd)
 		return (-1);
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
-		|| ft_strlen(cmd) <= 1)
+		|| ft_strlen(cmd) <= 1 || check_redir_error(cmd))
 		return (error_syntax(d), -1);
 	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
 	{
