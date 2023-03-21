@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 04:12:52 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:38:18 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		check_quotes(char *str, int i);
 int		check_quotes1(char *str, int i, char c);
 int		check_quotes2(char const *str, int i);
 int		check_redir(char *str);
+int		check_redir_error(char *cmd);
 int		copy_string_array_to_env_list(t_env *head, char *string_array[]);
 int		count_tab(char **str);
 int		display_env_list(t_env *head);
@@ -117,6 +118,7 @@ int		init_exec(char *argv, t_data *data);
 int		is_cmd(char **paths, char *cmd);
 int		is_file(const char *filename);
 int		is_get_env(char *dest, int i);
+int		is_here(int i, char *str);
 int		is_meta(char *str, int i, char c);
 int		is_number(char *str);
 int		is_point(char *str);

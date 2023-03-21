@@ -12,29 +12,44 @@
 
 #include "../../include/minishell.h"
 
-int	open_file(char *str, t_data *data, int i, int type)
-{
-	char	*dest;
+int	check_redir_error(char *cmd)
+{	
+	int	i;
+	int	y;
+	int	j;
 
-	if (data->type == 1)
-		return (1);
-	dest = return_word(str, i + 1);
-	if (ft_strlen(dest) > 0)
+	i = 0;
+	y = 0;
+	j = 0;
+	while (cmd[i])
 	{
-		if (type == 1)
-			data->outfile = open(dest, O_CLOEXEC | O_APPEND
-					| O_CREAT | O_RDWR, 0644);
-		else if (type == 2)
-			data->outfile = open(dest, O_CLOEXEC | O_TRUNC
-					| O_CREAT | O_RDWR, 0644);
-		if (data->outfile < 0)
+		if (cmd[i] == '<')
 		{
-			free_str(dest);
-			return (0);
+			while (cmd[i++] == '<')
+				y++;
 		}
-		free_str(dest);
+		else if (cmd[i] == '>')
+		{
+			while (cmd[i++] == '>')
+				j++;
+		}
+		else
+			i++;
+	}
+	if (y > 2 || j > 2)
+		return (1);
+	return (0);
+}
+
+int	is_here(int i, char *str)
+{
+	if ((i == 0 && is_meta(str, i, '<') && is_meta(str, i + 1, '<')
+			&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
+		|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
+			&& is_meta(str, i + 1, '<') && (!ft_strchr("<>", str[i + 2])
+				|| str[i + 2] == '\0')))
+	{
 		return (1);
 	}
-	free_str(dest);
 	return (0);
 }

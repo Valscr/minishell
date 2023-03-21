@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/21 19:06:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:38:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ int	pars_redir_in(char *str, t_data *data, int i)
 				&& (!ft_strchr("<>", str[i + 1]) || str[i + 1] == '\0')))
 			if (!err_syntax(str, data, i + 1) || !redir_in(str, dest, data, i))
 				return (0);
-		if ((i == 0 && is_meta(str, i, '<') && is_meta(str, i + 1, '<')
-				&& (!ft_strchr("<>", str[i + 2]) || str[i + 2] == '\0'))
-			|| (i > 0 && !ft_strchr("<>", str[i - 1]) && is_meta(str, i, '<')
-				&& is_meta(str, i + 1, '<') && (!ft_strchr("<>", str[i + 2])
-					|| str[i + 2] == '\0')))
+		if (is_here(i, str))
 		{
 			if (!err_syntax(str, data, i + 2))
 				return (0);
@@ -99,7 +95,7 @@ int	ft_redir(t_data *d, char *cmd)
 	if (!cmd)
 		return (-1);
 	if ((ft_strlen(cmd) <= 2 && (cmd[1] == '>' || cmd[1] == '<'))
-		|| ft_strlen(cmd) <= 1)
+		|| ft_strlen(cmd) <= 1 || check_redir_error(cmd))
 		return (error_syntax(d), -1);
 	if (ft_strnstr(cmd, "<", ft_strlen(cmd)))
 	{
