@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 22:17:23 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:07:41 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,11 @@ void	process_exec(t_data *data, char *argv)
 	}
 }
 
-int	exec(t_data *data, char *argv)
+int	exec2(t_data *data, char *argv)
 {
 	pid_t	pid;
 
-	if (!init_exec(argv, data))
-		return (g_sig.code_error);
-	while (data->count < (iter_pipe(argv)))
+	while (data->count < (iter_pipe(argv) - 1))
 	{
 		signal(SIGINT, SIG_IGN);
 		pid = fork();
@@ -79,35 +77,23 @@ int	exec(t_data *data, char *argv)
 			process_exec(data, argv);
 		data->count++;
 	}
-	return (free_tab_str(data->cmd), wait_fonct(data, argv));
+	return (free_tab_str(data->cmd));
 }
 
-char	*get_cmd(char **paths, char *cmd)
+int	exec(t_data *data, char *argv)
 {
-	char	*tmp;
-	char	*command;
+	pid_t	pid;
 
-	if (cmd == NULL || !is_slash(cmd) || !is_point(cmd))
-		return (NULL);
-	if (access(cmd, X_OK) == 0)
-		return (ft_strdup(cmd));
-	if (!paths)
-		return (NULL);
-	while (*paths)
+	if (!init_exec(argv, data))
+		return (g_sig.code_error);
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == 0)
 	{
-		tmp = ft_strjoin(*paths, "/");
-		if (!tmp)
-			return (write_perror("Error malloc\n"), NULL);
-		command = ft_strjoin(tmp, cmd);
-		free_str(tmp);
-		if (!command)
-			return (write_perror("Error malloc\n"), NULL);
-		if (access(command, X_OK) == 0)
-			return (command);
-		free_str(command);
-		paths++;
+		exec2(data, argv);
+		process_exec(data, argv);
 	}
-	return (NULL);
+	return (free_tab_str(data->cmd), wait_fonct(data, argv));
 }
 
 void	child(t_data *data, char *argv)
@@ -131,7 +117,10 @@ void	child(t_data *data, char *argv)
 			error = error_slash(cmd_args[0], 0);
 		free_end_process(data);
 		child_free(cmd_args, cmd);
-		exit(error);
+		if (data->count == count_tab(data->cmd))
+			exit(error);
+		else
+			exit(0);
 	}
 	child_bis(data, cmd, cmd_args);
 }

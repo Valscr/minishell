@@ -6,14 +6,28 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 00:20:37 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:04:48 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	wait_fonct_bis(int status, int error)
-{
+int	wait_fonct(t_data *data, char *argv)
+{	
+	int	status;
+	int	error;
+	int	pipe;
+
+	status = 0;
+	error = 0;
+	pipe = iter_pipe(argv) - 1;
+	(void)data;
+	(void)pipe;
+	if (iter_pipe(argv) > 1)
+		close_pipes(data, iter_pipe(argv));
+	waitpid(0, &status, 0);
+	parent_free(data);
+	error = WEXITSTATUS(status);
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == 2)
@@ -24,31 +38,32 @@ int	wait_fonct_bis(int status, int error)
 	return (error);
 }
 
-int	wait_fonct(t_data *data, char *argv)
-{	
-	int	i;
-	int	status;
-	int	error;
+char	*get_cmd(char **paths, char *cmd)
+{
+	char	*tmp;
+	char	*command;
 
-	i = 0;
-	status = 0;
-	error = 0;
-	if (iter_pipe(argv) > 1)
+	if (cmd == NULL || !is_slash(cmd) || !is_point(cmd))
+		return (NULL);
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	if (!paths)
+		return (NULL);
+	while (*paths)
 	{
-		close_pipes(data, iter_pipe(argv));
-		while (i++ < 2 * (iter_pipe(argv) - 1))
-		{
-			waitpid(0, &status, 0);
-			error = WEXITSTATUS(status);
-		}
-		parent_free(data);
+		tmp = ft_strjoin(*paths, "/");
+		if (!tmp)
+			return (write_perror("Error malloc\n"), NULL);
+		command = ft_strjoin(tmp, cmd);
+		free_str(tmp);
+		if (!command)
+			return (write_perror("Error malloc\n"), NULL);
+		if (access(command, X_OK) == 0)
+			return (command);
+		free_str(command);
+		paths++;
 	}
-	else
-	{
-		waitpid(0, &status, 0);
-		error = WEXITSTATUS(status);
-	}
-	return (wait_fonct_bis(status, error));
+	return (NULL);
 }
 
 int	is_cmd_bis(char **paths, char *cmd)
