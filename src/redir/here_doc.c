@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/21 22:39:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:24:16 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	here_doc(char *argv, t_data *data)
 	if (pid == 0)
 		exec_here_doc(data, file, buf, argv);
 	waitpid(pid, &status, 0);
+	data->limiter = 1;
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	return (0);
@@ -84,10 +85,12 @@ int	limiter_heredoc(char *str, t_data *data, int i)
 {
 	int		red;
 	char	*dest;
+	int		j;
 
-	dest = NULL;
+	j = 0;
 	while (str[++i])
 	{
+		dest = NULL;
 		if (is_here(i, str))
 		{
 			if (str[i + 2] == '\0')
@@ -97,13 +100,11 @@ int	limiter_heredoc(char *str, t_data *data, int i)
 				return (0);
 			red = here_doc(dest, data);
 			if (red == 0)
-			{
-				data->limiter = 1;
-				return (free_str(dest), 1);
-			}
+				j = 1;
 			if (red == 130)
-				return (free_str(dest), 2);
+				j = 2;
+			free_str(dest);
 		}
 	}
-	return (free_str(dest), 0);
+	return (free_str(dest), j);
 }

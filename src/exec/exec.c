@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/23 23:07:41 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:19:46 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ void	child(t_data *data, char *argv)
 			error = error_slash(cmd_args[0], 0);
 		free_end_process(data);
 		child_free(cmd_args, cmd);
-		if (data->count == count_tab(data->cmd))
-			exit(error);
-		else
-			exit(0);
+		exit(error);
 	}
 	child_bis(data, cmd, cmd_args);
 }
