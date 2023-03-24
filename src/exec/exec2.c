@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 14:40:57 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:05:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	wait_fonct(t_data *data, char *argv)
 		while (i++ < (iter_pipe(argv)))
 		{
 			waitpid(0, &status, 0);
-			error = WEXITSTATUS(status);
+			if (i == 1)
+				error = WEXITSTATUS(status);
 		}
 		parent_free(data);
 	}
