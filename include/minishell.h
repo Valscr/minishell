@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/21 22:38:18 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:36:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_data
 	int			*tube;
 	char		*argv;
 	char		*argv2;
+	char		**argv_hdoc;
 	char		**cmd;
 	char		**cmd_paths;
 	char		*cmd_redir;
@@ -124,7 +125,7 @@ int		is_number(char *str);
 int		is_point(char *str);
 int		is_slash(char *str);
 int		iter_pipe(char *argv);
-int		limiter_heredoc(char *str, t_data *data, int i);
+int		limiter_heredoc(char *str, t_data *data);
 int		loop_pipe(t_data data, char *argv);
 int		loop_shell(t_data *data);
 int		open_file(char *str, t_data *data, int i, int type);
@@ -133,6 +134,7 @@ int		pars_redir_out(char *str, t_data *data, int i);
 int		parse_error(t_data *data, char *buf);
 int		size_list(t_env *env);
 int		wait_fonct(t_data *data, char *argv);
+int		wait_fonct2(t_data *data, char *argv);
 int		write_error(char *str);
 int		write_perror(char *str);
 void	child(t_data *data, char *argv);

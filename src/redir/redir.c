@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:20:12 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/21 22:38:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:24:40 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	err_syntax(char *str, t_data *data, int i)
 {
-	if (str[i] == '\0')
+	if (str[i] == '\0' || str[i + 1] == '\0')
 	{
 		if (data->type)
 			write(STDERR, "syntax error\n", 14);

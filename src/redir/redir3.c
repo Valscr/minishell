@@ -12,6 +12,27 @@
 
 #include "../../include/minishell.h"
 
+void	open_here_doc(t_data *data)
+{
+	data->infile = open(".heredoc_tmp", O_CLOEXEC | O_RDONLY);
+	if (data->infile < 0)
+		unlink(".heredoc_tmp");
+	return ;
+}
+
+int	check_nb_redir(char *cmd, int i, char c)
+{
+	int		j;
+
+	j = 0;
+	while (cmd[i] == c)
+	{	
+		j++;
+		i++;
+	}
+	return (j);
+}
+
 int	check_redir_error(char *cmd)
 {	
 	int	i;
@@ -25,15 +46,15 @@ int	check_redir_error(char *cmd)
 	{
 		if (cmd[i] == '<')
 		{
-			while (cmd[i++] == '<')
-				y++;
+			y = check_nb_redir(cmd, i, '<');
+			i += y + 1;
 		}
 		else if (cmd[i] == '>')
 		{
-			while (cmd[i++] == '>')
-				j++;
+			j = check_nb_redir(cmd, i, '>');
+			i += j + 1;
 		}
-		else
+		if (cmd[i] != '\0')
 			i++;
 	}
 	if (y > 2 || j > 2)

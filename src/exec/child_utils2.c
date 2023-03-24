@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 22:48:33 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/24 14:40:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,32 @@ int	check_builtins_w(char *argv)
 			return (1);
 	}
 	return (check_builtins_w2(argv));
+}
+
+char	*get_cmd(char **paths, char *cmd)
+{
+	char	*tmp;
+	char	*command;
+
+	if (cmd == NULL || !is_slash(cmd) || !is_point(cmd))
+		return (NULL);
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	if (!paths)
+		return (NULL);
+	while (*paths)
+	{
+		tmp = ft_strjoin(*paths, "/");
+		if (!tmp)
+			return (write_perror("Error malloc\n"), NULL);
+		command = ft_strjoin(tmp, cmd);
+		free_str(tmp);
+		if (!command)
+			return (write_perror("Error malloc\n"), NULL);
+		if (access(command, X_OK) == 0)
+			return (command);
+		free_str(command);
+		paths++;
+	}
+	return (NULL);
 }
