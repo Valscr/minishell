@@ -47,12 +47,12 @@ int	check_redir_error(char *cmd)
 		if (cmd[i] == '<')
 		{
 			y = check_nb_redir(cmd, i, '<');
-			i += y + 1;
+			i += y;
 		}
 		else if (cmd[i] == '>')
 		{
 			j = check_nb_redir(cmd, i, '>');
-			i += j + 1;
+			i += j;
 		}
 		if (cmd[i] != '\0')
 			i++;

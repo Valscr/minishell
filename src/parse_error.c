@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 11:41:21 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 00:15:30 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**parse_error_init(t_data *data, char *buf)
 	data->type = 1;
 	data->count = 0;
 	data->paths = find_path(data->env);
+	if (!check_pipe(buf))
+		return (write_error("syntax error near unexpected token `|'\n"), NULL);
 	if (iter_pipe(buf) > 1)
 		cmd = ft_split3(buf, "|");
 	else

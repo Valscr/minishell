@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:39:57 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 22:47:39 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 00:11:49 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_exec(char *argv, t_data *data)
 	if (!check_pipe(argv))
 	{
 		g_sig.code_error = ERROR_SYNTAX;
-		return (write_error("syntax error\n"));
+		return (0);
 	}
 	if (iter_pipe(argv) > 1)
 	{

@@ -6,14 +6,49 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 15:05:36 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/26 21:30:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	wait_fonct_bis(int status, int error)
+int	waitpid_fonct(pid_t pid, pid_t target_pid, t_data *data, char *argv)
 {
+	int		error;
+	int		status;
+	int		i;
+
+	i = 0;
+	status = 0;
+	error = 0;
+	close_pipes(data, iter_pipe(argv));
+	while (i++ < 2 * (iter_pipe(argv) - 1))
+	{
+		pid = waitpid(0, &status, 0);
+		if (pid == target_pid)
+			error = WEXITSTATUS(status);
+	}
+	parent_free(data);
+	return (error);
+}
+
+int	wait_fonct(t_data *data, char *argv, pid_t target_pid)
+{	
+	int		status;
+	int		error;
+	pid_t	pid;
+
+	status = 0;
+	pid = 0;
+	error = 0;
+	if (iter_pipe(argv) > 1)
+		error = waitpid_fonct(pid, target_pid, data, argv);
+	else
+	{
+		pid = waitpid(0, &status, 0);
+		if (pid == target_pid)
+			error = WEXITSTATUS(status);
+	}
 	if (WIFSIGNALED(status))
 	{
 		if (WTERMSIG(status) == 2)
@@ -22,35 +57,6 @@ int	wait_fonct_bis(int status, int error)
 			return (ERROR_CTRLB);
 	}
 	return (error);
-}
-
-int	wait_fonct(t_data *data, char *argv)
-{	
-	int	i;
-	int	status;
-	int	error;
-
-	i = 0;
-	status = 0;
-	error = 0;
-	(void)data;
-	if ((iter_pipe(argv)) > 1)
-	{
-		close_pipes(data, iter_pipe(argv));
-		while (i++ < (iter_pipe(argv)))
-		{
-			waitpid(0, &status, 0);
-			if (i == 1)
-				error = WEXITSTATUS(status);
-		}
-		parent_free(data);
-	}
-	else
-	{
-		waitpid(0, &status, 0);
-		error = WEXITSTATUS(status);
-	}
-	return (wait_fonct_bis(status, error));
 }
 
 int	is_cmd_bis(char **paths, char *cmd)

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 15:06:16 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 00:00:01 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ void	process_exec(t_data *data, char *argv)
 	}
 }
 
-int	exec2(t_data *data, char *argv)
+int	exec(t_data *data, char *argv)
 {
 	pid_t	pid;
 
-	while (data->count < (iter_pipe(argv) - 1))
+	if (!init_exec(argv, data))
+		return (g_sig.code_error);
+	while (data->count < (iter_pipe(argv)))
 	{
 		signal(SIGINT, SIG_IGN);
 		pid = fork();
@@ -77,24 +79,21 @@ int	exec2(t_data *data, char *argv)
 			process_exec(data, argv);
 		data->count++;
 	}
-	return (0);
+	return (free_tab_str(data->cmd), wait_fonct(data, argv, pid));
 }
 
-int	exec(t_data *data, char *argv)
+/*int	exec(t_data *data, char *argv)
 {
 	pid_t	pid;
 
-	if (!init_exec(argv, data))
-		return (g_sig.code_error);
+	
 	signal(SIGINT, SIG_IGN);
 	exec2(data, argv);
 	pid = fork();
 	if (pid == 0)
-	{
 		process_exec(data, argv);
-	}
-	return (free_tab_str(data->cmd), wait_fonct(data, argv));
-}
+	return (free_tab_str(data->cmd), wait_fonct(data, argv, pid));
+}*/
 
 void	child(t_data *data, char *argv)
 {
