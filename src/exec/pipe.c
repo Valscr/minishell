@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/23 22:22:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:11:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	close_pipes(t_data *data, int len)
 	i = 0;
 	while (i < (2 * (len - 1)))
 		close(data->tube[i++]);
+	parent_free(data);
 }
 
 int	check_empty_pipe(char *argv, int i)

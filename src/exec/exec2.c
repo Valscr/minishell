@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 00:21:16 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/26 21:30:29 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:04:04 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int	waitpid_fonct(pid_t pid, pid_t target_pid, t_data *data, char *argv)
 		pid = waitpid(0, &status, 0);
 		if (pid == target_pid)
 			error = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			if (WTERMSIG(status) == 2)
+				return (ft_putstr_fd("\n", 1), ERROR_CTRLC);
+			if (WTERMSIG(status) == 3)
+				return (ERROR_CTRLB);
+		}
 	}
 	parent_free(data);
 	return (error);
@@ -48,13 +55,13 @@ int	wait_fonct(t_data *data, char *argv, pid_t target_pid)
 		pid = waitpid(0, &status, 0);
 		if (pid == target_pid)
 			error = WEXITSTATUS(status);
-	}
-	if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == 2)
-			return (ft_putstr_fd("\n", 1), ERROR_CTRLC);
-		if (WTERMSIG(status) == 3)
-			return (ERROR_CTRLB);
+		if (WIFSIGNALED(status))
+		{
+			if (WTERMSIG(status) == 2)
+				return (ft_putstr_fd("\n", 1), ERROR_CTRLC);
+			if (WTERMSIG(status) == 3)
+				return (ERROR_CTRLB);
+		}
 	}
 	return (error);
 }

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:20:06 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/11 21:58:52 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:10:09 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	free_all(t_data *data, char **cmd_args, char *cmd, char **env)
 	free_end_process(data);
 	child_free(cmd_args, cmd);
 	free_tab_str(env);
+	parent_free(data);
 }
 
 void	free_end_process(t_data *data)
