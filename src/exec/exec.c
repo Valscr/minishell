@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 00:56:26 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:33:53 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	exec(t_data *data, char *argv)
 			process_exec(data, argv);
 		data->count++;
 	}
-	parse_error(data, argv);
 	return (free_tab_str(data->cmd), wait_fonct(data, argv, pid));
 }
 
