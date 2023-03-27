@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:14:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 23:17:34 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 00:04:30 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	ft_cd(char **cmd_tab, char *string, t_env *env, int count)
 
 	i = 0;
 	if (!cmd_tab[1])
-		cd_alone(env, count);
-	while (string[i] != ' ')
+		return (cd_alone(env, count));
+	while (string[i] != ' ' && string[i])
 		i++;
 	if (chdir(cmd_tab[1]) == -1 && check_quotes(string, i))
 		return (ft_cd2(cmd_tab, count));
