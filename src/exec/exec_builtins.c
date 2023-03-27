@@ -6,14 +6,21 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 23:51:25 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 23:55:04 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_arg_bis(char **str, t_data *data)
+int	check_arg_bis(char **str, t_data *data, int end)
 {
+	if (!ft_strncmp("env", str[0], 3) && !str[1])
+	{
+		end = display_env_list(data->env);
+		free_end_process(data);
+		free_tab_str(str);
+		exit(end);
+	}
 	if ((!ft_strncmp("pwd", str[0], 3) && ft_strlen(str[0]) == 3)
 		|| (!ft_strncmp("pwd", str[0], 3) && str[0][3] == ' '))
 	{
@@ -54,14 +61,7 @@ int	check_arg(char *str, t_data *data)
 		free_tab_str(dest);
 		exit(end);
 	}
-	if (!ft_strncmp("env", dest[0], 3) && !dest[1])
-	{
-		end = display_env_list(data->env);
-		free_end_process(data);
-		free_tab_str(dest);
-		exit(end);
-	}
-	return (check_arg_bis(dest, data));
+	return (check_arg_bis(dest, data, end));
 }
 
 int	check_arg2bis(char **str, char *string, t_data *data, int count)
