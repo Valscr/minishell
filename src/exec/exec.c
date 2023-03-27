@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 01:33:53 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:56:14 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	child(t_data *data, char *argv)
 		free_end_process(data);
 		exit(error);
 	}
+	take_away_quotes_echo(cmd_args[0]);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	if (!cmd)
 	{

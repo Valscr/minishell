@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 01:35:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:58:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	check_cmd(t_data *data, char *argv)
 	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 		return (0);
+	take_away_quotes_echo(cmd_args[0]);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
 	i = check_builtins(argv);
 	if (i > -1)

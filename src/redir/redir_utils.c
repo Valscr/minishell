@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 23:02:08 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/12 03:46:45 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:05:38 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	find_cmd(char *str, t_data *data, int type)
 
 	i = 0;
 	dest = NULL;
+	take_away_quotes_echo(str);
 	dest = return_word(str, i);
 	if (dest == NULL)
 		return (0);
