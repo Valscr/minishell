@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/26 20:54:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:45:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int		check_builtins_w(char *argv);
 int		check_builtins_w2(char *argv);
 int		check_cmd(t_data *data, char *argv);
 int		check_empty_line(char *buf);
+int		check_empty_bpipe(char *argv, int i);
+int		check_empty_pipe(char *argv, int i);
 int		check_exit(char *str);
 int		check_file(t_data *data, char *dest);
 int		check_pipe(char *argv);
@@ -133,6 +135,7 @@ int		pars_redir_in(char *str, t_data *data, int i);
 int		pars_redir_out(char *str, t_data *data, int i);
 int		parse_error(t_data *data, char *buf);
 int		size_list(t_env *env);
+int		tests_quotes(char *s, int *i, int *simpleq, int *doubleq);
 int		wait_fonct(t_data *data, char *argv, pid_t target_pid);
 int		wait_fonct2(t_data *data, char *argv);
 int		write_error(char *str);
@@ -156,6 +159,7 @@ void	parent_free(t_data *data);
 void	print_sorted_env(t_env *env);
 void	process_exec(t_data *data, char *argv);
 void	sig_quit(int code);
+void	take_away_quotes_echo(char *s);
 char	*cut_arg(char *str, int j, int i);
 char	**env_list_to_string_array(t_env *head);
 char	*find_path(t_env *head);

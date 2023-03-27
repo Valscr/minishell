@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:11:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 01:11:31 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:54:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,16 @@ int	check_empty_pipe(char *argv, int i)
 	return (1);
 }
 
-int	iter_pipe(char *argv)
+int	check_empty_bpipe(char *argv, int i)
 {
-	int	i;
-	int	j;
-
-	j = 1;
-	i = 0;
-	while (argv[i++])
-	{
-		if (argv[i] == '|' && check_quotes(argv, i)
-			&& check_empty_pipe(argv, i))
-			j++;
-	}
-	return (j);
+	if (i == 0)
+		return (0);
+	i--;
+	while (argv[i] == ' ' && i > 0)
+		i--;
+	if (i <= 0 || argv[i] == '|')
+		return (0);
+	return (1);
 }
 
 int	check_pipe(char *argv)
@@ -77,7 +73,8 @@ int	check_pipe(char *argv)
 		if (argv[i] == '|' && check_quotes(argv, i)
 			&& check_empty_pipe(argv, i))
 			j++;
-		if (argv[i] == '|' && !check_empty_pipe(argv, i))
+		if (argv[i] == '|' && (!check_empty_pipe(argv, i)
+				|| !check_empty_bpipe(argv, i)))
 			return (0);
 		i++;
 	}

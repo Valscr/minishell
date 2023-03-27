@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 13:11:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 14:40:49 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 01:52:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,20 @@ char	*get_cmd(char **paths, char *cmd)
 		paths++;
 	}
 	return (NULL);
+}
+
+int	iter_pipe(char *argv)
+{
+	int	i;
+	int	j;
+
+	j = 1;
+	i = 0;
+	while (argv[i++])
+	{
+		if (argv[i] == '|' && check_quotes(argv, i)
+			&& check_empty_pipe(argv, i) && check_empty_bpipe(argv, i))
+			j++;
+	}
+	return (j);
 }

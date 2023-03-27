@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/24 12:19:35 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:44:43 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	exec_here_doc(t_data *data, int file, char *buf, char *argv)
 			ft_putstr_fd("\n", 1);
 			free_str(buf);
 			free_str(argv);
+			free_tab_str(data->argv_hdoc);
 			close(file);
 			exit (g_sig.code_error);
 		}
@@ -83,6 +84,7 @@ int	limiter_heredoc2(char *str, t_data *data, int i)
 	{
 		if (is_here(i, str))
 		{
+			take_away_quotes_echo(str);
 			if (str[i + 2] == '\0')
 				return (0);
 			dest = return_word(str, i + 2);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/17 22:58:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/27 09:38:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
+int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 {
 	if ((s[*i] == '\'' && *simpleq) || (s[*i] == '\''
 			&& !(*simpleq) && !(*doubleq)))
@@ -31,7 +31,7 @@ static int	tests_quotes(char *s, int *i, int *simpleq, int *doubleq)
 	return (0);
 }
 
-static void	take_away_quotes_echo(char *s)
+void	take_away_quotes_echo(char *s)
 {
 	int	i;
 	int	j;
