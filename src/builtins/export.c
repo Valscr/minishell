@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/20 03:11:20 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:17:02 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,30 @@ char	*get_first_word(char *str)
 	return (dest);
 }
 
-int	ft_export(char *string, t_data *data)
+int	ft_export(char *string, t_data *data, int count)
 {
 	int		i;
-	char	*dest;
+	int		j;
 
-	i = 0;
-	string += 1;
-	while (string[i] && string[i] != '=')
-		i++;
-	if (string[i] == '\0')
+	i = reach_egal(string);
+	if (count_word(string, i) == -1)
+		return (ERROR_NOTFOUND);
+	j = count_word(string, i);
+	if (check_quotes(string, i) && string[i + 1] == '\0')
+	{
+		string += j + 1;
+		if (count == 1)
+			add_env_variable(data->env, string);
 		return (0);
-	if (string[i] == '=' && string[i + 1] == '\0')
-		add_env_variable(data->env, string);
-	else if (string[i + 2] && !check_quotes(string, i + 2))
+	}
+	else if (check_quotes(string, i))
 	{
+		string += j + 1;
 		take_away_quotes(string);
-		add_env_variable(data->env, string);
+		if (count == 1)
+			add_env_variable(data->env, string);
+		return (0);
 	}
-	else
-	{
-		dest = get_first_word(string);
-		add_env_variable(data->env, dest);
-		free_str(dest);
-	}
-	return (0);
+	return (take_away_quotes(string), write_error(string),
+		write_error(": command not found\n"), 127);
 }

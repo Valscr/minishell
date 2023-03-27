@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:36:33 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/19 22:57:18 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 21:17:59 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,14 @@ char	*replace_word(t_data *data, char *str, int i, int y)
 	i += ft_strlen(dest) + 1;
 	str3 = fill_replace_word(str3, str, i, j);
 	return (free_str(dest), free_str(str), free_str(str2), str3);
+}
+
+int	reach_egal(char *string)
+{
+	int	i;
+
+	i = 6;
+	while (string[i] && string[i] != '=')
+		i++;
+	return (i);
 }

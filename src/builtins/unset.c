@@ -3,36 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/02 01:33:20 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/27 23:50:27 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_unset(char *name, t_env *env)
+int	ft_unset_bis(char *name)
+{
+	int	i;
+
+	i = 6;
+	while (name[i] != ' ' && name[i])
+		i++;
+	if (name[i] == '\0')
+		return (ERROR_NOTFOUND);
+	if (!check_quotes(name, i) || ft_strchr(name, '=') != NULL)
+		return (take_away_quotes(name), write_error(name),
+			write_error(": command not found\n"), ERROR_NOTFOUND);
+	return (0);
+}
+
+int	ft_unset(char *name, char *str, t_env *env)
 {
 	int		len;
 	t_env	*cur;
 	t_env	*tmp;
 
-	if (ft_strchr(name, '=') != NULL)
-		return (0);
-	len = ft_strlen(name);
+	if (ft_unset_bis(name) > 0)
+		return (ft_unset_bis(name));
+	len = ft_strlen(str);
 	cur = env;
 	while (cur->next)
 	{
-		if (ft_strncmp(cur->next->value, name, len) == 0)
+		if (ft_strncmp(cur->next->value, str, len) == 0)
 		{
 			if (cur->next->value[len] == '=')
 			{
 				free(cur->next->value);
 				tmp = cur->next;
 				cur->next = cur->next->next;
-				free(tmp);
-				return (0);
+				return (free(tmp), 0);
 			}
 		}
 		cur = cur->next;

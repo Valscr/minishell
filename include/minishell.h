@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 19:23:25 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 09:45:31 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 22:11:21 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 	int			type;
 	int			*tube;
 	char		*argv;
+	char		*str;
 	char		*argv2;
 	char		**argv_hdoc;
 	char		**cmd;
@@ -97,6 +98,7 @@ int		check_redir(char *str);
 int		check_redir_error(char *cmd);
 int		copy_string_array_to_env_list(t_env *head, char *string_array[]);
 int		count_tab(char **str);
+int		count_word(char *string, int i);
 int		display_env_list(t_env *head);
 int		end_word(char *str, int i);
 int		error_slash(char *cmd_args, int type);
@@ -106,13 +108,13 @@ int		find_cmd(char *str, t_data *data, int type);
 int		find_cmd_after(char *str, t_data *data);
 int		find_slash(char *str);
 int		free_tab_str(char **str);
-int		ft_cd(char **cmd_tab, t_env *env);
+int		ft_cd(char **cmd_tab, char *string, t_env *env, int count);
 int		ft_countdest2(char const *s, char const *sep);
 int		ft_echo(char *args);
-int		ft_export(char *string, t_data *data);
+int		ft_export(char *string, t_data *data, int count);
 int		ft_pwd(void);
 int		ft_redir(t_data *d, char *cmd);
-int		ft_unset(char *name, t_env *env);
+int		ft_unset(char *name, char *str, t_env *env);
 int		get_in_out(char *argv, t_data *data, int redir);
 int		get_pipes(t_data *data, char *argv);
 int		here_doc(char *argv, t_data *data);
@@ -134,6 +136,7 @@ int		open_file(char *str, t_data *data, int i, int type);
 int		pars_redir_in(char *str, t_data *data, int i);
 int		pars_redir_out(char *str, t_data *data, int i);
 int		parse_error(t_data *data, char *buf);
+int		reach_egal(char *string);
 int		size_list(t_env *env);
 int		tests_quotes(char *s, int *i, int *simpleq, int *doubleq);
 int		wait_fonct(t_data *data, char *argv, pid_t target_pid);
@@ -179,12 +182,13 @@ char	*replace_word(t_data *data, char *str, int i, int y);
 char	*return_cmd(char *str, int i);
 char	*return_cmd_after(char *str, t_data *data);
 char	*return_word(char *str, int i);
+char	*take_away_quotes2(char *s);
 int		test_redir(char *str, t_data *data, int i);
 int		redir_in(char *str, char *dest, t_data *data, int i);
-char	*take_away_quotes(char *s);
 char	*delete_quotes(char *str);
 int		n_option(char *str);
 int		check_string_n_option(char *str);
+void	take_away_quotes(char *s);
 
 extern t_sig	g_sig;
 

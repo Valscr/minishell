@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:13:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 09:50:17 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:34:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	take_away_quotes_echo(char *s)
 		else
 			s[j++] = s[i++];
 	}
-	s[j] = '\0';
+	s[j++] = '\0';
 }
 
 static int	check_end_space(char *str)

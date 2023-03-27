@@ -58,3 +58,16 @@ int	is_get_env(char *dest, int i)
 		return (1);
 	return (0);
 }
+
+int	count_word(char *string, int i)
+{
+	int	j;
+
+	j = i;
+	while (j > 0 && string[j] != ' ')
+		j--;
+	if (string[i] == '\0' || j == 0)
+		return (take_away_quotes(string), write_error(string),
+			write_error(": command not found\n"), -1);
+	return (j);
+}

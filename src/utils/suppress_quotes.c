@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-char	*take_away_quotes(char *s)
+/*char	*take_away_quotes(char *s)
 {
 	int	i;
 	int	j;
@@ -32,3 +32,4 @@ char	*take_away_quotes(char *s)
 	s[j] = '\0';
 	return (s);
 }
+*/

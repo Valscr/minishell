@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 09:58:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:50:24 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	parse_error(t_data *data, char *buf)
 				error = g_sig.code_error;
 		}
 		else
-		{
-			check_arg2(cmd[data->count], data, count_tab(cmd));
 			error = check_cmd(data, cmd[data->count]);
-		}
 		data->count++;
 	}
 	return (free_tab_str(cmd), error);
@@ -89,15 +86,16 @@ int	check_builtins2(char *argv)
 
 int	check_builtins(char *argv)
 {
-	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
-	{
-		if (ft_strlen(argv) > 3 && argv[3] != ' ')
-			return (-1);
-		return (g_sig.code_error);
-	}
 	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
 	{
 		if (ft_strlen(argv) > 4 && argv[4] != ' ')
+			return (-1);
+		return (g_sig.code_error);
+	}
+	take_away_quotes(argv);
+	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
+	{
+		if (ft_strlen(argv) > 3 && argv[3] != ' ')
 			return (-1);
 		return (g_sig.code_error);
 	}
@@ -121,8 +119,8 @@ int	check_cmd(t_data *data, char *argv)
 	cmd_args = ft_split2(argv, " ");
 	if (!cmd_args)
 		return (0);
-	take_away_quotes_echo(cmd_args[0]);
 	cmd = get_cmd(data->cmd_paths, cmd_args[0]);
+	check_arg2(argv, data, iter_pipe(data->argv));
 	i = check_builtins(argv);
 	if (i > -1)
 		return (child_free(cmd_args, cmd), g_sig.code_error);
