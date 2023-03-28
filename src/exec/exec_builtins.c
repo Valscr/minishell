@@ -6,11 +6,23 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 03:52:10 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 04:05:22 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	is_arg(char **str)
+{
+	if (!ft_strncmp("cd", str[0], 2) || (!ft_strncmp("export", str[0], 6)
+			&& str[0][6] == '\0') || (!ft_strncmp("unset", str[0], 5)
+		&& str[0][5] == '\0') || (!ft_strncmp("exit", str[0], 4)
+		&& str[0][4] == '\0'))
+	{
+		return (1);
+	}
+	return (0);
+}
 
 int	check_arg_bis(char **str, t_data *data, int end)
 {
@@ -29,8 +41,7 @@ int	check_arg_bis(char **str, t_data *data, int end)
 		free_tab_str(str);
 		exit(0);
 	}
-	if (!ft_strncmp("cd", str[0], 2) || !ft_strncmp("export", str[0], 6)
-		|| !ft_strncmp("unset", str[0], 5) || !ft_strncmp("exit", str[0], 4))
+	if (is_arg(str))
 	{
 		if (!ft_strncmp("export", str[0], 6) && !str[1])
 			print_sorted_env(data->env);
@@ -83,7 +94,7 @@ int	check_arg2(char *string, t_data *data, int count)
 		if (str[1])
 			g_sig.code_error = ft_export(string, data, count);
 	}
-	if (!ft_strncmp("unset", str[0], 5) && count == 1)
+	if (!ft_strncmp("unset", str[0], 5) && str[0][5] == '\0' && count == 1)
 	{
 		if (str[1])
 			g_sig.code_error = ft_unset(string, str[1], data->env);
