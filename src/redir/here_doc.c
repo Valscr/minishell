@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:18:31 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 03:05:18 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 03:28:36 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,17 @@ int	limiter_heredoc2(char *str, t_data *data, int i)
 	{
 		if (is_here(i, str))
 		{
+			take_away_quotes(str);
+			while (!is_here(i++, str))
+				i--;
 			if (str[i + 2] == '\0')
 				return (0);
-			take_away_quotes(str);
-			dest = return_word(str, i + 1);
+			dest = return_word(str, i + 2);
 			if (!dest)
 				return (2);
 			red = here_doc(dest, data);
 			if (red == 0)
-			{
-				data->limiter = 1;
 				return (free_str(dest), 1);
-			}
 			if (red == 130)
 				return (free_str(dest), 2);
 		}
@@ -112,6 +111,10 @@ int	limiter_heredoc(char *str, t_data *data)
 	error = 0;
 	j = 0;
 	while (data->argv_hdoc[j])
+	{
 		error = limiter_heredoc2(data->argv_hdoc[j++], data, -1);
+		if (error == 1)
+			data->limiter = 1;
+	}
 	return (free_tab_str(data->argv_hdoc), error);
 }
