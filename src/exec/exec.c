@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 20:06:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 14:43:50 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 02:22:29 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,6 @@ int	exec(t_data *data, char *argv)
 	}
 	return (free_tab_str(data->cmd), wait_fonct(data, argv, pid));
 }
-
-/*int	exec(t_data *data, char *argv)
-{
-	pid_t	pid;
-
-	
-	signal(SIGINT, SIG_IGN);
-	exec2(data, argv);
-	pid = fork();
-	if (pid == 0)
-		process_exec(data, argv);
-	return (free_tab_str(data->cmd), wait_fonct(data, argv, pid));
-}*/
 
 void	child(t_data *data, char *argv)
 {
