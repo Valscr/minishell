@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 19:48:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 23:50:27 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 05:06:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_unset_bis(char *name)
 	while (name[i] != ' ' && name[i])
 		i++;
 	if (name[i] == '\0')
-		return (ERROR_NOTFOUND);
+		return (0);
 	if (!check_quotes(name, i) || ft_strchr(name, '=') != NULL)
 		return (take_away_quotes(name), write_error(name),
 			write_error(": command not found\n"), ERROR_NOTFOUND);

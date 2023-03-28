@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:14:13 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 00:04:30 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 05:04:31 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	cd_alone(t_env *env, int count)
 
 	splt = search_home(env);
 	if (!splt)
-		return (write_perror("HOME not set\n"));
+		return (write_error("cd: HOME not set\n"));
 	if (count == 1)
 		return (chdir(splt[1]), free_tab_str(splt), 0);
 	return (free_tab_str(splt), 0);
