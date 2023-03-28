@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 13:38:41 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:13:32 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,15 @@ int	check_builtins2(char *argv, char *str, int i)
 	if (ft_strlen(argv) >= 6 && !ft_strncmp(argv, "export", 6))
 	{
 		if (ft_strlen(argv) > 6 && argv[6] != ' ')
-			return (-1);
-		return (g_sig.code_error);
+			return (free_str(argv), -1);
+		return (free_str(argv), g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 5 && !ft_strncmp(argv, "unset", 5)
 		&& check_quotes(str, i))
 	{
 		if (ft_strlen(argv) > 5 && argv[5] != ' ')
-			return (-1);
-		return (g_sig.code_error);
+			return (free_str(argv), -1);
+		return (free_str(argv), g_sig.code_error);
 	}
 	return (check_builtins3(argv, str, i));
 }
@@ -87,15 +87,15 @@ int	check_builtins(char *str)
 		&& check_quotes(str, i))
 	{
 		if (ft_strlen(argv) > 4 && argv[4] != ' ')
-			return (-1);
-		return (g_sig.code_error);
+			return (free_str(argv), -1);
+		return (free_str(argv), g_sig.code_error);
 	}
 	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3)
 		&& check_quotes(str, i))
 	{
 		if (ft_strlen(argv) > 3 && argv[3] != ' ')
-			return (-1);
-		return (g_sig.code_error);
+			return (free_str(argv), -1);
+		return (free_str(argv), g_sig.code_error);
 	}
 	return (check_builtins2(argv, str, i));
 }
