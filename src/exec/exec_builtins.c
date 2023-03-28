@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 04:08:34 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 04:16:14 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_arg_bis(char **str, t_data *data, int end)
 		ft_pwd();
 		free_end_process(data);
 		free_tab_str(str);
-		exit(0);
+		exit(SUCESS_CODE);
 	}
 	if (is_arg(str))
 	{
