@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 23:02:19 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 13:50:24 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 04:59:08 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int	check_builtins2(char *argv)
 
 int	check_builtins(char *argv)
 {
+	take_away_quotes(argv);
 	if (ft_strlen(argv) >= 4 && !ft_strncmp(argv, "echo", 4))
 	{
 		if (ft_strlen(argv) > 4 && argv[4] != ' ')
 			return (-1);
 		return (g_sig.code_error);
 	}
-	take_away_quotes(argv);
 	if (ft_strlen(argv) >= 3 && !ft_strncmp(argv, "env", 3))
 	{
 		if (ft_strlen(argv) > 3 && argv[3] != ' ')

@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 04:16:14 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 04:55:56 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,22 @@ int	check_arg(char *str, t_data *data)
 {
 	int		end;
 	char	**dest;
+	int		i;
 
 	end = 0;
+	i = 0;
 	dest = ft_split(str, " ");
 	take_away_quotes(dest[0]);
 	if (!ft_strncmp("echo", dest[0], 4))
 	{
-		if (dest[0][4] != ' ')
+		if (dest[0][4] != '\0')
 		{
 			g_sig.code_error = ERROR_NOTFOUND;
 			return (free_tab_str(dest), 0);
 		}
-		end = ft_echo(str);
+		while (str[i] != ' ')
+			i++;
+		end = ft_echo(str + i);
 		free_end_process(data);
 		free_tab_str(dest);
 		exit(end);
