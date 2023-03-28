@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/28 04:05:22 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 04:08:34 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	is_arg(char **str)
 {
-	if (!ft_strncmp("cd", str[0], 2) || (!ft_strncmp("export", str[0], 6)
-			&& str[0][6] == '\0') || (!ft_strncmp("unset", str[0], 5)
-		&& str[0][5] == '\0') || (!ft_strncmp("exit", str[0], 4)
-		&& str[0][4] == '\0'))
+	if ((!ft_strncmp("cd", str[0], 2) && str[0][2] == '\0')
+		|| (!ft_strncmp("export", str[0], 6) && str[0][6] == '\0')
+		|| (!ft_strncmp("unset", str[0], 5) && str[0][5] == '\0')
+		|| (!ft_strncmp("exit", str[0], 4) && str[0][4] == '\0'))
 	{
 		return (1);
 	}
