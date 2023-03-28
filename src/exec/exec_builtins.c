@@ -6,7 +6,7 @@
 /*   By: valentin <valentin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 00:16:58 by valentin          #+#    #+#             */
-/*   Updated: 2023/03/27 23:55:04 by valentin         ###   ########.fr       */
+/*   Updated: 2023/03/28 03:52:10 by valentin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_arg_bis(char **str, t_data *data, int end)
 {
-	if (!ft_strncmp("env", str[0], 3) && !str[1])
+	if (!ft_strncmp("env", str[0], 3) && str[0][3] == '\0' && !str[1])
 	{
 		end = display_env_list(data->env);
 		free_end_process(data);
