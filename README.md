@@ -26,6 +26,3 @@ To run the program :
 
 ```./minishell```
 
-To run with valgrind without readline leaks :
-
-```valgrind --suppressions=valgrind_readline ./minishell```
